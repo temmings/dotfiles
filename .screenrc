@@ -1,0 +1,30 @@
+# change prefix: C-t
+escape ^tt
+bind w windowlist -b
+
+# enable 256 colors
+term xterm-256color
+termcapinfo xterm-256color 'is=rmJH?7h?1;4;6l'
+# enable terminal scroll bar
+termcapinfo xterm* ti@:te@
+
+caption always "%?%F%{= wk}%:%{= ww}%?%-w%{=u Wk}%n %t%{-}%+w"
+hardstatus alwayslastline
+#defhstatus "c:2s Y/2m/2d (D)"
+
+defencoding utf8
+encoding utf8 utf8
+
+bind ^U encoding utf8 utf8
+bind ^E encoding eucjp utf8
+bind ^W encoding sjis utf8
+bind ^J encoding jis utf8
+
+startup_message off
+autodetach on
+defbce on
+defmonitor off
+defscrollback 10000
+msgwait 5
+msgminwait 5
+
