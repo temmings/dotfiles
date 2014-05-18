@@ -1,0 +1,40 @@
+#### Diablo II 用キーバインド
+window Diablo2 /Diablo II\.exe:Diablo II.*/ : EmacsEdit
+
+ mod !Control
+ mod Alt -= LAlt RAlt LMeta
+ mod mod0 = LAlt LMeta
+
+ keyseq $W		= &Wait(100)
+
+ keyseq $ToggleRun	= &Toggle(Lock0) &VK(F19)
+ keyseq $StandStill	= *D-LShift
+ keyseq $UnStandStill	= *U-LShift
+ keyseq $SwapWeapons	= *Tab
+ keyseq $ShowItems	= &Toggle(Lock8,on)  &VK(D-F22)
+ keyseq $UnShowItems	= &Toggle(Lock8,off) &VK(U-F22)
+ keyseq $HiddenItems	= &Toggle(Lock9) &VK(F23)
+ keyseq $LockLeftClick	= &VK(D-Shift) &VK(D-LButton)
+ keyseq $LockRightClick	= &VK(D-Shift) &VK(D-RButton)
+ keyseq $UnLockClick	= &VK(U-Shift) &VK(U-RButton) &VK(U-LButton)
+ keyseq $ChickenExit	= &VK(F24)
+
+ keyseq $AuraRotation	= *S $W *F $W *B $W *A $W *R
+
+ key C-*R	= $ToggleRun
+ key *Tab	= $SwapWeapons
+ key *LAlt	= $ShowItems &Sync $UnShowItems
+ key D-*LMeta	= $HiddenItems &Sync $ShowItems
+ key R-*LMeta	= &Ignore
+ key U-*LMeta	= $HiddenItems &Sync $UnShowItems
+ key U-*RAlt	= $ShowItems
+ key L8-U-*RAlt	= $UnShowItems
+
+ key RMeta	= $AuraRotation
+
+ key C-S-*Enter	= $ChickenExit
+
+ key C-*C	= $LockLeftClick
+ key C-*V	= $LockRightClick
+ key C-*G	= $UnLockClick
+
