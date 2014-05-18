@@ -1,0 +1,6 @@
+# -*- coding: utf-8 -*-
+
+#export PORTSDIR="/usr/ports"
+#export PORTS_INDEX="$PORTSDIR/local/INDEX"
+#export PORTS_DBDIR="$PORTSDIR/local"
+#export PORTUPGRADE="-v -l /var/log/portupgrade.log"

@@ -1,0 +1,159 @@
+# -*- coding: utf-8 -*-
+setopt auto_cd
+setopt auto_pushd
+setopt pushd_ignore_dups
+setopt auto_menu
+setopt print_eight_bit
+setopt ignore_eof
+setopt correct
+setopt always_last_prompt
+
+setopt extended_glob
+setopt prompt_subst
+setopt magic_equal_subst
+setopt auto_remove_slash
+setopt brace_ccl
+setopt no_clobber
+
+setopt hist_ignore_space
+setopt hist_ignore_dups
+setopt extended_history
+setopt share_history
+
+unsetopt all_export
+unsetopt bg_nice
+unsetopt no_match
+
+### functions {{{
+function source_if_exist {
+  [[ -f "$1" ]] && source "$1"
+}
+
+function get_value_of_key() {
+    local file="$1"
+    local key=$2
+    local delimiter=$3
+    if [ -n "$file" -a -f "$file" -a -n "$key" -a -n "$delimiter" ]; then
+        grep -h "${key}${delimiter}" $file | awk -F"$delimiter" '{print $2;}'
+    fi
+}
+
+function is_executable() {
+    hash "$1" 2>/dev/null || return
+}
+
+function get_executable() {
+    is_executable "$1" && echo "$1" || return
+}
+
+function get_executable_first() {
+    while [[ -n "$1" ]]; do
+        get_executable "$1" && return
+        shift
+    done
+    return 1
+}
+
+function home_or_basename() {
+    case "$1" in
+        $HOME) echo '~';;
+        *) echo $(basename $1) ;;
+    esac
+}
+
+function get_ssh_client_ip() {
+    echo $SSH_CLIENT | awk '{print $1}'
+}
+# }}}
+
+local my_zsh_function_path=$HOME/.zsh/functions
+fpath=($my_zsh_function_path $fpath)
+
+## N: NULL_GLOBオプションを設定。
+##    globがマッチしなかったり存在しないパスを無視する。
+## -: シンボリックリンク先のパスを評価。
+## /: ディレクトリのみ残す。
+path=(
+    ~/.local/bin(N-/)
+    /usr/local/heroku/bin(N-/)
+    ### pear / pecl $ php -d detect_unicode=0 =(curl -fsSL http://pear.php.net/go-pear.phar)
+    ~/node_modules/.bin(N-/)
+    ~/.cabal/bin(N-/)
+    ~/pear/bin(N-/)
+    /usr/local/bin(N-/)
+    /usr/local/sbin(N-/)
+    /sbin(N-/)
+    /bin(N-/)
+    /usr/sbin(N-/)
+    /usr/bin(N-/)
+    $path
+    /usr/games(N-/)
+    /usr/X11/bin(N-/)
+    /usr/X11R6/bin(N-/)
+    ### NetBSD packages
+    /usr/pkg/bin(N-/)
+    /usr/pkg/sbin(N-/)
+    ### qmail
+    /var/qmail/bin(N-/)
+    #~/Dropbox/bin(N-/)
+)
+typeset -U path
+
+export HISTFILE="$HOME/.zsh-history"
+export HISTSIZE=100000000
+export SAVEHIST=100000000
+
+export EDITOR=$(get_executable_first "vim" "vi")
+export PAGER="less"
+
+export LANG="en_US.UTF-8"
+export LC_COLLATE=$LANG
+export LC_CTYPE=$LANG
+export LC_MESSAGES=$LANG
+export LC_MONETARY=$LANG
+export LC_NUMERIC=$LANG
+export LC_TIME=$LANG
+#export LC_ALL="en_US.UTF-8"
+export TZ=JST-9
+export BLOCKSIZE=G
+
+# suppress the logout ^D.
+export IGNOREEOF=2
+
+export LYNX_CFG=~/.lynxrc
+export PERL_BADLANG=0
+#export PIP_REQUIRE_VIRTUALENV=true
+
+if is_executable nc && nc -w 0 localhost 8123; then
+    export HTTP_PROXY="http://localhost:8123"
+fi
+export WWW_HOME=http://www.google.co.jp/
+export HTTP_HOME=$WWW_HOME
+
+export AWS_CREDENTIAL_FILE=$HOME/.aws-credentials-master
+export AWS_ACCESS_KEY=$(get_value_of_key $AWS_CREDENTIAL_FILE 'AWSAccessKeyId' '=')
+export AWS_SECRET_KEY=$(get_value_of_key $AWS_CREDENTIAL_FILE 'AWSSecretKey' '=')
+if [[ -d "$HOME"/.ec2 ]]; then
+    export EC2_PRIVATE_KEY="$(/bin/ls "$HOME"/.ec2/pk-*.pem | /usr/bin/head -1)"
+    export EC2_CERT="$(/bin/ls "$HOME"/.ec2/cert-*.pem | /usr/bin/head -1)"
+fi
+export EC2_URL="https://ec2.ap-northeast-1.amazonaws.com"
+
+#export CVSROOT=/home/ncvs/tsc
+#export PDX_PATH=~acid/local/lib/pdx
+
+### os specific
+case "$OSTYPE" in
+    cygwin*) source_if_exist ~/.zsh/zshenv.cygwin ;;
+    darwin*) source_if_exist ~/.zsh/zshenv.darwin ;;
+    freebsd*) source_if_exist ~/.zsh/zshenv.freebsd ;;
+    linux*) source_if_exist ~/.zsh/zshenv.linux ;;
+esac
+typeset -U path
+
+# for OpenCV
+#typeset -xT PYTHONPATH python_path
+#typeset -U python_path
+#python_path=(/usr/local/lib/python2.7/site-packages $python_path)
+
+source_if_exist ~/.zshenv.local

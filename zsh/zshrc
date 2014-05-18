@@ -1,0 +1,245 @@
+# -*- coding: utf-8 -*-
+### on exec
+## 1: /etc/zshenv
+## 2: ~/.zshenv
+## if login shell; then
+##   3: /etc/zprofile
+##   4: ~/.zprofile
+## fi
+## if interactive shell; then
+## 5: /etc/zshrc
+## 6: ~/.zshrc
+## fi
+## if login shell; then
+## 7: /etc/zlogin
+## 8: ~/.zlogin
+## fi
+
+### on logout
+## 1: ~/.zlogout
+## 2: /etc/zlogout
+
+### functions {{{
+
+### http://qiita.com/mollifier/items/160a13a95e9627a55750
+function 256colortest() {
+    local code
+    for code in {000..255}; echo -n -e "\e[38;05;${code}m $code"
+}
+
+function set_screen_caption() {
+    # set program name to screen caption
+    [ -n "$STY" ] && echo -ne "\ek$1\e\\"
+}
+
+function show_todo() {
+    local TODOFILE=".todo"
+    if [ -f "$TODOFILE" ]; then
+        cat -b $TODOFILE
+    fi
+}
+
+function todo() {
+    local TODOFILE=".todo"
+    local opt
+    local OPTARG
+    while getopts ":d:u" opt; do
+        case $opt in
+            d)
+                if [[ $OPTARG =~ '^[0-9]+$' ]]; then
+                    if [[ -f $TODOFILE ]]; then
+                        local removed=$(sed -n "${OPTARG}p" $TODOFILE)
+                        if [[ -n $removed ]]; then
+                            echo "removed: $removed"
+                            sed -i'.old' "${OPTARG}d" $TODOFILE
+                        fi
+                    fi
+                fi
+                show_todo
+                return
+                ;;
+            u)
+                echo "undo"
+                cp ${TODOFILE}.old ${TODOFILE}
+                show_todo
+                return
+                ;;
+            ?)
+                echo "usage: $0 [option] [<add todo>] "
+                echo " -d <number> remove todo"
+                echo " -u          undo once"
+                return
+                ;;
+        esac
+    done
+    ## no options
+    if [[ -n "$*" ]]; then
+        echo "add: $*"
+        echo $* >> $TODOFILE
+    fi
+    show_todo
+}
+
+function mkcdir() {
+    mkdir "$@" || return $?
+
+    local arg got_end_option=0
+    for arg in "$@"; do
+        case "$arg" in
+            --)
+                got_end_option=1
+                continue
+                ;;
+            -*)
+                ((1 == $got_end_option)) && break
+                continue
+                ;;
+            *)
+                break
+                ;;
+        esac
+    done
+    cd -- "$arg"
+}
+
+function search_ssh_agent() {
+    local agentPID
+    if [[ x"$OSTYPE" == x"cygwin" ]]; then
+        agentPID=$(ps ux | grep ssh-agent | grep -v 'grep ssh-agent' | awk '{print $1}' | head -1)
+    else
+        agentPID=$(ps ux | grep ssh-agent | grep -v 'grep ssh-agent' | grep $USER | awk '{print $2}')
+    fi
+    local agentSCK=$( (/bin/ls -t /tmp/ssh-*/agent.* | head -1) 2> /dev/null)
+    if [ -z "$agentPID" ]; then
+        eval $(ssh-agent -s) >/dev/null
+        ssh-add $HOME/.ssh/id_dsa
+    else
+        export SSH_AUTH_SOCK=$agentSCK
+        export SSH_AGENT_PID=$agentPID
+        #echo "Agent pid $agentPID"
+    fi
+}
+
+function configure_bootstrap() {
+    if which glibtoolize &>/dev/null; then
+        glibtoolize --force
+    else
+        libtoolize --force
+    fi
+    autoheader
+    automake --add-missing --foreign
+    autoconf
+    shtoolize all
+}
+
+function configure_for_home_local() {
+    ./configure --prefix=$HOME/.local "$@"
+}
+
+function attach_tmux() {
+    if ( ! test $TMUX ) && ( ! expr $TERM : "^screen" > /dev/null ) && is_executable tmux; then
+        if ( tmux has-session ); then
+            local session=$(tmux list-sessions | grep -e '^[0-9].*]$' | head -n 1 | sed -e 's/^\([0-9]\+\).*$/\1/')
+            if [ -n "$session" ]; then
+                echo "Attache tmux session $session."
+                tmux attach-session -t $session
+            else
+                echo "Session has been already attached."
+                tmux list-sessions
+            fi
+        else
+            echo "Create new tmux session."
+            tmux
+        fi
+    fi
+}
+
+last_exec_command_name=$(basename -- $0)
+function periodic() {
+}
+function chpwd() {
+    todo
+}
+function preexec() {
+    last_exec_command_name=${1%% *}
+    set_screen_caption "${last_exec_command_name}:$(home_or_basename ${PWD})"
+}
+function precmd() {
+    set_screen_caption "${last_exec_command_name}:$(home_or_basename ${PWD})"
+}
+function TRAPDEBUG() {
+}
+function TRAPEXIT() {
+}
+function TRAPZERR() {
+    echo "TRAPZERR: return $?"
+}
+# }}}
+
+### oh-my-zsh
+# git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+ZSH=$HOME/.oh-my-zsh
+if [[ -d $ZSH ]]; then
+    DISABLE_UPDATE_PROMPT=true
+    ZSH_THEME="mrtazz"
+    plugins=(git rbenv pyenv)
+    source $ZSH/oh-my-zsh.sh
+else
+    # show user@host and random color.
+    PROMPT="%{[$[32 + $RANDOM % 5]m%}%n@%m%{[m%} %(#.#.$) "
+
+    # show current path.
+    RPROMPT="%{[36m%}%~%{[m%}"
+fi
+
+# ignore ['?', '&', '/'] in word.
+WORDCHARS='*_-.[]~=;!#$%^(){}<>'
+
+USE_GNU_SCREEN=1
+
+### alias {{{
+alias ll="ls -l"
+alias lf="ls -F"
+alias la="ls -A"
+#alias ssh="search_ssh_agent; ssh"
+alias svstatall="sudo svstat /var/service/*"
+if is_executable w3mman; then
+    alias man="w3mman"
+    alias run-help="w3mman"
+fi
+if is_executable vim; then
+    alias vi="vim"
+fi
+
+alias vinarise="vim -c Vinarise"
+
+alias grep_nm_func_names="grep ' T _' | sed 's/.* T _//'"
+
+alias show_my_ipv4="telnet ipv4.test-ipv6.com 79"
+alias show_my_ipv6="telnet ipv6.test-ipv6.com 79"
+alias show_my_external_ip="curl 'http://whatismyip.akamai.com'"
+
+alias show_ec2_public_ip="curl -s 'http://169.254.169.254/2008-02-01/meta-data/public-ipv4'"
+# }}}
+
+### anyenv
+if [[ x"$OSTYPE" != x"cygwin" ]]; then
+    [[ -d $HOME/.anyenv ]] || git clone https://github.com/riywo/anyenv $HOME/.anyenv
+    export PATH="$HOME/.anyenv/bin:$PATH"
+    eval "$(anyenv init -)"
+    for D in `find $HOME/.anyenv/envs -type d -d 1`
+    do
+        export PATH="$D/shims:$PATH"
+    done
+fi
+
+### virtualenvwrapper for python virtualenv
+#if hash virtualenvwrapper.sh 2>/dev/null; then
+#    WORKON_HOME="$HOME/.virtualenvs"
+#    source $(which virtualenvwrapper.sh)
+#fi
+
+bindkey -e
+autoload -U compinit && compinit -u
+
+source_if_exist ~/.zshrc.local

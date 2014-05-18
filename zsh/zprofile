@@ -1,0 +1,15 @@
+# -*- coding: utf-8 -*-
+umask 022
+
+#  to Backspace
+stty erase 
+
+### os specific
+case "$OSTYPE" in
+    cygwin*) source_if_exist ~/.zsh/zprofile.cygwin ;;
+    darwin*) source_if_exist ~/.zsh/zprofile.darwin ;;
+    freebsd*) source_if_exist ~/.zsh/zprofile.freebsd ;;
+    linux*) source_if_exist ~/.zsh/zprofile.linux ;;
+esac
+
+source_if_exist ~/.zprofile.local

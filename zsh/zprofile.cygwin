@@ -1,0 +1,13 @@
+# -*- coding: utf-8 -*-
+
+function setup_apt_cyg() {
+    echo "fetch apt-cyg"
+    #svn --force export http://apt-cyg.googlecode.com/svn/trunk/ /bin/ &&
+    curl -Ls -o /bin/apt-cyg http://raw.github.com/kou1okada/apt-cyg/master/apt-cyg
+    chmod -v +x /bin/apt-cyg
+    /bin/apt-cyg --use-setuprc --no-verify install gnupg
+}
+
+hash apt-cyg 2>/dev/null ||
+    setup_apt_cyg
+
