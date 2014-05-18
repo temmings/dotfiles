@@ -1,0 +1,15 @@
+#### HHK のメタキーを定義
+def key LeftMeta  LMeta = 0x7b
+def key RightMeta RMeta = 0x79
+
+#keymap Global
+
+### LMeta を LAlt にする
+ mod	Alt	+= LMeta
+ key	*LMeta	= *LAlt
+
+### LAlt を LeftWindows にする
+# mod	Alt	-= LAlt
+# mod	Windows	+= LAlt
+# key	*LAlt	= *LWin
+
