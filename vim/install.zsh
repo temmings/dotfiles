@@ -1,9 +1,9 @@
 #!/usr/bin/env zsh
 local install_script_dir=$(dirname $0(:A))
 local vim_dir=$HOME/.vim
-local -a dotfiles
-dotfiles=(vimrc gvimrc)
-vim_dir_files=(vimrc.shadow autoload doc ftplugin indent plugin spell syntax templates)
+local -a dotfiles vim_dir_files
+dotfiles=(vimrc gvimrc vimrc.shadow)
+vim_dir_files=(autoload doc ftplugin indent plugin spell syntax templates)
 
 mkdir -p $vim_dir
 mkdir -p $vim_dir/backup
