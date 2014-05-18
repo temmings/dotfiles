@@ -1,0 +1,4 @@
+common.dict
+*.ignore
+*.local
+*.shadow

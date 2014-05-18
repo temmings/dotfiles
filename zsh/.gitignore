@@ -1,0 +1,4 @@
+homebrew.github.token
+*.ignore
+*.local
+*.shadow

@@ -1,0 +1,5 @@
+.config/
+.gitconfig.local
+.ssh/
+.todo
+proxy.pac
