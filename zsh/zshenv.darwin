@@ -16,7 +16,7 @@ export LC_CTYPE="C"
 # 'ls' enable colorized output.
 export CLICOLOR=1
 
-export HOMEBREW_GITHUB_API_TOKEN='7ea3b4f46ae98346a183bb4256204cadc96f009f'
+export HOMEBREW_GITHUB_API_TOKEN=$(cat ~/.zsh/homebrew.github.token)
 export HOMEBREW_VERBOSE=1
 export HOMEBREW_CURL_VERBOSE=1
 if ! which brew &>/dev/null; then
