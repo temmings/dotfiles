@@ -1,0 +1,32 @@
+[user]
+	name = Tetsuya HAMAMOTO
+	email = temmings@gmail.com
+[include]
+	path = .gitconfig.local
+[color]
+	ui = auto
+	status = auto
+	diff = auto
+	branch = auto
+	grep = auto
+[grep]
+	lineNumber = true
+[core]
+	precomposeunicode = true
+	autocrlf = input
+	safecrlf = true
+[i18n]
+	filesEncoding = utf-8
+[alias]
+	ad = add
+	br = branch
+	ci = commit
+	co = checkout
+	di = diff
+	dif = diff
+	difc = diff --cached
+	glog = log --decorate --graph --name-status
+	ls = ls-files
+	st = status
+	tree = log --oneline --decorate --graph --pretty='format:%C(yellow)%h%C(blue)%d%C(reset) %s %C(cyan)%an, %ar%C(reset)'
+	unadd = rm --cached
