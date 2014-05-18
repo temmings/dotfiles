@@ -172,11 +172,6 @@ function! MyCharCode() " {{{
 endfunction
 " }}}
 
-" {{{ emacs keybind for command line.
-"   * <C-O> : prefix to original keybind
-NeoBundle 'houtsnip/vim-emacscommandline'
-" }}}
-
 NeoBundle 'buftabs'
 let g:buftabs_only_basename = 1
 NeoBundle 'bufexplorer.zip'
