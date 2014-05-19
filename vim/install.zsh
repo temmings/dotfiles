@@ -3,7 +3,7 @@ local install_script_dir=$(dirname $0(:A))
 local vim_dir=$HOME/.vim
 local -a dotfiles vim_dir_files
 dotfiles=(vimrc gvimrc vimrc.shadow)
-vim_dir_files=(autoload doc ftplugin indent plugin spell syntax templates)
+vim_dir_files=(autoload doc dict ftplugin indent plugin runtime spell syntax templates)
 
 mkdir -p $vim_dir
 mkdir -p $vim_dir/backup
