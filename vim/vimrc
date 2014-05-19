@@ -13,7 +13,7 @@ let $DOTVIM = expand('~/.vim')
 " ローカル設定 (.vimrc 末尾で読み込み)
 let $MYLOCALVIMRC = expand('~/.vimrc.local')
 " 見せられないよ！
-let $MYSHADOWVIMRC = expand('~/.vim/vimrc.shadow')
+let $MYSHADOWVIMRC = expand('~/.vimrc.shadow')
 
 function! s:source_if_exist(file)
   if filereadable(a:file)
