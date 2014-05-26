@@ -201,7 +201,7 @@ USE_GNU_SCREEN=1
 alias ll="ls -l"
 alias lf="ls -F"
 alias la="ls -A"
-#alias ssh="search_ssh_agent; ssh"
+alias ssh="ssh -F <(cat ~/.ssh/config ~/.ssh/config.hosts ~/.ssh/config.local)"
 alias svstatall="sudo svstat /var/service/*"
 if is_executable w3mman; then
     alias man="w3mman"
