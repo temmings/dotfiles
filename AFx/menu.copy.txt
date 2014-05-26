@@ -1,0 +1,3 @@
+afx *** copy/move menu
+"Copy (FFC)" $V"USERPROFILE"\Dropbox\Windows\ffc4_10_0_3u\FFC.exe $MF /to:"$O" /copy /bg"
+"Move (FFC)" $V"USERPROFILE"\Dropbox\Windows\ffc4_10_0_3u\FFC.exe $MF /to:"$O" /move /bg"

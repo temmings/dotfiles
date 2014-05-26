@@ -1,0 +1,94 @@
+﻿[AFXW]
+CFG=ON
+
+[KEY_DEF]
+KEY_00="&VIEW $V"afx"\AFXW.TXT"
+KEY_01="c:\cygwin\bin\mintty.exe -o charset=UTF-8 /bin/zsh -l"
+KEY_02="$V"USERPROFILE"\Dropbox\Windows\ConEmuPack.131225\ConEmu64.exe /cmd cmd -new_console"
+KEY_03=""$V"USERPROFILE"\Dropbox\Windows\vim74-kaoriya-win64\gvim.exe" $K "$P\$F""
+KEY_04=""$V"USERPROFILE"\Dropbox\Windows\tsxbin\TSXBIN.exe" "$P\$F""
+KEY_05=""$V"USERPROFILE"\Dropbox\Windows\ffc4_10_0_3u\FFC.exe" $MF /to:"$O" /copy /bg"
+KEY_06="touch $K"
+KEY_07="$~\AMKLN.EXE "$P\$F" "$O\$F$K""
+KEY_08="$V"USERPROFILE"\Dropbox\Windows\REST2514\Restoration.exe"
+KEY_09="c:\cygwin\bin\mintty.exe -s 200,15 -t "$P\$F" -o charset=UTF-8 /bin/bash -c "/bin/tail -n 2000 -F '$F' $K""
+KEY_10="&VIEW "$V"SystemRoot"\System32\drivers\etc\hosts""
+KEY_11="&VIEW "$V"USERPROFILE"\Documents\servers.org""
+KEY_12="&VIEW $V"afx"\ACHAW.TXT"
+KEY_17=""$V"USERPROFILE"\Dropbox\Windows\ffc4_10_0_3u\FFC.exe $MF /to:"$O" /move /bg"
+KEY_19="mklink "$P\$F" "$O\$F$K""
+KEY_21="c:\cygwin\bin\mintty.exe -s 200,15 -t "$P\$F" -o charset=SJIS /bin/bash -c "/bin/tail -n 2000 -F '$F' $K""
+KEY_33=""$~\afxtools\bin\afxtail.exe" $MF""
+KEY_44="&PRPTY "$P\$F""
+BTN_00="afxw.txt"
+BTN_01="mintty"
+BTN_02="cmd"
+BTN_03="gvim"
+BTN_04="tsxbin"
+BTN_05="FFC (copy)"
+BTN_06="touch"
+BTN_07="ハードリンク"
+BTN_08="うっかりさん"
+BTN_09="tail (utf8)"
+BTN_10="hosts"
+BTN_11="servers"
+BTN_12="achaw.txt"
+BTN_17="FFC (move)"
+BTN_19="mklink"
+BTN_21="tail (sjis)"
+BTN_33="afxtail"
+
+[REG_DIR]
+PRT_00="1 Desktop"
+DIR_00=%USERPROFILE%\Desktop\
+PRT_01="2 My Documents"
+DIR_01=%USERPROFILE%\Documents\
+PRT_02="3 My Dropbox"
+DIR_02=%USERPROFILE%\Dropbox\
+PRT_03="4 work"
+DIR_03=%USERPROFILE%\2014\
+PRT_04="B Binary"
+DIR_04=%USERPROFILE%\Dropbox\Windows\
+PRT_05="G Graphics"
+DIR_05=%USERPROFILE%\Pictures\
+PRT_06="H Home"
+DIR_06=%USERPROFILE%\
+PRT_07="I Incoming"
+DIR_07=%USERPROFILE%\Downloads\
+PRT_08="M Music"
+DIR_08=%USERPROFILE%\Music\
+PRT_09="N Network Shortcuts"
+DIR_09=%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Network Shortcuts\
+PRT_10="P Program Files"
+DIR_10=%ProgramFiles%\
+PRT_11="P Program Files (x86)"
+DIR_11=%ProgramFiles(x86)%\
+PRT_12="S Src"
+DIR_12=%USERPROFILE%\src\
+PRT_13="S Startup"
+DIR_13=%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\
+PRT_14="V Video"
+DIR_14=%USERPROFILE%\Videos\
+PRT_15="W Windows"
+DIR_15=%SystemRoot%\
+
+[REG_COL]
+COL_00=16776960
+EXT_00=ear fla ipa iso img lzh zip cab rar swc tar taz tgz tbz yz1 z gz bz bz2 7z msi msp msu far jar xpi xap dmg apk nupkg rpm xz lzma war hpi vsix lha
+COL_01=65535
+EXT_01=exe com bat cmd ps1 psd1 psm1 sh sed awk pl rb py js wsh vim el lisp cl pm vb swf wsf lua
+COL_02=255
+EXT_02=bin dll sys so ax a o lib class elc spi sph auf auo vfp ste
+COL_03=16711935
+EXT_03=ico bmp gif jpg jpeg jpe jfif tif tiff pi mag png mdpf psd
+COL_04=65280
+EXT_04=wav pcm poi mp3 ogg ape wma m4a m4r aif aiff m m2 mz opi ovi ozi oxi mdx mod mdz xm xmz it itz spc sp2 m4p tta mid
+COL_05=8388672
+EXT_05=lnk gid cnt orig old bak tmp
+COL_06=8421631
+EXT_06=a5er inf mf rc conf def cfg cnf ini csv tsv sql hlp chm html htm mht shtml sht xml xhtml xht rels doc pdf ppt pptx ods vcf xls xlt xlb xla docx xlsx xlsm mpp reg xsl rtf m3u css php asp aspx asax inc doc docx
+COL_07=33023
+EXT_07=avi mpg mpeg wmv mkv mov rm asx asf mp4 mp2 flv f4v 3gp vob ts m3u8 3g2 aac m4v wvm
+COL_08=4227072
+EXT_08=p12 pfx cer crt pem ppk rsa dsa pub key
+
