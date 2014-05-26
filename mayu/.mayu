@@ -4,7 +4,7 @@ if ( USE109 )
 else
   include "104.mayu"
   include ".mayu.HHK" # Happy Hacking Keyboard
-  include "default.mayu"
+  include "default.minimal.mayu"
 endif
 
 keymap Global
@@ -61,26 +61,33 @@ window	FlashBuild	/Flash\.exe:.*/ : EmacsEdit
 window	FlashBuild2	/FlashBuilder\.exe:.*/ : EmacsEdit
 window	Gimp		/gimp-2\.6\.exe:.*/ : EmacsEdit
 window	GgBar		/iexplore\.exe:.*Search Box/ : EmacsEdit
-window	Chrome		/chrome\.exe:.*/ : EmacsEdit
+window	GgChrome	/chrome\.exe:.*/ : EmacsEdit
 #window	GgChrome	/chrome\.exe:.*Chrome_RenderWidgetHostHWND/ : EmacsEdit
 #window	GgChromeEdit	/chrome\.exe:.*Chrome_AutocompleteEditView/ : EmacsEdit
 #window	GgChromeEdit2	/chrome\.exe:.*ViewsTextfieldEdit/ : EmacsEdit
 #window	GgChromeEdit3	/chrome\.exe:.*Chrome_OmniboxView/ : EmacsEdit
+#window	GgChromeEdit4	/chrome\.exe:.*Chrome_WidgetWin_1/ : EmacsEdit
 window	GgDesktop	/GoogleDesktopDisplay\.exe:.*_GD_QueryEditBox/ : EmacsEdit
 window	Himawari	/himapad\.exe:TfrmHimapad:TPanel:TPanel:TEditorEx/ : EmacsEdit
+window	IpMsg		/ipmsg\.exe:.*/ : EmacsEdit
 window	Launchy		/Launchy\.exe:.*/ : EmacsEdit
 window	LiveMessengerIM	/msnmsgr\.exe:.*:IM Window Class:.*/ : EmacsEdit
 window	LiveMessengerMW	/msnmsgr\.exe:.*:Main Window Class:.*/ : EmacsEdit
 window	MSNMessenger	/msnmsgr\.exe:IMWindowClass:DirectUIHWND/ : EmacsEdit
 window	MSTSC		/mstsc\.exe:.*:CtrlNotifySink:Edit/ : EmacsEdit
+window	MarkdownPad2	/MarkdownPad2\.exe:.*/ : EmacsEdit
+window	MarkdownSharp	/MarkDownSharpEditor\.exe:.*\.RichEdit20W\..*/ : EmacsEdit
 window	MySQLWorkbench	/MySQLWorkbench.exe:.*/ : EmacsEdit
 window	NaviCat		/navicat.exe:.*/ : EmacsEdit
 window	Pidgin		/pidgin\.exe:.*/ : EmacsEdit
 window	PShellISE	/powershell_ise\.exe:.*/ : EmacsEdit
 window	Sakura		/sakura\.exe:.*/ : EmacsEdit
-window	Skype		/Skype\.exe:.*TChatRichEdit.*/ : EmacsEdit
+#window	Skype		/Skype\.exe:.*TChatRichEdit.*/ : EmacsEdit
+window	Skype		/Skype\.exe:.*/ : EmacsEdit
+ key	C-R	=> &Ignore
 window	Soffice		/soffice\.exe:/ : EmacsEdit
 window	Soffice3	/soffice\.bin:SALFRAME/ : EmacsEdit
+window	StikyNot	/StikyNot\.exe:.*/ : EmacsEdit
 window	SQLServer	/ssmsee.exe:.*/ : EmacsEdit
 window	SQLServer2008	/Ssms\.exe:.*/ : EmacsEdit
 window	SQL_SP_UT_Tool	/SQL_SP_UT_Tool\.exe:.*/ : EmacsEdit
@@ -97,6 +104,17 @@ window	VWDTextEdit	/VWDExpress\.exe:.*VsTextEditPane/ : EmacsEdit
 window	VWDProp		/VWDExpress\.exe:.*WindowsForms10.Window.8.app.0.378734a:WindowsForms10.Window.8.app.0.378734a:WindowsForms10.Window.8.app.0.378734a/ : EmacsEdit
 window	VWDHWND		/VWDExpress\.exe:HwndWrapper.*/ : EmacsEdit
 window	VWDEdit		/VWDExpress\.exe:.*WindowsForms10\.EDIT.*/ : EmacsEdit
+
+#window	VCETextEdit	/VCExpress\.exe:.*VsTextEditPane/ : EmacsEdit
+#window	VCEHWND		/VCExpress\.exe:HwndWrapper.*/ : EmacsEdit
+#window	VCEEdit		/VCExpress\.exe:.*WindowsForms10\.EDIT.*/ : EmacsEdit
+#window	VCEDESKED	/VCExpress\.exe:wndclass_desked_gsk/ : EmacsEdit
+window	VCExpress	/VCExpress\.exe:.*/ : EmacsEdit
+
+window	VCSTextEdit	/vcsexpress\.exe:.*VsTextEditPane/ : EmacsEdit
+window	VCSHWND		/vcsexpress\.exe:HwndWrapper.*/ : EmacsEdit
+window	VCSEdit		/vcsexpress\.exe:.*WindowsForms10\.EDIT.*/ : EmacsEdit
+
 window	WinMergeU	/WinMergeU\.exe:.*AfxMDIFrame100u.*/ : EmacsEdit
 window	WireShark	/wireshark\.exe:.*/ : EmacsEdit
 
