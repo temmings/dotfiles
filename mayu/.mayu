@@ -139,5 +139,5 @@ window	MSProject	/WINPROJ\.EXE:.*/ : EmacsEdit
  key	C-Space		= F8
  key	C-I		= F2
 
-window	VS2012		/devenv\.exe:.*/ : KeymapDefault
+window	VS2012		/devenv\.exe:.*/ : Global
  key	C-H		= Backspace	# VsVim ÇÃ command ÉÇÅ[ÉhÇ≈ Ctrl-H Ç™å¯Ç©Ç»Ç≠Ç»ÇÈÇÃÇ≈
