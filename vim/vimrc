@@ -41,8 +41,8 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 " }}}
 
 " testing: {{{
-NeoBundle 'mytoh/unite-highlight'
 NeoBundle 'rking/ag.vim'
+
 "NeoBundle 'haya14busa/vim-migemo'
 "NeoBundle 'rhysd/migemo-search.vim'
 "if executable('cmigemo')
@@ -51,6 +51,7 @@ NeoBundle 'rking/ag.vim'
 " migemo 検索テスト用
 "local: ローカル
 "indent: インデント
+
 " }}}
 
 ":Restart" で gvim を再起動
@@ -408,6 +409,7 @@ NeoBundle 'osyo-manga/unite-fold'
 NeoBundle 'ujihisa/unite-font'
 NeoBundle 'hewes/unite-gtags'
 NeoBundle 'tsukkee/unite-help'
+NeoBundle 'mytoh/unite-highlight'
 NeoBundle 'thinca/vim-unite-history'
 NeoBundle 'tacroe/unite-mark'
 NeoBundle 'h1mesuke/unite-outline'
@@ -570,7 +572,7 @@ set softtabstop=4
 set expandtab           " indent tab をスペースに展開
 set noautoindent
 set smartindent
-set backspace=2         " バックスペースでインデントや改行を削除可
+set backspace=indent,eol,start
 
 set wildmenu            " コマンドライン補完するときに強化されたものを使う
 
@@ -662,7 +664,7 @@ set timeout timeoutlen=1000 ttimeoutlen=100
 " }}}
 
 " 全角スペースを表示 {{{
-" FIXME: 機能してない
+" FIXME: gvim で機能しない
 " http://sites.google.com/site/fudist/Home/vim-nihongo-ban/vim-color
 " sample:[　　　]
 
