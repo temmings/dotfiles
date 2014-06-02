@@ -172,7 +172,7 @@ function TRAPDEBUG() {
 function TRAPEXIT() {
 }
 function TRAPZERR() {
-    echo "TRAPZERR: return $?"
+    echo "TRAPZERR: return $?" 1>&2
 }
 # }}}
 
