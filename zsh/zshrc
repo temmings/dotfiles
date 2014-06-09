@@ -202,6 +202,8 @@ alias ll="ls -l"
 alias lf="ls -F"
 alias la="ls -A"
 alias ssh="ssh -F =(cat ~/.ssh/config.local ~/.ssh/config ~/.ssh/config.global)"
+alias scp="scp -F =(cat ~/.ssh/config.local ~/.ssh/config ~/.ssh/config.global)"
+alias sftp="sftp -F =(cat ~/.ssh/config.local ~/.ssh/config ~/.ssh/config.global)"
 alias svstatall="sudo svstat /var/service/*"
 if is_executable w3mman; then
     alias man="w3mman"
