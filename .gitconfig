@@ -30,3 +30,5 @@
 	st = status
 	tree = log --oneline --decorate --graph --pretty='format:%C(yellow)%h%C(blue)%d%C(reset) %s %C(cyan)%an, %ar%C(reset)'
 	unadd = rm --cached
+[push]
+	default = simple
