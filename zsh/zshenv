@@ -115,7 +115,7 @@ export LC_NUMERIC=$LANG
 export LC_TIME=$LANG
 #export LC_ALL="en_US.UTF-8"
 export TZ=JST-9
-export BLOCKSIZE=G
+export BLOCKSIZE=M
 
 # suppress the logout ^D.
 export IGNOREEOF=2
