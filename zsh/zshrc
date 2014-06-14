@@ -222,6 +222,16 @@ alias show_my_ipv6="telnet ipv6.test-ipv6.com 79"
 alias show_my_external_ip="curl 'http://whatismyip.akamai.com'"
 
 alias show_ec2_public_ip="curl -s 'http://169.254.169.254/2008-02-01/meta-data/public-ipv4'"
+
+alias -s htm="w3m"
+alias -s html="w3m"
+alias -s shtml="w3m"
+alias -s php="php -f"
+alias -s pl="perl"
+alias -s py="python"
+alias -s rb="ruby"
+alias -s sh="sh"
+alias -s zsh="zsh"
 # }}}
 
 ### anyenv
