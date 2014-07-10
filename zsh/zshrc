@@ -221,11 +221,13 @@ alias show_my_ipv4="telnet ipv4.test-ipv6.com 79"
 alias show_my_ipv6="telnet ipv6.test-ipv6.com 79"
 alias show_my_external_ip="curl 'http://whatismyip.akamai.com'"
 
-alias show_ec2_public_ip="curl -s 'http://169.254.169.254/2008-02-01/meta-data/public-ipv4'"
+alias show_ec2_local_ipv4="curl -s 'http://169.254.169.254/latest/meta-data/local-ipv4'"
+alias show_ec2_public_ipv4="curl -s 'http://169.254.169.254/latest/meta-data/public-ipv4'"
 
 alias -s htm="w3m"
 alias -s html="w3m"
 alias -s shtml="w3m"
+alias -s phar="php -f"
 alias -s php="php -f"
 alias -s pl="perl"
 alias -s py="python"
@@ -239,7 +241,7 @@ if [[ x"$OSTYPE" != x"cygwin" ]]; then
     [[ -d $HOME/.anyenv ]] || git clone https://github.com/riywo/anyenv $HOME/.anyenv
     export PATH="$HOME/.anyenv/bin:$PATH"
     eval "$(anyenv init -)"
-    for D in `find $HOME/.anyenv/envs -type d -d 1`
+    for D in `find $HOME/.anyenv/envs -type d -mindepth 1 -maxdepth 1`
     do
         export PATH="$D/shims:$PATH"
     done
