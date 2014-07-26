@@ -32,3 +32,6 @@
 	unadd = rm --cached
 [push]
 	default = simple
+[tig "bind"]
+	generic = g move-first-line
+	generic = G move-last-line

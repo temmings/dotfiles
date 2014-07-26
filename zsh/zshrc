@@ -207,7 +207,7 @@ ZSH=$HOME/.oh-my-zsh
 if [[ -d $ZSH ]]; then
     DISABLE_UPDATE_PROMPT=true
     ZSH_THEME="mrtazz"
-    plugins=(git rbenv pyenv)
+    plugins=(git)
     source $ZSH/oh-my-zsh.sh
 else
     # show user@host and random color.
