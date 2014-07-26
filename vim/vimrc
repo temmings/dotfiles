@@ -349,20 +349,20 @@ endif
 NeoBundle 'Shougo/neosnippet'
 
 " JavaScript completion
-NeoBundle 'marijnh/tern_for_vim'
-if s:on_windows
-  let g:tern#command = [expand('~/AppData/Roaming/npm/tern.cmd')]
-else
-  let g:tern#command = ['node', expand('~/node_modules/tern/bin/tern')]
-endif
-
-NeoBundle 'taichouchou2/vim-rsense'
-NeoBundle 'taichouchou2/vim-rails'
-NeoBundle 'romanvbabenko/rails.vim'
-let g:rsenseUseOmniFunc = 1
-if filereadable(expand('~/rsense/bin/rsense'))
-  let g:rsenseHome = expand('~/rsense')
-endif
+"NeoBundle 'marijnh/tern_for_vim'
+"if s:on_windows
+"  let g:tern#command = [expand('~/AppData/Roaming/npm/tern.cmd')]
+"else
+"  let g:tern#command = ['node', expand('~/node_modules/tern/bin/tern')]
+"endif
+"
+"NeoBundle 'taichouchou2/vim-rsense'
+"NeoBundle 'taichouchou2/vim-rails'
+"NeoBundle 'romanvbabenko/rails.vim'
+"let g:rsenseUseOmniFunc = 1
+"if filereadable(expand('~/rsense/bin/rsense'))
+"  let g:rsenseHome = expand('~/rsense')
+"endif
 " }}}
 
 NeoBundle 'vim-scripts/Flex-4'
@@ -577,7 +577,9 @@ set backspace=indent,eol,start
 set wildmenu            " コマンドライン補完するときに強化されたものを使う
 
 set number              " 行番号表示
-set relativenumber      " 相対行番号表示
+if exists('&relativenumber')
+  set relativenumber    " 相対行番号表示
+endif
 set ruler
 set list                " タブ・改行表示
 " タブや改行の表現方法
