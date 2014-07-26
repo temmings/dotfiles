@@ -9,6 +9,11 @@ endif
 
 keymap Global
 
+ ### 何故かRDP 経由すると右シフトが E0-0x36 になるね？
+ def key YetRightShift YetRShift = E0-0x36
+ mod Shift += YetRightShift
+ key *YetRightShift = *LShift
+
  ### Windows キーは Alt として扱う
  mod	Windows		-= LeftWindows RightWindows
  mod	Alt		+= LeftWindows RightWindows
@@ -71,6 +76,7 @@ window	GgDesktop	/GoogleDesktopDisplay\.exe:.*_GD_QueryEditBox/ : EmacsEdit
 window	Himawari	/himapad\.exe:TfrmHimapad:TPanel:TPanel:TEditorEx/ : EmacsEdit
 window	IpMsg		/ipmsg\.exe:.*/ : EmacsEdit
 window	Launchy		/Launchy\.exe:.*/ : EmacsEdit
+window	Line		/line\.exe:.*/ : EmacsEdit
 window	LiveMessengerIM	/msnmsgr\.exe:.*:IM Window Class:.*/ : EmacsEdit
 window	LiveMessengerMW	/msnmsgr\.exe:.*:Main Window Class:.*/ : EmacsEdit
 window	MSNMessenger	/msnmsgr\.exe:IMWindowClass:DirectUIHWND/ : EmacsEdit
