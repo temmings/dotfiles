@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# vim:ts=4 foldmethod=marker
+
 ### on exec
 ## 1: /etc/zshenv
 ## 2: ~/.zshenv
@@ -154,6 +156,29 @@ function attach_tmux() {
     fi
 }
 
+function prepare_boot2docker() {
+    boot2docker init
+    boot2docker start
+    export DOCKER_HOST=tcp://$(boot2docker ip 2>/dev/null):2375
+}
+
+function prepare_z() {
+    local z_dir=$HOME/src/z
+    [[ -d $z_dir ]] || (mkdir -p $(dirname $z_dir) && git clone https://github.com/rupa/z.git $z_dir)
+    source $z_dir/z.sh
+}
+
+function prepare_anyenv() {
+    local anyenv_dir=$HOME/.anyenv
+    [[ -d $anyenv_dir ]] || git clone https://github.com/riywo/anyenv $anyenv_dir
+    export PATH="$anyenv_dir/bin:$PATH"
+    eval "$(anyenv init -)"
+    for D in $(find $anyenv_dir/envs -type d -mindepth 1 -maxdepth 1)
+    do
+        export PATH="$D/shims:$PATH"
+    done
+}
+
 last_exec_command_name=$(basename -- $0)
 function periodic() {
 }
@@ -236,16 +261,11 @@ alias -s sh="sh"
 alias -s zsh="zsh"
 # }}}
 
-### anyenv
 if [[ x"$OSTYPE" != x"cygwin" ]]; then
-    [[ -d $HOME/.anyenv ]] || git clone https://github.com/riywo/anyenv $HOME/.anyenv
-    export PATH="$HOME/.anyenv/bin:$PATH"
-    eval "$(anyenv init -)"
-    for D in `find $HOME/.anyenv/envs -type d -mindepth 1 -maxdepth 1`
-    do
-        export PATH="$D/shims:$PATH"
-    done
+    prepare_anyenv
 fi
+
+prepare_z
 
 ### virtualenvwrapper for python virtualenv
 #if hash virtualenvwrapper.sh 2>/dev/null; then
