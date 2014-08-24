@@ -260,6 +260,7 @@ NeoBundle 'JSON.vim'
 NeoBundle 'XML-Folding'
 let g:xml_syntax_folding = 0
 autocmd FileType xml setlocal foldmethod=syntax
+NeoBundle 'aklt/plantuml-syntax'
 
 " {{{ eskk.vim
 NeoBundle 'tyru/eskk.vim'
