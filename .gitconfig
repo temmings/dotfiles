@@ -14,7 +14,7 @@
 [core]
 	precomposeunicode = true
 	autocrlf = input
-	safecrlf = true
+	safecrlf = false
 [i18n]
 	filesEncoding = utf-8
 [alias]
