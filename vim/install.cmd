@@ -2,7 +2,7 @@
 set install_script_dir=%~dp0
 set vim_dir=%USERPROFILE%\.vim
 set dotfiles=vimrc gvimrc vimrc.shadow
-set vim_dir_files=autoload dict doc ftplugin indent plugin runtime spell syntax templates
+set vim_dir_files=autoload conf.d dict doc ftplugin indent plugin runtime spell syntax templates
 
 mkdir %vim_dir%
 mkdir %vim_dir%\backup

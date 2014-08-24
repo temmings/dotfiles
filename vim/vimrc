@@ -23,6 +23,7 @@ endfunction
 
 call s:source_if_exist($MYSHADOWVIMRC)
 
+" neobundle: {{{
 let s:bundle_plugin_dir = '$DOTVIM/bundle'
 
 if has('vim_starting')
@@ -30,8 +31,6 @@ if has('vim_starting')
   set runtimepath+=$DOTVIM/bundle/neobundle.vim/
 endif
 
-"---------------------------------------------------------------------------
-" NeoBundle {{{
 call neobundle#rc(s:bundle_plugin_dir)
 
 " * github  : NeoBundle '<username>/<scriptname>'
@@ -356,7 +355,7 @@ NeoBundle 'Shougo/neosnippet'
 "else
 "  let g:tern#command = ['node', expand('~/node_modules/tern/bin/tern')]
 "endif
-"
+
 "NeoBundle 'taichouchou2/vim-rsense'
 "NeoBundle 'taichouchou2/vim-rails'
 "NeoBundle 'romanvbabenko/rails.vim'
@@ -370,16 +369,12 @@ NeoBundle 'vim-scripts/Flex-4'
 autocmd BufRead *.as set filetype=actionscript
 autocmd BufRead *.mxml set filetype=mxml
 
-" NERD Tree {{{
-NeoBundle 'scrooloose/nerdtree'
-"autocmd vimenter * if !argc() | NERDTree | endif
-"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-let g:NERDTreeIgnore = ['\.bak$', '\.clean$', '\.orig$', '\.pyc$', '\.swp$', '\~$']
-let g:NERDTreeShowHidden = 1
-let g:NERDTreeMinimalUI = 1
-let g:NERDTreeDirArrows = 0
-let g:NERDTreeMouseMode = 1
-" }}}
+call s:source_if_exist('$DOTVIM/conf.d/nerdtree.vim')
+
+call s:source_if_exist('$DOTVIM/conf.d/unite.vim')
+
+" * gs : disable safe mode.
+NeoBundle 'Shougo/vimfiler', { 'depends' : 'Shougo/unite.vim' }
 
 NeoBundle 'Shougo/vimshell'
 NeoBundle 'Shougo/vinarise'
@@ -400,101 +395,7 @@ let qfixmemo_template = [
   \""
 \]
 
-" {{{ unite / vimfiler
-" * gs : disable safe mode.
-NeoBundle 'Shougo/vimfiler', { 'depends' : 'Shougo/unite.vim' }
-NeoBundle 'Shougo/unite-build'
-NeoBundle 'ujihisa/unite-colorscheme'
-NeoBundle 'm2mdas/unite-file-vcs'
-NeoBundle 'osyo-manga/unite-fold'
-NeoBundle 'ujihisa/unite-font'
-NeoBundle 'hewes/unite-gtags'
-NeoBundle 'tsukkee/unite-help'
-NeoBundle 'mytoh/unite-highlight'
-NeoBundle 'thinca/vim-unite-history'
-NeoBundle 'tacroe/unite-mark'
-NeoBundle 'h1mesuke/unite-outline'
-NeoBundle 'osyo-manga/unite-qfixhowm'
-NeoBundle 'basyura/unite-rails'
-NeoBundle 'ujihisa/unite-rake'
-
-NeoBundle 'mattn/unite-advent_calendar'
-
-if s:on_windows
-  NeoBundle 'sgur/unite-everything'
-  let g:unite_source_everything = 'everything/async'
-elseif has('mac')
-  NeoBundle 'choplin/unite-spotlight'
-  let g:unite_source_everything = 'spotlight'
-else
-  NeoBundle 'ujihisa/unite-locate'
-  let g:unite_source_everything = 'locate'
-endif
-
-" Start insert.
-let g:unite_enable_start_insert = 1
-let g:unite_enable_short_source_names = 0
-
-let g:unite_source_file_mru_limit = 200
-" To track long mru history.
-let g:unite_source_file_mru_long_limit = 3000
-let g:unite_source_directory_mru_long_limit = 3000
-
-let g:unite_update_time = 1000
-let g:vimfiler_as_default_explorer = 1
-
-if executable('jvgrep')
-  " For jvgrep.
-  let g:unite_source_grep_command = 'jvgrep'
-  let g:unite_source_grep_default_opts = '--exclude ''\.(git|svn|hg|bzr)'''
-  let g:unite_source_grep_recursive_opt = '-R'
-elseif executable('ack-grep')
-  " For ack.
-  let g:unite_source_grep_command = 'ack-grep'
-  let g:unite_source_grep_default_opts = '--no-heading --no-color -a -H'
-  let g:unite_source_grep_recursive_opt = ''
-endif
-
-" " ウィンドウを分割して開く
-" autocmd FileType unite nnoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
-" autocmd FileType unite inoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
-" " ウィンドウを縦に分割して開く
-" autocmd FileType unite nnoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
-" autocmd FileType unite inoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
-" " ESCキーを2回押すと終了する
-" autocmd FileType unite nnoremap <silent> <buffer> <ESC><ESC> q
-" autocmd FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>q
-
-NeoBundle 'hrsh7th/vim-versions'
-" }}}
-
-" {{{ quickrun / quickfix
-NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'osyo-manga/unite-quickfix'
-NeoBundle 'osyo-manga/shabadou.vim'
-let g:quickrun_config = {
-      \ "_" : {
-      \     "hook/close_unite_quickfix/enable_hook_loaded" : 1,
-      \     "hook/unite_quickfix/enable_failure" : 1,
-      \     "hook/close_quickfix/enable_exit" : 1,
-      \     "hook/close_buffer/enable_failure" : 1,
-      \     "hook/close_buffer/enable_empty_data" : 1,
-      \     "outputter" : "multi:buffer:quickfix",
-      \     "hook/shabadoubi_touch_henshin/enable" : 1,
-      \     "hook/shabadoubi_touch_henshin/wait" : 20,
-      \     "outputter/buffer/split" : ":botright 8sp",
-      \     "runner" : "vimproc",
-      \     "runner/vimproc/updatetime" : 100,
-      \   },
-      \ }
-"NeoBundle 'osyo-manga/vim-watchdogs'
-NeoBundle "jceb/vim-hier"
-"call watchdogs#setup(g:quickrun_config)
-" 書き込み後にシンタックスチェックを行う
-let g:watchdogs_check_BufWritePost_enable = 1
-" 一定時間キー入力がなかった場合にシンタックスチェックを行う
-let g:watchdogs_check_CursorHold_enable = 1
-" }}}
+call s:source_if_exist('$DOTVIM/conf.d/quickfix.vim')
 
 "NeoBundle 'TortoiseSVN.vim'
 "let g:tortoiseSvnCmd = 'C:\Progra~1\TortoiseSVN\bin\TortoiseProc.exe'
@@ -666,22 +567,7 @@ set display+=lastline
 set timeout timeoutlen=1000 ttimeoutlen=100
 " }}}
 
-" 全角スペースを表示 {{{
-" FIXME: gvim で機能しない
-" http://sites.google.com/site/fudist/Home/vim-nihongo-ban/vim-color
-" sample:[　　　]
-
-function! s:highlight_zenkaku_space()
-  highlight ZenkakuSpace cterm=underline ctermfg=darkgrey gui=underline guifg=darkgrey
-  silent! match ZenkakuSpace /　/
-endfunction
-if has('syntax')
-  augroup ZenkakuSpace
-    autocmd!
-    autocmd VimEnter,BufEnter * call <SID>highlight_zenkaku_space()
-  augroup END
-endif
-" }}}
+call s:source_if_exist('$DOTVIM/conf.d/show_zenkaku_space.vim')
 
 autocmd FileType python setl tabstop=8 expandtab shiftwidth=4 softtabstop=4 autoindent smartindent
 autocmd FileType python setl cinwords=if,elif,else,for,while,try,except,finally,def,class
@@ -725,69 +611,9 @@ command! DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | d
 "ファイルまたはバッファ番号を指定して差分表示。#なら裏バッファと比較
 command! -nargs=? -complete=file Diff if '<args>'=='' | browse vertical diffsplit|else| vertical diffsplit <args>|endif
 
-" {{{ Source Explorer
-" // Set the height of Source Explorer window
-let g:SrcExpl_winHeight = 8
+"call s:source_if_exist('$DOTVIM/conf.d/srcexpl.vim')
 
-" // Set 100 ms for refreshing the Source Explorer
-let g:SrcExpl_refreshTime = 100
-
-" // Set "Enter" key to jump into the exact definition context
-" let g:SrcExpl_jumpKey = "<ENTER>"
-
-" // Set "Space" key for back from the definition context
-let g:SrcExpl_gobackKey = "<SPACE>"
-
-" // In order to Avoid conflicts, the Source Explorer should know what plugins
-" // are using buffers. And you need add their bufname into the list below
-" // according to the command ":buffers!"
-let g:SrcExpl_pluginList = [
-      \   "__Tag_List__",
-      \   "_NERD_tree_",
-      \   "Source_Explorer"
-      \ ]
-
-" // Enable/Disable the local definition searching, and note that this is not
-" // guaranteed to work, the Source Explorer doesn't check the syntax for now.
-" // It only searches for a match with the keyword according to command 'gd'
-let g:SrcExpl_searchLocalDef = 1
-
-" // Do not let the Source Explorer update the tags file when opening
-let g:SrcExpl_isUpdateTags = 1
-
-" // Use 'Exuberant Ctags' with '--sort=foldcase -R .' or '-L cscope.files' to
-" //  create/update a tags file
-let g:SrcExpl_updateTagsCmd = "ctags --sort=foldcase -R ."
-
-" // Set "<F12>" key for updating the tags file artificially
-let g:SrcExpl_updateTagsKey = "<F12>"
-" }}}
-
-""" python virtualenv {{{
-" Function to activate a virtualenv in the embedded interpreter for
-" omnicomplete and other things like that.
-function! LoadVirtualEnv(path)
-  let activate_this = a:path . '/bin/activate_this.py'
-  if getftype(a:path) == "dir" && filereadable(activate_this)
-    python << EOF
-import vim
-activate_this = vim.eval('l:activate_this')
-execfile(activate_this, dict(__file__=activate_this))
-EOF
-  endif
-endfunction
-
-" Load up a 'stable' virtualenv if one exists in ~/.virtualenv
-let defaultvirtualenv = expand("~/.virtualenvs/vim")
-
-" Only attempt to load this virtualenv if the defaultvirtualenv
-" actually exists, and we aren't running with a virtualenv active.
-if has("python")
-  if empty($VIRTUAL_ENV) && getftype(defaultvirtualenv) == "dir"
-    call LoadVirtualEnv(defaultvirtualenv)
-  endif
-endif
-" }}}
+call s:source_if_exist('$DOTVIM/conf.d/virtualenv.vim')
 
 autocmd! BufRead,BufNewFile *.sql set filetype=mysql
 
