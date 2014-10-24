@@ -21,6 +21,7 @@ keymap Global
  key	*RightWindows	= *RightAlt
 
  key	C-I			=> Tab
+ key	C-_3			=> ESC
  key	C-LeftSquareBracket	=> ESC
 
  # default.mayu の一部のショートカットを無効に
