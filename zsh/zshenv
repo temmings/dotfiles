@@ -124,9 +124,6 @@ export LYNX_CFG=~/.lynxrc
 export PERL_BADLANG=0
 #export PIP_REQUIRE_VIRTUALENV=true
 
-if is_executable nc && nc -w 0 localhost 8123; then
-    export HTTP_PROXY="http://localhost:8123"
-fi
 export WWW_HOME=http://www.google.co.jp/
 export HTTP_HOME=$WWW_HOME
 
