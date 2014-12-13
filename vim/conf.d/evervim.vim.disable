@@ -1,0 +1,8 @@
+NeoBundle 'kakkyz81/evervim'
+
+" Token: https://sandbox.evernote.com/api/DeveloperToken.action
+" NoteStore URL: https://sandbox.evernote.com/shard/s1/notestore
+"let g:evervim_devtoken = $EVERNOTE_SANDBOX_TOKEN
+" Token: https://www.evernote.com/api/DeveloperToken.action
+" NoteStore URL: https://www.evernote.com/shard/s20/notestore
+let g:evervim_devtoken = $EVERNOTE_DEV_TOKEN

@@ -1,0 +1,3 @@
+NeoBundle 'TortoiseSVN.vim'
+
+let g:tortoiseSvnCmd = 'C:\Progra~1\TortoiseSVN\bin\TortoiseProc.exe'

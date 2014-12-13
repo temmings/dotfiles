@@ -1,0 +1,2 @@
+NeoBundle 'mattn/emmet-vim'
+let g:user_emmet_mode='n'    "only enable normal mode functions.

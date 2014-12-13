@@ -1,0 +1,5 @@
+NeoBundle 'kana/vim-smartchr'
+NeoBundle 'kana/vim-smartinput'
+
+inoremap <buffer><expr> = smartchr#one_of('=', ' = ', ' == ')
+inoremap <buffer><expr> , smartchr#one_of(',', ', ', ' => ')

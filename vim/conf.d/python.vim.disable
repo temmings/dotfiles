@@ -1,0 +1,3 @@
+NeoBundle 'klen/python-mode'
+let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe']
+let g:pymode_lint_ignore = "E501,W293"

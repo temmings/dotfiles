@@ -1,0 +1,20 @@
+NeoBundle 'taglist.vim'
+
+let Tlist_Show_One_File = 0
+let Tlist_Auto_Update = 1
+let Tlist_Enable_Fold_Column = 1
+let Tlist_Process_File_Always = 1
+
+autocmd BufRead *.c TlistOpen
+autocmd BufRead *.h TlistOpen
+autocmd BufRead *.cc TlistOpen
+autocmd BufRead *.cpp TlistOpen
+autocmd BufRead *.hpp TlistOpen
+autocmd BufRead *.cs TlistOpen
+autocmd BufRead *.aspx TlistOpen
+autocmd BufRead *.py TlistOpen
+autocmd BufRead *.rb TlistOpen
+autocmd BufRead *.pl TlistOpen
+autocmd BufRead *.pm TlistOpen
+autocmd BufRead *.vb TlistOpen
+autocmd BufRead *.vbs TlistOpen

@@ -6,3 +6,5 @@ let g:NERDTreeShowHidden = 1
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeDirArrows = 0
 let g:NERDTreeMouseMode = 1
+
+nnoremap <silent> <C-e> :<C-u>NERDTreeToggle<CR>

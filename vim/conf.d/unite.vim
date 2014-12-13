@@ -1,3 +1,6 @@
+NeoBundle 'Shougo/unite.vim'
+
+NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'Shougo/unite-build'
 NeoBundle 'ujihisa/unite-colorscheme'
 NeoBundle 'm2mdas/unite-file-vcs'
@@ -14,17 +17,6 @@ NeoBundle 'basyura/unite-rails'
 NeoBundle 'ujihisa/unite-rake'
 NeoBundle 'hrsh7th/vim-versions'
 NeoBundle 'mattn/unite-advent_calendar'
-
-if s:on_windows
-  NeoBundle 'sgur/unite-everything'
-  let g:unite_source_everything = 'everything/async'
-elseif has('mac')
-  NeoBundle 'choplin/unite-spotlight'
-  let g:unite_source_everything = 'spotlight'
-else
-  NeoBundle 'ujihisa/unite-locate'
-  let g:unite_source_everything = 'locate'
-endif
 
 " Start insert.
 let g:unite_enable_start_insert = 1
@@ -50,6 +42,18 @@ elseif executable('ack-grep')
   let g:unite_source_grep_recursive_opt = ''
 endif
 
+let s:on_windows = has('win95') || has('win16') || has('win32') || has('win64')
+if s:on_windows
+  NeoBundle 'sgur/unite-everything'
+  let g:unite_source_everything = 'everything/async'
+elseif has('mac')
+  NeoBundle 'choplin/unite-spotlight'
+  let g:unite_source_everything = 'spotlight'
+else
+  NeoBundle 'ujihisa/unite-locate'
+  let g:unite_source_everything = 'locate'
+endif
+
 " " ウィンドウを分割して開く
 " autocmd FileType unite nnoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
 " autocmd FileType unite inoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
@@ -59,3 +63,23 @@ endif
 " " ESCキーを2回押すと終了する
 " autocmd FileType unite nnoremap <silent> <buffer> <ESC><ESC> q
 " autocmd FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>q
+
+nnoremap [unite] <Nop>
+nmap , [unite]
+nnoremap <silent> [unite]a :<C-u>Unite -buffer-name=wild buffer file_mru bookmark file<CR>
+nnoremap <silent> [unite]b :<C-u>Unite -buffer-name=buffer buffer<CR>
+nnoremap <silent> [unite]c :<C-u>Unite -buffer-name=build build<CR>
+nnoremap <silent> [unite]f :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+nnoremap <silent> [unite]h :<C-u>Unite -buffer-name=history history/command<CR>
+nnoremap <silent> [unite]H :<C-u>Unite -buffer-name=highlight highlight<CR>
+nnoremap <silent> [unite]k :<C-u>Unite -buffer-name=mapping mapping<CR>
+nnoremap <silent> [unite]m :<C-u>Unite -buffer-name=mru file_mru:short<CR>
+nnoremap <silent> [unite]ps :<C-u>Unite -buffer-name=plugin/search neobundle/search<CR>
+nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=register register<CR>
+nnoremap <silent> [unite]t :<C-u>Unite -buffer-name=tab tab<CR>
+nnoremap <silent> [unite]u :<C-u>Unite buffer file_mru:short<CR>
+nnoremap <silent> [unite]v :<C-u>Unite -start-insert -no-split -buffer-name=file_vcs file/vcs<CR>
+nnoremap <silent> [unite]vs :<C-u>UniteVersions status:!<CR>
+nnoremap <silent> [unite]vl :<C-u>UniteVersions log:%<CR>
+nnoremap <silent> [unite]/ :<C-u>execute "Unite -buffer-name=spotlight " . g:unite_source_everything<CR>
+

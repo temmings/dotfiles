@@ -1,0 +1,11 @@
+NeoBundle 'nathanaelkane/vim-indent-guides'
+let g:indent_guides_indent_levels = 30
+let g:indent_guides_color_change_percent = 10
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermbg=darkgrey guibg=grey11 ctermbg=8
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=black guibg=black ctermbg=3
+let g:indent_guides_guide_size = 1
+let g:indent_guides_start_level = 1
+let g:indent_guides_space_guides = 2
+let g:indent_guides_enable_on_vim_startup = 1
+

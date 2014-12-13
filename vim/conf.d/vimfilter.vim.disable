@@ -1,0 +1,4 @@
+NeoBundle 'Shougo/vimfiler', { 'depends' : 'Shougo/unite.vim' }
+" * gs : disable safe mode.
+
+NeoBundle 'Shougo/vimshell'

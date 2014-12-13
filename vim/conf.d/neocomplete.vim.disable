@@ -1,0 +1,67 @@
+" {{{ neocomplete / neosnippet
+if has('lua')
+  NeoBundle 'Sougo/neocomplete.vim'
+  set completeopt=preview,menuone
+  let g:neocomplete#enable_at_startup = 1
+  let g:neocomplete#enable_smart_case = 1
+  let g:neocomplete#enable_underbar_completion = 1
+  let g:neocomplete#enable_camel_case_completion = 1
+  let g:neocomplete#disable_auto_complete = 0
+
+  " Enable omni completion.
+  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+"  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+  autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+  autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
+  let g:SuperTabDefaultCompletionType = "context"
+  let g:SuperTabContextDefaultCompletionType = "<c-n>"
+
+  " Enable heavy omni completion.
+  if !exists('g:neocomplete#omni_patterns')
+    let g:neocomplete#omni_patterns = {}
+  endif
+  "let g:neocomplete#omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+  let g:neocomplete#omni_patterns.cs = '.*'
+  let g:neocomplete#omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+  let g:neocomplete#omni_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+  let g:neocomplete#omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
+  let g:neocomplete#force_overwrite_completefunc = 1
+
+  if !exists("g:neocomplete#force_omni_patterns")
+    let g:neocomplete#force_omni_patterns = {}
+  endif
+
+  " omnifunc が呼び出される場合の正規表現パターンを設定しておく
+  let g:neocomplete#force_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|::'
+endif
+
+NeoBundle 'Shougo/neosnippet'
+
+ JavaScript completion
+NeoBundle 'marijnh/tern_for_vim'
+if s:on_windows
+  let g:tern#command = [expand('~/AppData/Roaming/npm/tern.cmd')]
+else
+  let g:tern#command = ['node', expand('~/node_modules/tern/bin/tern')]
+endif
+
+NeoBundle 'taichouchou2/vim-rsense'
+NeoBundle 'taichouchou2/vim-rails'
+NeoBundle 'romanvbabenko/rails.vim'
+let g:rsenseUseOmniFunc = 1
+if filereadable(expand('~/rsense/bin/rsense'))
+  let g:rsenseHome = expand('~/rsense')
+endif
+" }}}
+
+" SuperTab like snippets behavior.
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)"  : "\<TAB>"
+
+imap <C-k> <Plug>(neosnippet_expand_or_jump)
+smap <C-k> <Plug>(neosnippet_expand_or_jump)
+xmap <C-k> <Plug>(neosnippet_expand_target)

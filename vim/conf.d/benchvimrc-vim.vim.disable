@@ -1,0 +1,5 @@
+NeoBundleLazy 'mattn/benchvimrc-vim', {
+      \   'autoload': {
+      \     'commands': ['BenchVimrc'],
+      \   },
+      \ }

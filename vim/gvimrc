@@ -3,16 +3,17 @@
 let s:on_windows = has('win95') || has('win16') || has('win32') || has('win64')
 
 if s:on_windows
-  "set guifont=MS_Gothic:h8:cSHIFTJIS
-  set guifont=Inconsolata:h10
+  set guifont=MS_Gothic:h10:cSHIFTJIS
+  "set guifont=Inconsolata:h10
+  set renderoptions=type:directx
 
   set linespace=0
   set columns=165
-  set lines=65
+  set lines=74
   set cmdheight=2
   set guioptions-=T
   set guioptions-=m
-  set guioptions+=a
+  "set guioptions+=a	" ビジュアルモードで選択したテキストをクリップボードに入れる
   if exists('&transparency')
     set transparency=240
     augroup hack234

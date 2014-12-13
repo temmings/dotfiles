@@ -5,15 +5,11 @@ filetype off                   " required!
 
 let s:on_windows = has('win95') || has('win16') || has('win32') || has('win64')
 
-if s:on_windows
-  set shellslash
-endif
-
 let $DOTVIM = expand('~/.vim')
-" ローカル設定 (.vimrc 末尾で読み込み)
-let $MYLOCALVIMRC = expand('~/.vimrc.local')
 " 見せられないよ！
 let $MYSHADOWVIMRC = expand('~/.vimrc.shadow')
+" ローカル設定 (.vimrc 末尾で読み込み)
+let $MYLOCALVIMRC = expand('~/.vimrc.local')
 
 function! s:source_if_exist(file)
   if filereadable(a:file)
@@ -25,6 +21,9 @@ call s:source_if_exist($MYSHADOWVIMRC)
 
 " neobundle: {{{
 let s:bundle_plugin_dir = '$DOTVIM/bundle'
+if s:on_windows
+  set shellslash
+endif
 
 if has('vim_starting')
   " $ git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
@@ -39,8 +38,14 @@ call neobundle#rc(s:bundle_plugin_dir)
 NeoBundleFetch 'Shougo/neobundle.vim'
 " }}}
 
+" 各種プラグインなどのまとまった設定を読み込み
+for rc in glob('$DOTVIM/conf.d/*.vim', 1, 1)
+  execute "source " . rc
+endfor
+
+""" misc plugins {{{
 " testing: {{{
-NeoBundle 'rking/ag.vim'
+"NeoBundle 'rking/ag.vim'
 
 "NeoBundle 'haya14busa/vim-migemo'
 "NeoBundle 'rhysd/migemo-search.vim'
@@ -57,10 +62,10 @@ NeoBundle 'rking/ag.vim'
 NeoBundle 'tyru/restart.vim'
 
 ":Capture <command>" で command windows への出力をバッファに取り込む
-NeoBundle 'tyru/capture.vim'
+"NeoBundle 'tyru/capture.vim'
 
 ":PP <Variable>"
-NeoBundle 'thinca/vim-prettyprint'
+"NeoBundle 'thinca/vim-prettyprint'
 
 " バッファを Vim Script として評価
 ":Batch" : 現在行を評価
@@ -68,188 +73,31 @@ NeoBundle 'thinca/vim-prettyprint'
 NeoBundle 'vim-scripts/batch.vim'
 
 " ctags, <cword>, 任意の文字列をハイライト
-NeoBundle 't9md/vim-quickhl'
-
-" vimproc {{{
-let s:has_vimproc = has('kaoriya')
-if !s:has_vimproc
-  NeoBundle 'Shougo/vimproc', {
-        \   'build' : {
-        \     'windows' : 'make -f make_mingw32.mak',
-        \     'cygwin' : 'make -f make_cygwin.mak',
-        \     'mac' : 'make -f make_mac.mak',
-        \     'unix' : 'make -f make_unix.mak',
-        \   },
-        \ }
-endif
-" }}}
+"NeoBundle 't9md/vim-quickhl'
 
 " Ex command 差し替え
 NeoBundle 'tyru/vim-altercmd'
 call altercmd#load()
+" require: conf.d/bufferWipeoutInteractive
 AlterCommand q[uit] call BufferWipeoutInteractive()
 
-" {{{ emacs keybind for command line.
+" emacs keybind for command line.
 "   * <C-O> : prefix to original keybind
 NeoBundle 'houtsnip/vim-emacscommandline'
-" }}}
 
 """ use \\[fFtT]{char} or \\[wWbBeEjknN] or \\g[eE]
-NeoBundle 'Lokaltog/vim-easymotion'
+"NeoBundle 'Lokaltog/vim-easymotion'
 
-NeoBundle 'tpope/vim-abolish'
 " MixedCase (crm), camelCase (crc), snake_case (crs), and UPPER_CASE (cru)
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'tpope/vim-repeat'
-"  Old text                  Command     New text ~
-"  "Hello *world!"           ds"         Hello world!
-"  [123+4*56]/2              cs])        (123+456)/2
-"  "Look ma, I'm *HTML!"     cs"<q>      <q>Look ma, I'm HTML!</q>
-"  if *x>3 {                 ysW(        if ( x>3 ) {
-"  my $str = *whee!;         vllllS'     my $str = 'whee!';
+"NeoBundle 'tpope/vim-abolish'
 
 " search string from visual mode.
-NeoBundle 'thinca/vim-visualstar'
-
-" yankround.vim {{{
-NeoBundle 'LeafCage/yankround.vim'
-
-let g:yankround_max_history = 50
-" }}}
-
-" lightline {{{
-NeoBundle 'itchyny/lightline.vim'
-let g:lightline = {
-      \   'colorscheme': 'solarized',
-      \   'active': {
-      \     'right': [
-      \       ['lineinfo', 'syntastic'],
-      \       ['percent'],
-      \       ['charcode', 'fileformat', 'fileencoding', 'filetype'],
-      \     ],
-      \   },
-      \   'component_function': {
-      \     'charcode': 'MyCharCode',
-      \   },
-      \ }
-set noshowmode " モード表示しない
-" }}}
-
-" https://github.com/Lokaltog/vim-powerline/blob/develop/autoload/Powerline/Functions.vim
-function! MyCharCode() " {{{
-  if winwidth('.') <= 70
-    return ''
-  endif
-
-  " Get the output of :ascii
-  redir => ascii
-  silent! ascii
-  redir END
-
-  if match(ascii, 'NUL') != -1
-    return 'NUL'
-  endif
-
-  " Zero pad hex values
-  let nrformat = '0x%02x'
-
-  let encoding = (&fenc == '' ? &enc : &fenc)
-
-  if encoding == 'utf-8'
-    " Zero pad with 4 zeroes in unicode files
-    let nrformat = '0x%04x'
-  endif
-
-  " Get the character and the numeric value from the return value of :ascii
-  " This matches the two first pieces of the return value, e.g.
-  " "<F>  70" => char: 'F', nr: '70'
-  let [str, char, nr; rest] = matchlist(ascii, '\v\<(.{-1,})\>\s*([0-9]+)')
-
-  " Format the numeric value
-  let nr = printf(nrformat, nr)
-
-  return "'". char ."' ". nr
-endfunction
-" }}}
-
-NeoBundle 'buftabs'
-let g:buftabs_only_basename = 1
-NeoBundle 'bufexplorer.zip'
-
-" python plugins {{{
-"NeoBundle 'klen/python-mode'
-let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe']
-let g:pymode_lint_ignore = "E501,W293"
-" }}}
-
-" use K : call perldoc or pydoc or phpdoc
-NeoBundle 'Show-mandictperldocpydocphpdoc-use-K'
-"NeoBundle 'thinca/vim-ref'
-let g:ref_open = ':tabnew'
-let g:ref_use_vimproc = 0
-let g:ref_man_cmd = "/usr/bin/man -P cat"
-let g:ref_man_lang = "C"
-let g:ref_detect_filetype = {
-  \  'c': 'man',
-  \  'clojure': 'clojure',
-  \  'perl': 'perldoc',
-  \  'php': 'phpmanual',
-  \  'ruby': 'refe',
-  \  'erlang': 'erlang',
-  \  'python': 'pydoc',
-  \  '_': ['help', 'man']
-  \}
+"NeoBundle 'thinca/vim-visualstar'
 
 "NeoBundle 'yuratomo/w3m.vim'
 "let g:w3m#command = 'C:\Cygwin\bin\w3m.exe'
 
-NeoBundle 'mattn/webapi-vim'
-
-" previm (markdown) {{{
-"   :PrevimOpen
-NeoBundle 'kannokanno/previm', { 'depends' : 'tyru/open-browser.vim' }
-augroup filetypedetect
-  autocmd BufNew,BufNewFile,BufRead *.md,*.markdown :setfiletype markdown
-augroup END
-" }}}
-
-" vim-indent-guides {{{
-NeoBundle 'nathanaelkane/vim-indent-guides'
-let g:indent_guides_indent_levels = 30
-let g:indent_guides_color_change_percent = 10
-let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermbg=darkgrey guibg=grey11 ctermbg=8
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=black guibg=black ctermbg=3
-let g:indent_guides_guide_size = 1
-let g:indent_guides_start_level = 1
-let g:indent_guides_space_guides = 2
-let g:indent_guides_enable_on_vim_startup = 1
-" }}}
-
-" gtags {{{
-NeoBundle 'gtags.vim'
-" }}}
-
-" Taglist {{{
-"NeoBundle 'taglist.vim'
-"let Tlist_Show_One_File = 0
-"let Tlist_Auto_Update = 1
-"let Tlist_Enable_Fold_Column = 1
-"let Tlist_Process_File_Always = 1
-"autocmd BufRead *.c TlistOpen
-"autocmd BufRead *.h TlistOpen
-"autocmd BufRead *.cc TlistOpen
-"autocmd BufRead *.cpp TlistOpen
-"autocmd BufRead *.hpp TlistOpen
-"autocmd BufRead *.cs TlistOpen
-"autocmd BufRead *.aspx TlistOpen
-"autocmd BufRead *.py TlistOpen
-"autocmd BufRead *.rb TlistOpen
-"autocmd BufRead *.pl TlistOpen
-"autocmd BufRead *.pm TlistOpen
-"autocmd BufRead *.vb TlistOpen
-"autocmd BufRead *.vbs TlistOpen
-" }}}
+"NeoBundle 'mattn/webapi-vim'
 
 NeoBundle 'vim-orgmode'
 NeoBundle 'VimOrganizer'
@@ -260,188 +108,18 @@ NeoBundle 'XML-Folding'
 let g:xml_syntax_folding = 0
 autocmd FileType xml setlocal foldmethod=syntax
 NeoBundle 'aklt/plantuml-syntax'
+NeoBundle 'vim-scripts/nagios-syntax'
+au BufNewFile,BufRead */nagios/*.cfg setf nagios
 
-" {{{ eskk.vim
-NeoBundle 'tyru/eskk.vim'
-set imdisable
-
-let g:eskk#directory = "~/Dropbox/skk/eskk"
-let g:eskk#dictionary = {
-\ 'path': expand("~/Dropbox/skk/eskk/.skk-jisyo"), 'sorted': 0, 'encoding': 'utf-8'
-\ }
-let g:eskk#large_dictionary = {
-\ 'path': expand("~/Dropbox/skk/SKK-JISYO.L.unannotated"), 'sorted': 1, 'encoding': 'euc-jp'
-\ }
-
-let g:eskk#enable_completion = 1
-let g:eskk#max_candidates = 30
-let g:eskk#start_completion_length = 2
-let g:eskk#register_completed_word = 0
-let g:eskk#auto_save_dictionary_at_exit = 1
-let g:eskk#dictionary_save_count = 3
-let g:eskk#show_annotation = 0
-let g:eskk#keep_state = 1
-let g:eskk#egg_like_newline = 1
-let g:eskk#egg_like_newline_completion = 1
-let g:eskk#debug = 0
-let g:eskk#no_default_mappings = 1
-" }}}
-
-NeoBundle 'mattn/emmet-vim'
-"let g:user_emmet_mode='n'    "only enable normal mode functions.
-
-"NeoBundle 'kana/vim-smartchr'
-"NeoBundle 'kana/vim-smartinput'
-"inoremap <buffer><expr> = smartchr#one_of('=', ' = ', ' == ')
-"inoremap <buffer><expr> , smartchr#one_of(',', ', ', ' => ')
-
-" NeoBundleLazy 'nosami/Omnisharp', {
-" \   'autoload': {'filetypes': ['cs']},
-" \   'build': {
-" \     'windows': 'MSBuild.exe server/OmniSharp.sln /p:Platform="Any CPU"',
-" \     'mac': 'xbuild server/OmniSharp.sln',
-" \     'unix': 'xbuild server/OmniSharp.sln',
-" \   }
-" \ }
-" let g:OmniSharp_typeLookupInPreview = 1
-
-" {{{ neocomplete / neosnippet
-if has('lua')
-  NeoBundle 'Sougo/neocomplete.vim'
-  set completeopt=preview,menuone
-  let g:neocomplete#enable_at_startup = 1
-  let g:neocomplete#enable_smart_case = 1
-  let g:neocomplete#enable_underbar_completion = 1
-  let g:neocomplete#enable_camel_case_completion = 1
-  let g:neocomplete#disable_auto_complete = 0
-
-  " Enable omni completion.
-  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-"  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-  autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-  autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
-  let g:SuperTabDefaultCompletionType = "context"
-  let g:SuperTabContextDefaultCompletionType = "<c-n>"
-
-  " Enable heavy omni completion.
-  if !exists('g:neocomplete#omni_patterns')
-    let g:neocomplete#omni_patterns = {}
-  endif
-  "let g:neocomplete#omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-  let g:neocomplete#omni_patterns.cs = '.*'
-  let g:neocomplete#omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-  let g:neocomplete#omni_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-  let g:neocomplete#omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-
-  let g:neocomplete#force_overwrite_completefunc = 1
-
-  if !exists("g:neocomplete#force_omni_patterns")
-    let g:neocomplete#force_omni_patterns = {}
-  endif
-
-  " omnifunc が呼び出される場合の正規表現パターンを設定しておく
-  let g:neocomplete#force_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|::'
-endif
-
-NeoBundle 'Shougo/neosnippet'
-
-" JavaScript completion
-"NeoBundle 'marijnh/tern_for_vim'
-"if s:on_windows
-"  let g:tern#command = [expand('~/AppData/Roaming/npm/tern.cmd')]
-"else
-"  let g:tern#command = ['node', expand('~/node_modules/tern/bin/tern')]
-"endif
-
-"NeoBundle 'taichouchou2/vim-rsense'
-"NeoBundle 'taichouchou2/vim-rails'
-"NeoBundle 'romanvbabenko/rails.vim'
-"let g:rsenseUseOmniFunc = 1
-"if filereadable(expand('~/rsense/bin/rsense'))
-"  let g:rsenseHome = expand('~/rsense')
-"endif
-" }}}
-
-NeoBundle 'vim-scripts/Flex-4'
-autocmd BufRead *.as set filetype=actionscript
-autocmd BufRead *.mxml set filetype=mxml
-
-call s:source_if_exist('$DOTVIM/conf.d/nerdtree.vim')
-
-call s:source_if_exist('$DOTVIM/conf.d/unite.vim')
-
-" * gs : disable safe mode.
-NeoBundle 'Shougo/vimfiler', { 'depends' : 'Shougo/unite.vim' }
-
-NeoBundle 'Shougo/vimshell'
-NeoBundle 'Shougo/vinarise'
-let g:vinarise_enable_auto_detect = 1
-let g:vinarise_detect_large_file_size = 0
-
-NeoBundle 'fuenor/qfixhowm'
-let QFixHowm_Key = 'g'
-let QFixHowm_FileType = 'markdown'
-let QFixHowm_Title = '#'
-let howm_dir = expand('~/Dropbox/qfixmemo')
-let howm_filename = '%Y/%m/%Y-%m-%d-%H%M%S.md'
-let howm_fileencoding = 'utf-8'
-let howm_fileformat = 'unix'
-let qfixmemo_filetype = ''
-let qfixmemo_template = [
-  \'%TITLE%  %TAG%',
-  \""
-\]
-
-call s:source_if_exist('$DOTVIM/conf.d/quickfix.vim')
-
-"NeoBundle 'TortoiseSVN.vim'
-"let g:tortoiseSvnCmd = 'C:\Progra~1\TortoiseSVN\bin\TortoiseProc.exe'
-
-NeoBundleLazy 'mattn/benchvimrc-vim', {
-      \   'autoload': {
-      \     'commands': ['BenchVimrc'],
-      \   },
-      \ }
-
-" {{{ matchit
-runtime macros/matchit.vim
-NeoBundle 'vimtaku/hl_matchit.vim.git'
-let g:hl_matchit_enable_on_vim_startup = 1
-let g:hl_matchit_hl_groupname = 'Title'
-"let g:hl_matchit_allow_ft = 'html,xml,vim,ruby,sh'
-let g:hl_matchit_allow_ft = 'html,vim,ruby,sh'
-" }}}
-
-NeoBundle 'kakkyz81/evervim'
-" Token: https://sandbox.evernote.com/api/DeveloperToken.action
-" NoteStore URL: https://sandbox.evernote.com/shard/s1/notestore
-let g:evervim_devtoken = $EVERNOTE_SANDBOX_TOKEN
-" Token: https://www.evernote.com/api/DeveloperToken.action
-" NoteStore URL: https://www.evernote.com/shard/s20/notestore
-"let g:evervim_devtoken = $EVERNOTE_DEV_TOKEN
+"NeoBundle 'vim-scripts/Flex-4'
+"autocmd BufRead *.as set filetype=actionscript
+"autocmd BufRead *.mxml set filetype=mxml
 
 filetype plugin indent on
 
-"NeoBundle 'Diablo3'
-" {{{ solarized
-NeoBundle 'altercation/vim-colors-solarized'
-let g:solarized_termcolors = 256
-let g:solarized_termtrans = 1
-" let g:solarized_degrade = 0
-" let g:solarized_bold = 1
-" let g:solarized_underline = 1
-" let g:solarized_italic = 1
-" let g:solarized_contrast = "normal"
-" let g:solarized_visibility = "normal"
-" let g:solarized_diffmode = "normal"
-" let g:solarized_hitrail = 0
-" let g:solarized_menu = 1
-" }}}
+""" misc plugins: }}}
 
-" Installation check.
+" Plugin installation check.
 NeoBundleCheck
 
 " Vim config: {{{
@@ -519,14 +197,6 @@ set laststatus=2        " 常にステータス行を表示
 set showcmd             " コマンドをステータス行に表示
 set showtabline=2       " 常にタブを表示
 
-" ステータスラインに文字コードやBOM、16進表示等表示 {{{
-if has('iconv')
-  set statusline=%<%f\ %m\ %r%h%w%{'['.(&fenc!=''?&fenc:&enc).(&bomb?':BOM':'').']['.&ff.']'}%=[0x%{FencB()}]\ (%v,%l)/%L%8P\ 
-else
-  set statusline=%<%f\ %m\ %r%h%w%{'['.(&fenc!=''?&fenc:&enc).(&bomb?':BOM':'').']['.&ff.']'}%=\ (%v,%l)/%L%8P\ 
-endif
-" }}}
-
 set noswapfile
 set directory-=. " no create on current
 set updatecount=0
@@ -558,7 +228,7 @@ set fileformat=unix
 set showmatch           " 括弧入力時に対応する括弧を表示
 set ambiwidth=double
 
-set clipboard+=unnamed
+"set clipboard+=unnamed
 set nrformats-=octal
 set virtualedit=block
 set display+=lastline
@@ -567,87 +237,13 @@ set display+=lastline
 set timeout timeoutlen=1000 ttimeoutlen=100
 " }}}
 
-call s:source_if_exist('$DOTVIM/conf.d/show_zenkaku_space.vim')
-
-autocmd FileType python setl tabstop=8 expandtab shiftwidth=4 softtabstop=4 autoindent smartindent
-autocmd FileType python setl cinwords=if,elif,else,for,while,try,except,finally,def,class
-autocmd FileType ruby   setl tabstop=8 expandtab shiftwidth=2 softtabstop=2 autoindent
-
-" Autocompletion using the TAB key {{{
-" This function determines, wether we are on the start of the line text (then tab indents) or
-" if we want to try autocompletion
-function! InsertTabWrapper()
-  let col = col('.') - 1
-  if !col || getline('.')[col - 1] !~ '\k'
-    return "\<TAB>"
-  else
-    return pumvisible() ? "\<C-N>" : "\<C-N>\<C-P>"
-  endif
-endfunction
-" Remap the tab key to select action with InsertTabWrapper
-"inoremap <tab> <c-r>=InsertTabWrapper()<cr>
-" }}} Autocompletion using the TAB key
-
-" 文字コードまわり {{{
-" カーソル上の文字コードをエンコードに応じた表示にする
-if has('iconv')
-  function! FencB()
-    let c = matchstr(getline('.'), '.', col('.') - 1)
-    return s:Byte2hex(s:Str2byte(iconv(c, &enc, &fenc)))
-  endfunction
-endif
-
-function! s:Str2byte(str)
-  return map(range(len(a:str)), 'char2nr(a:str[v:val])')
-endfunction
-
-function! s:Byte2hex(bytes)
-  return join(map(copy(a:bytes), 'printf("%02X", v:val)'), '')
-endfunction
-" }}}
-
 "現バッファの差分表示(変更箇所の表示)
 command! DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | diffthis
 "ファイルまたはバッファ番号を指定して差分表示。#なら裏バッファと比較
 command! -nargs=? -complete=file Diff if '<args>'=='' | browse vertical diffsplit|else| vertical diffsplit <args>|endif
 
-"call s:source_if_exist('$DOTVIM/conf.d/srcexpl.vim')
-
-call s:source_if_exist('$DOTVIM/conf.d/virtualenv.vim')
-
-autocmd! BufRead,BufNewFile *.sql set filetype=mysql
-
-" {{{ JSON
-augroup json_autocmd
-  autocmd!
-  autocmd FileType json set autoindent
-  autocmd FileType json set formatoptions=tcq2l
-  autocmd FileType json set textwidth=78 shiftwidth=2
-  autocmd FileType json set softtabstop=2 tabstop=8
-  autocmd FileType json set expandtab
-  autocmd FileType json set foldmethod=syntax
-augroup END
 autocmd! BufRead,BufNewFile *.json set filetype=json
-" }}}
-
-" {{{ 新規作成ファイルのテンプレートを指定
-augroup templates_newfile_autocmd
-  autocmd!
-  autocmd BufNewFile *.html 0r $DOTVIM/templates/skel.html
-  autocmd BufNewFile *.py 0r $DOTVIM/templates/skel.py
-augroup END
-" }}}
-
-""" ディレクトリが存在しない場合に作成するかを尋ねる
-augroup vimrc-auto-mkdir  " {{{
-  autocmd!
-  autocmd BufWritePre * call s:auto_mkdir(expand('<afile>:p:h'), v:cmdbang)
-  function! s:auto_mkdir(dir, force)  " {{{
-    if !isdirectory(a:dir) && (a:force || input(printf('"%s" does not exist. Create? [y/N]', a:dir)) =~? '^y\%[es]$')
-      call mkdir(iconv(a:dir, &encoding, &termencoding), 'p')
-    endif
-  endfunction  " }}}
-augroup END  " }}}
+autocmd! BufRead,BufNewFile *.sql set filetype=mysql
 
 " {{{ change current directory of buffer
 augroup lcd_buffer_dir_autocmd
@@ -656,82 +252,8 @@ augroup lcd_buffer_dir_autocmd
 augroup END
 " }}}
 
-" ファイルを開いた時に、以前のカーソル位置を復元する {{{
-function! UnfoldCur()
-  if !&foldenable
-    return
-  endif
-  let cl = line(".")
-  if cl <= 1
-    return
-  endif
-  let cf  = foldlevel(cl)
-  let uf  = foldlevel(cl - 1)
-  let min = (cf > uf ? uf : cf)
-  if min
-    execute "normal!" min . "zo"
-    return 1
-  endif
-endfunction
-
-function! s:RestoreCursorPostion()
-  if line("'\"") <= line("$")
-    normal! g`"
-    return 1
-  endif
-endfunction
-
-augroup vimrc_restore_cursor_position
-  autocmd!
-  if has("folding")
-    autocmd BufWinEnter * if s:RestoreCursorPostion() | call UnfoldCur() | endif
-  else
-    autocmd BufWinEnter * call s:RestoreCursorPostion()
-  endif
-augroup END
-" }}}
-
-""" インタラクティブにバッファを閉じる {{{
-""" see: http://blog.supermomonga.com/articles/vim/taiwa.html
-function! SelectInteractive(question, candidates) " {{{
-  try
-    let a:candidates[0] = toupper(a:candidates[0])
-    let l:select = 0
-    while index(a:candidates, l:select, 0, 1) == -1
-      let l:select = input(a:question . ' [' . join(a:candidates, '/') . '] ')
-      if l:select == ''
-        let l:select = a:candidates[0]
-      endif
-    endwhile
-    return tolower(l:select)
-  finally
-    redraw!
-  endtry
-endfunction " }}}
-
-function! BufferWipeoutInteractive() " {{{
-  if &modified == 1
-    let l:selected = SelectInteractive('Buffer is unsaved. What should I do?', ['n', 'w', 'q'])
-    if l:selected == 'w'
-      write
-      bdelete
-    elseif l:selected == 'q'
-      bdelete!
-    endif
-  else
-    bdelete
-  endif
-endfunction " }}}
-
-" }}}
-
-" store last tab number {{{
-let g:vim_last_tab_number = 1
-autocmd! TabLeave * let g:vim_last_tab_number = tabpagenr()
-" }}}
-
 " key mappings: {{{
-" - overview {{{
+" - key mappings overview {{{
 " commands:           modes:
 "         Normal  Visual+Select  Operator-pending
 " :map      yes        yes            yes
@@ -750,6 +272,7 @@ autocmd! TabLeave * let g:vim_last_tab_number = tabpagenr()
 " :cmap      -         yes         -
 " :lmap     yes*       yes*       yes*
 " }}}
+
 nnoremap ; :
 
 nnoremap gj j
@@ -762,15 +285,10 @@ nnoremap k gk
 "  nnoremap <expr> l foldlevel(line('.')) ? "\<Right>zo" : "\<Right>"
 "endif
 
-nmap p <Plug>(yankround-p)
-nmap P <Plug>(yankround-P)
-
+" 間違えやすいキーを潰したり入れ替えたり
 nnoremap Q gq
-
 nnoremap ZQ <Nop>
 nnoremap ZZ <Nop>
-
-nnoremap <silent> <C-e> :<C-u>NERDTreeToggle<CR>
 
 " Esc*2 or C-g でハイライト消す
 nnoremap <silent> <C-g> :<C-u>nohlsearch<CR><C-g>
@@ -779,23 +297,9 @@ nnoremap <silent> <Esc><Esc> :<C-u>nohlsearch<CR>
 inoremap <C-g> <Esc>
 cnoremap <C-g> <ESC>
 
-imap <C-j> <Plug>(eskk:enable)
-cmap <C-j> <Plug>(eskk:enable)
-
-imap <C-k> <Plug>(neosnippet_expand_or_jump)
-smap <C-k> <Plug>(neosnippet_expand_or_jump)
-xmap <C-k> <Plug>(neosnippet_expand_target)
-
-" SuperTab like snippets behavior.
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)"  : "\<TAB>"
-
-nmap <C-n> <Plug>(yankround-next)
-nmap <C-p> <Plug>(yankround-prev)
-
-nnoremap [C-c] <Nop>
-nmap <C-c> [C-c]
-nnoremap <silent> [C-c]<C-c> :<C-u>execute '!' &l:filetype '%'<CR>
+"nnoremap [C-c] <Nop>
+"nmap <C-c> [C-c]
+"nnoremap <silent> [C-c]<C-c> :<C-u>execute '!' &l:filetype '%'<CR>
 
 "nnoremap [C-x] <Nop>
 "nmap <C-x> [C-x]
@@ -807,12 +311,12 @@ map [misc] <Nop>
 map <Space> [misc]
 noremap <silent> [misc]e :Batch<CR>
 nnoremap [misc]E :<C-u>source %<CR>
-nmap [misc]j <Plug>(quickhl-cword-toggle)
-nmap [misc]] <Plug>(quickhl-tag-toggle)
-nmap [misc]m <Plug>(quickhl-manual-this)
-nmap [misc]M <Plug>(quickhl-manual-reset)
-xmap [misc]m <Plug>(quickhl-manual-this)
-xmap [misc]M <Plug>(quickhl-manual-reset)
+"nmap [misc]j <Plug>(quickhl-cword-toggle)
+"nmap [misc]] <Plug>(quickhl-tag-toggle)
+"nmap [misc]m <Plug>(quickhl-manual-this)
+"nmap [misc]M <Plug>(quickhl-manual-reset)
+"xmap [misc]m <Plug>(quickhl-manual-this)
+"xmap [misc]M <Plug>(quickhl-manual-reset)
 nnoremap [misc]n :<C-u>cn<CR>
 nnoremap [misc]p :<C-u>cp<CR>
 " スペルチェックをトグル。
@@ -823,56 +327,6 @@ nnoremap [misc]w :<C-u>set wrap! wrap?<CR>
 nnoremap [misc]/ *
 "map H <Plug>(operator-quickhl-manual-this-motion)
 
-nnoremap [tab] <Nop>
-nmap t [tab]
-nnoremap <silent> [tab]1 1gt
-nnoremap <silent> [tab]2 2gt
-nnoremap <silent> [tab]3 3gt
-nnoremap <silent> [tab]4 4gt
-nnoremap <silent> [tab]5 5gt
-nnoremap <silent> [tab]6 6gt
-nnoremap <silent> [tab]7 7gt
-nnoremap <silent> [tab]8 8gt
-nnoremap <silent> [tab]9 9gt
-nnoremap <silent> [tab]c :<C-u>tabclose<CR>
-nnoremap [tab]e :<C-u>tabedit<Space>
-nnoremap [tab]f :<C-u>tabfind<Space>
-nnoremap <silent> [tab]h :<C-u>tabfirst<CR>
-nnoremap <silent> [tab]j gt
-nnoremap <silent> [tab]k gT
-nnoremap <silent> [tab]l :<C-u>tablast<CR>
-nnoremap <silent> [tab]n :<C-u>tabedit<CR>
-nnoremap <silent> [tab]s :<C-u>tab split<CR>
-nnoremap <silent> [tab]t :<C-u>execute "tabnext " . g:vim_last_tab_number<CR>
-
-nnoremap [gtags] <Nop>
-nmap [misc]g [gtags]
-nnoremap [gtags]d :<C-u>Gtags -d <C-R>=expand("<cword>")<CR><CR>
-nnoremap [gtags]f :<C-u>Gtags -f <C-R>=expand("<cfile>")<CR><CR>
-nnoremap [gtags]g :<C-u>Gtags -g <C-R>=expand("<cword>")<CR><CR>
-nnoremap [gtags]i :<C-u>Gtags<CR>
-nnoremap [gtags]j :<C-u>GtagsCursor<CR>
-nnoremap [gtags]r :<C-u>Gtags -r <C-R>=expand("<cword>")<CR><CR>
-nnoremap [gtags]s :<C-u>Gtags -s <C-R>=expand("<cword>")<CR><CR>
-
-nnoremap [unite] <Nop>
-nmap , [unite]
-nnoremap <silent> [unite]a :<C-u>Unite -buffer-name=wild buffer file_mru bookmark file<CR>
-nnoremap <silent> [unite]b :<C-u>Unite -buffer-name=buffer buffer<CR>
-nnoremap <silent> [unite]c :<C-u>Unite -buffer-name=build build<CR>
-nnoremap <silent> [unite]f :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
-nnoremap <silent> [unite]h :<C-u>Unite -buffer-name=history history/command<CR>
-nnoremap <silent> [unite]H :<C-u>Unite -buffer-name=highlight highlight<CR>
-nnoremap <silent> [unite]k :<C-u>Unite -buffer-name=mapping mapping<CR>
-nnoremap <silent> [unite]m :<C-u>Unite -buffer-name=mru file_mru:short<CR>
-nnoremap <silent> [unite]ps :<C-u>Unite -buffer-name=plugin/search neobundle/search<CR>
-nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=register register<CR>
-nnoremap <silent> [unite]t :<C-u>Unite -buffer-name=tab tab<CR>
-nnoremap <silent> [unite]u :<C-u>Unite buffer file_mru:short<CR>
-nnoremap <silent> [unite]v :<C-u>Unite -start-insert -no-split -buffer-name=file_vcs file/vcs<CR>
-nnoremap <silent> [unite]vs :<C-u>UniteVersions status:!<CR>
-nnoremap <silent> [unite]vl :<C-u>UniteVersions log:%<CR>
-nnoremap <silent> [unite]/ :<C-u>execute "Unite -buffer-name=spotlight " . g:unite_source_everything<CR>
 " }}}
 
 " enable syntax color: {{{
@@ -881,10 +335,6 @@ set nocursorline    " cursorline は描画重い
 set synmaxcol=2000  " syntax を適用する最大カラム数
 set background=dark
 syntax on
-colorscheme solarized
-" force background to black
-hi Normal guibg=#000000
-hi CursorLine guibg=#262626
 " }}}
 
 call s:source_if_exist($MYLOCALVIMRC)

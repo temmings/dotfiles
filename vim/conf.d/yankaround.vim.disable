@@ -1,0 +1,9 @@
+NeoBundle 'LeafCage/yankround.vim'
+
+let g:yankround_max_history = 50
+
+nmap p <Plug>(yankround-p)
+nmap P <Plug>(yankround-P)
+
+nmap <C-n> <Plug>(yankround-next)
+nmap <C-p> <Plug>(yankround-prev)
