@@ -39,7 +39,7 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 " }}}
 
 " 各種プラグインなどのまとまった設定を読み込み
-for rc in glob('$DOTVIM/conf.d/*.vim', 1, 1)
+for rc in split(globpath('$DOTVIM/conf.d/', '*.vim'), '\n')
   execute "source " . rc
 endfor
 
@@ -334,7 +334,11 @@ set t_Co=256
 set nocursorline    " cursorline は描画重い
 set synmaxcol=2000  " syntax を適用する最大カラム数
 set background=dark
+colorscheme solarized
 syntax on
+" force background to black
+hi Normal guibg=#000000
+hi CursorLine guibg=#262626
 " }}}
 
 call s:source_if_exist($MYLOCALVIMRC)

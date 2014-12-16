@@ -13,7 +13,3 @@ let g:solarized_termtrans = 1
 " let g:solarized_menu = 1
 
 colorscheme solarized
-
-" force background to black
-hi Normal guibg=#000000
-hi CursorLine guibg=#262626
