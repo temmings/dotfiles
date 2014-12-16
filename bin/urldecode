@@ -1,0 +1,4 @@
+use URI::Escape;
+while(<>) {
+    print uri_unescape($_);
+}
