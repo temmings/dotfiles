@@ -74,12 +74,14 @@ fpath=($my_zsh_function_path $fpath)
 ## -: シンボリックリンク先のパスを評価。
 ## /: ディレクトリのみ残す。
 path=(
+    ~/bin(N-/)
     ~/.local/bin(N-/)
-    /usr/local/heroku/bin(N-/)
+    ~/Dropbox/bin(N-/)
     ### pear / pecl $ php -d detect_unicode=0 =(curl -fsSL http://pear.php.net/go-pear.phar)
     ~/node_modules/.bin(N-/)
     ~/.cabal/bin(N-/)
     ~/pear/bin(N-/)
+    /usr/local/heroku/bin(N-/)
     /usr/local/bin(N-/)
     /usr/local/sbin(N-/)
     /sbin(N-/)
