@@ -7,3 +7,5 @@ augroup json_autocmd
   autocmd FileType json set expandtab
   autocmd FileType json set foldmethod=syntax
 augroup END
+
+autocmd! BufRead,BufNewFile *.json set filetype=json

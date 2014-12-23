@@ -107,13 +107,6 @@ NeoBundle 'JSON.vim'
 NeoBundle 'XML-Folding'
 let g:xml_syntax_folding = 0
 autocmd FileType xml setlocal foldmethod=syntax
-NeoBundle 'aklt/plantuml-syntax'
-NeoBundle 'vim-scripts/nagios-syntax'
-au BufNewFile,BufRead */nagios/*.cfg setf nagios
-
-"NeoBundle 'vim-scripts/Flex-4'
-"autocmd BufRead *.as set filetype=actionscript
-"autocmd BufRead *.mxml set filetype=mxml
 
 filetype plugin indent on
 
@@ -242,9 +235,6 @@ command! DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | d
 "ファイルまたはバッファ番号を指定して差分表示。#なら裏バッファと比較
 command! -nargs=? -complete=file Diff if '<args>'=='' | browse vertical diffsplit|else| vertical diffsplit <args>|endif
 
-autocmd! BufRead,BufNewFile *.json set filetype=json
-autocmd! BufRead,BufNewFile *.sql set filetype=mysql
-
 " {{{ change current directory of buffer
 augroup lcd_buffer_dir_autocmd
   autocmd!
@@ -338,6 +328,7 @@ colorscheme solarized
 syntax on
 " force background to black
 hi Normal guibg=#000000
+hi Normal guifg=#888888
 hi CursorLine guibg=#262626
 " }}}
 
