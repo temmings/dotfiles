@@ -266,12 +266,17 @@ if [[ x"$OSTYPE" != x"cygwin" ]]; then
 fi
 
 prepare_z
+eval "$(direnv hook zsh)"
 
 ### virtualenvwrapper for python virtualenv
 #if hash virtualenvwrapper.sh 2>/dev/null; then
 #    WORKON_HOME="$HOME/.virtualenvs"
 #    source $(which virtualenvwrapper.sh)
 #fi
+
+binary_extension_patterns='*.(o|obj|a|so|dylib|lib|dll|exe|pyc|elc|class|pdb)'
+zstyle ':completion:*:*:'$EDITOR':*:*files' ignored-patterns $binary_extension_patterns
+zstyle ':completion:*:*:'$PAGER':*:*files' ignored-patterns $binary_extension_patterns
 
 bindkey -e
 autoload -U compinit && compinit -u

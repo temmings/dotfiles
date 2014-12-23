@@ -14,6 +14,7 @@ setopt magic_equal_subst
 setopt auto_remove_slash
 setopt brace_ccl
 setopt no_clobber
+setopt glob_dots
 
 setopt hist_ignore_space
 setopt hist_ignore_dups
