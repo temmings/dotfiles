@@ -142,6 +142,11 @@ export EC2_URL="https://ec2.ap-northeast-1.amazonaws.com"
 #export CVSROOT=/home/ncvs/tsc
 #export PDX_PATH=~acid/local/lib/pdx
 
+# for OpenCV
+#typeset -xT PYTHONPATH python_path
+#typeset -U python_path
+#python_path=(/usr/local/lib/python2.7/site-packages $python_path)
+
 ### os specific
 case "$OSTYPE" in
     cygwin*) source_if_exist ~/.zsh/zshenv.cygwin ;;
@@ -149,11 +154,7 @@ case "$OSTYPE" in
     freebsd*) source_if_exist ~/.zsh/zshenv.freebsd ;;
     linux*) source_if_exist ~/.zsh/zshenv.linux ;;
 esac
-typeset -U path
 
-# for OpenCV
-#typeset -xT PYTHONPATH python_path
-#typeset -U python_path
-#python_path=(/usr/local/lib/python2.7/site-packages $python_path)
+typeset -U path
 
 source_if_exist ~/.zshenv.local

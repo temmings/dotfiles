@@ -278,6 +278,14 @@ binary_extension_patterns='*.(o|obj|a|so|dylib|lib|dll|exe|pyc|elc|class|pdb)'
 zstyle ':completion:*:*:'$EDITOR':*:*files' ignored-patterns $binary_extension_patterns
 zstyle ':completion:*:*:'$PAGER':*:*files' ignored-patterns $binary_extension_patterns
 
+### os specific
+case "$OSTYPE" in
+    cygwin*) source_if_exist ~/.zsh/zshrc.cygwin ;;
+    darwin*) source_if_exist ~/.zsh/zshrc.darwin ;;
+    freebsd*) source_if_exist ~/.zsh/zshrc.freebsd ;;
+    linux*) source_if_exist ~/.zsh/zshrc.linux ;;
+esac
+
 bindkey -e
 autoload -U compinit && compinit -u
 
