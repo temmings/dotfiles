@@ -4,7 +4,7 @@ local zsh_dir=$HOME/.zsh
 local -a dotfiles
 dotfiles=(zprofile zshenv zshrc zlogin zlogout)
 
-ln -svhi $install_script_dir $zsh_dir
+ln -svni $install_script_dir $zsh_dir
 for f in $dotfiles; do
-    ln -svhi $zsh_dir/$f ~/.$f
+    ln -svni $zsh_dir/$f ~/.$f
 done
