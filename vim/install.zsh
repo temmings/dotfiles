@@ -11,8 +11,8 @@ mkdir -p $vim_dir/bundle
 mkdir -p $vim_dir/undo
 
 for f in $dotfiles; do
-    ln -sv $install_script_dir/$f ~/.$f
+    ln -svhi $install_script_dir/$f ~/.$f
 done
 for f in $vim_dir_files; do
-    ln -sv $install_script_dir/$f $vim_dir/$f
+    ln -svhi $install_script_dir/$f $vim_dir/$f
 done
