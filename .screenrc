@@ -20,6 +20,13 @@ bind ^E encoding eucjp utf8
 bind ^W encoding sjis utf8
 bind ^J encoding jis utf8
 
+bind  J focus down
+bind  K focus up
+bind ^J focus down
+bind ^K focus up
+bind ^N focus down
+bind ^P focus up
+
 startup_message off
 autodetach on
 defbce on
