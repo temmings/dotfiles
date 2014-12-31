@@ -17,6 +17,7 @@
         "firefox",
         "github",
         "google-chrome",
+        "gpsfish",
         "growlnotify",
         "intellij-idea",
         "iterm2",
@@ -182,6 +183,6 @@
         "homebrew/dupes",
         "homebrew/versions",
         "peco/peco",
-        "temmings/mfiler3"
+        "temmings/alt"
     ]
 }
