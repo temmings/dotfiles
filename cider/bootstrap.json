@@ -1,22 +1,31 @@
 {
+    "after-scripts": [
+        "brew cask alfred link"
+    ],
     "casks": [
+        "1password",
         "adobe-creative-cloud",
         "adobe-reader",
         "alfred",
+        "aquaskk",
         "atom",
         "cathode",
         "charles",
         "dropbox",
         "evernote",
+        "filezilla",
         "firefox",
         "github",
         "google-chrome",
+        "growlnotify",
         "intellij-idea",
         "iterm2",
         "java",
         "kaleidoscope",
         "karabiner",
+        "macvim",
         "mplayerx",
+        "mysqlworkbench",
         "nocturne",
         "sbrowserq",
         "scansnap-manager",
@@ -27,6 +36,7 @@
         "sourcetree",
         "steam",
         "synergy",
+        "teamviewer",
         "vagrant",
         "virtualbox",
         "vlc",
@@ -35,7 +45,6 @@
     ],
     "formulas": [
         "ack",
-        "apple-gcc42",
         "atk",
         "autoconf",
         "bdw-gc",
@@ -74,7 +83,7 @@
         "libgphoto2",
         "libicns",
         "libpng",
-        "libsixel",
+        "--HEAD libsixel",
         "libtiff",
         "libtool",
         "libusb",
@@ -104,5 +113,13 @@
         "x264",
         "xvid",
         "xz"
+    ],
+    "taps": [
+        "aereal/aereal_casks",
+        "aki017/sixel",
+        "caskroom/cask",
+        "homebrew/dupes",
+        "homebrew/versions",
+        "peco/peco"
     ]
 }
