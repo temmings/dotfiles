@@ -163,6 +163,7 @@
         "sdl",
         "shtool",
         "sqlite",
+        "subversion17 --unicode-path",
         "tig",
         "tmux",
         "tokyo-cabinet",
