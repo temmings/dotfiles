@@ -68,11 +68,8 @@ window	FlashBuild2	/FlashBuilder\.exe:.*/ : EmacsEdit
 window	Gimp		/gimp-2\.6\.exe:.*/ : EmacsEdit
 window	GgBar		/iexplore\.exe:.*Search Box/ : EmacsEdit
 window	GgChrome	/chrome\.exe:.*/ : EmacsEdit
-#window	GgChrome	/chrome\.exe:.*Chrome_RenderWidgetHostHWND/ : EmacsEdit
-#window	GgChromeEdit	/chrome\.exe:.*Chrome_AutocompleteEditView/ : EmacsEdit
-#window	GgChromeEdit2	/chrome\.exe:.*ViewsTextfieldEdit/ : EmacsEdit
-#window	GgChromeEdit3	/chrome\.exe:.*Chrome_OmniboxView/ : EmacsEdit
-#window	GgChromeEdit4	/chrome\.exe:.*Chrome_WidgetWin_1/ : EmacsEdit
+#window	GgChromeWidget	/Chrome_WidgetWin_1.*/ : EmacsEdit
+#window	GgChromeRender	/Chrome_RenderWidgetHostHWND.*/ : EmacsEdit
 window	GgDesktop	/GoogleDesktopDisplay\.exe:.*_GD_QueryEditBox/ : EmacsEdit
 window	Himawari	/himapad\.exe:TfrmHimapad:TPanel:TPanel:TEditorEx/ : EmacsEdit
 window	IpMsg		/ipmsg\.exe:.*/ : EmacsEdit
