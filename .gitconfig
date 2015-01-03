@@ -26,6 +26,7 @@
 	dif = diff
 	difc = diff --cached
 	glog = log --decorate --graph --name-status
+	logp = log -p
 	ls = ls-files
 	st = status
 	tree = log --oneline --decorate --graph --pretty='format:%C(yellow)%h%C(blue)%d%C(reset) %s %C(cyan)%an, %ar%C(reset)'

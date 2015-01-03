@@ -55,6 +55,10 @@ function get_executable_first() {
     return 1
 }
 
+function abs_path() {
+    (cd -P -- "$(dirname -- "$1")" && echo "$(pwd -P)/$(basename -- "$1")")
+}
+
 function home_or_basename() {
     case "$1" in
         $HOME) echo '~';;
