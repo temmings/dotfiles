@@ -1,0 +1,9 @@
+{
+    "NSGlobalDomain": {
+        "InitialKeyRepeat": 26,
+        "KeyRepeat": 1
+    },
+    "com.apple.finder": {
+        "_FXShowPosixPathInTitle": 1
+    }
+}
