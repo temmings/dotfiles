@@ -1,5 +1,9 @@
 {
     "after-scripts": [
+        "launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist",
+        "chflags nohidden ~/Library",
+        "sudo chgrp admin /dev/bpf*",
+        "sudo chmod g+rw /dev/bpf*",
         "brew cask alfred link"
     ],
     "casks": [
@@ -26,7 +30,6 @@
         "java6",
         "kaleidoscope",
         "karabiner",
-        "macvim",
         "mplayerx",
         "mysqlworkbench",
         "nocturne",
@@ -126,7 +129,7 @@
         "little-cms2",
         "lua",
         "lv",
-        "macvim",
+        "macvim --env-std --override-system-vim",
         "maven",
         "mfiler3",
         "mlterm",
