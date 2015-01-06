@@ -75,6 +75,8 @@ NeoBundle 'vim-scripts/batch.vim'
 " ctags, <cword>, 任意の文字列をハイライト
 "NeoBundle 't9md/vim-quickhl'
 
+NeoBundle 'thinca/vim-ref'
+
 " Ex command 差し替え
 NeoBundle 'tyru/vim-altercmd'
 call altercmd#load()

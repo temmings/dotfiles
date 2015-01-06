@@ -67,11 +67,22 @@ if !s:on_windows
   " autocmd FileType unite nnoremap <silent> <buffer> <ESC><ESC> q
   " autocmd FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>q
 
+  function! UniteRefDoc()
+      if &filetype =~ 'perl'
+          Unite ref/perldoc
+      elseif &filetype =~ 'python'
+          Unite ref/pydo
+      elseif &filetype =~ 'ruby'
+          Unite ref/refe
+      endif
+  endfunction
+
   nnoremap [unite] <Nop>
   nmap , [unite]
   nnoremap <silent> [unite]a :<C-u>Unite -buffer-name=wild buffer file_mru bookmark file<CR>
   nnoremap <silent> [unite]b :<C-u>Unite -buffer-name=buffer buffer<CR>
   nnoremap <silent> [unite]c :<C-u>Unite -buffer-name=build build<CR>
+  nnoremap <silent> [unite]d :<C-u>call UniteRefDoc()<CR>
   nnoremap <silent> [unite]f :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
   nnoremap <silent> [unite]h :<C-u>Unite -buffer-name=history history/command<CR>
   nnoremap <silent> [unite]H :<C-u>Unite -buffer-name=highlight highlight<CR>
