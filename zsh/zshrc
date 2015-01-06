@@ -141,7 +141,7 @@ function configure_for_home_local() {
 function attach_tmux() {
     if ( ! test $TMUX ) && ( ! expr $TERM : "^screen" > /dev/null ) && is_executable tmux; then
         if ( tmux has-session ); then
-            local session=$(tmux list-sessions | grep -e '^[0-9].*]$' | head -n 1 | sed -e 's/^\([0-9]\+\).*$/\1/')
+            local session=$(tmux list-sessions | head -n 1 | awk -F: '{print $1}')
             if [ -n "$session" ]; then
                 echo "Attache tmux session $session."
                 tmux attach-session -t $session
@@ -220,7 +220,7 @@ fi
 # ignore ['?', '&', '/'] in word.
 WORDCHARS='*_-.[]~=;!#$%^(){}<>'
 
-USE_GNU_SCREEN=1
+USE_TMUX=1
 
 ### alias {{{
 alias ll="ls -l"

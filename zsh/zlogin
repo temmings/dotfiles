@@ -14,4 +14,8 @@ if [[ -n "$USE_GNU_SCREEN" ]]; then
     fi
 fi
 
+if [[ -n "$USE_TMUX" ]]; then
+    attach_tmux
+fi
+
 source_if_exist ~/.zlogin.local
