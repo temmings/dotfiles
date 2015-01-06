@@ -2,4 +2,6 @@
 .gitconfig.local
 .ssh/
 .todo
+bin/
+.DS_Store
 proxy.pac
