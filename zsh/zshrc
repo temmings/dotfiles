@@ -264,7 +264,7 @@ alias -s zsh="zsh"
 
 if [[ x"$OSTYPE" != x"cygwin" ]]; then
     prepare_anyenv
-    eval "$(direnv hook zsh)"
+    is_executable direnv && eval "$(direnv hook zsh)"
 fi
 
 prepare_z

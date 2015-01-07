@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 umask 022
 
-#  to Backspace
-stty erase 
-
 ### os specific
 case "$OSTYPE" in
     cygwin*) source_if_exist ~/.zsh/zprofile.cygwin ;;
