@@ -74,18 +74,20 @@ function get_ssh_client_ip() {
 local my_zsh_function_path=$HOME/.zsh/functions
 fpath=($my_zsh_function_path $fpath)
 
-## N: NULL_GLOBオプションを設定。
-##    globがマッチしなかったり存在しないパスを無視する。
-## -: シンボリックリンク先のパスを評価。
-## /: ディレクトリのみ残す。
+##  N: NULL_GLOBオプションを設定。globがマッチしなかったり存在しないパスを無視する。
+##  -: シンボリックリンク先のパスを評価。
+##  /: ディレクトリのみ残す。
+## ^W: reject world-writable directories
 path=(
     ~/bin(N-/)
     ~/.local/bin(N-/)
     ~/Dropbox/bin(N-/)
-    ### pear / pecl $ php -d detect_unicode=0 =(curl -fsSL http://pear.php.net/go-pear.phar)
     ~/node_modules/.bin(N-/)
     ~/.cabal/bin(N-/)
+    ### pear / pecl $ php -d detect_unicode=0 =(curl -fsSL http://pear.php.net/go-pear.phar)
     ~/pear/bin(N-/)
+    ### cpanminus
+    ~/perl5/bin(N-/)
     /usr/local/heroku/bin(N-/)
     /usr/local/bin(N-/)
     /usr/local/sbin(N-/)
@@ -93,7 +95,7 @@ path=(
     /bin(N-/)
     /usr/sbin(N-/)
     /usr/bin(N-/)
-    $path
+    ${^path}(N-/^W)
     /usr/games(N-/)
     /usr/X11/bin(N-/)
     /usr/X11R6/bin(N-/)
@@ -102,9 +104,8 @@ path=(
     /usr/pkg/sbin(N-/)
     ### qmail
     /var/qmail/bin(N-/)
-    #~/Dropbox/bin(N-/)
 )
-typeset -U path
+typeset -U path PATH
 
 export HISTFILE="$HOME/.zsh-history"
 export HISTSIZE=100000000
@@ -129,6 +130,9 @@ export IGNOREEOF=2
 
 export LYNX_CFG=~/.lynxrc
 export PERL_BADLANG=0
+PERL_CPANM_LOCAL_LIB="$HOME/perl5"
+export PERL_CPANM_OPT="--local-lib=$PERL_CPANM_LOCAL_LIB"
+export PERL5LIB="$PERL_CPANM_LOCAL_LIB/lib/perl5:$PERL5LIB"
 #export PIP_REQUIRE_VIRTUALENV=true
 
 export WWW_HOME=http://www.google.co.jp/
@@ -159,6 +163,6 @@ case "$OSTYPE" in
     linux*) source_if_exist ~/.zsh/zshenv.linux ;;
 esac
 
-typeset -U path
+typeset -U path PATH
 
 source_if_exist ~/.zshenv.local
