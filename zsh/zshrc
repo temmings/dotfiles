@@ -173,10 +173,10 @@ function prepare_anyenv() {
     [[ -d $anyenv_dir ]] || git clone https://github.com/riywo/anyenv $anyenv_dir
     export PATH="$anyenv_dir/bin:$PATH"
     eval "$(anyenv init -)"
-    for D in $(find $anyenv_dir/envs -mindepth 1 -maxdepth 1 -type d)
-    do
-        export PATH="$D/shims:$PATH"
-    done
+    if [[ ! -d $(anyenv root)/plugins/anyenv-update ]]; then
+        mkdir -p $(anyenv root)/plugins
+        git clone https://github.com/znz/anyenv-update.git $(anyenv root)/plugins/anyenv-update
+    fi
 }
 
 last_exec_command_name=$(basename -- $0)
@@ -287,6 +287,8 @@ case "$OSTYPE" in
     freebsd*) source_if_exist ~/.zsh/zshrc.freebsd ;;
     linux*) source_if_exist ~/.zsh/zshrc.linux ;;
 esac
+
+typeset -U path PATH
 
 bindkey -e
 autoload -U compinit && compinit -u
