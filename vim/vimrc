@@ -30,12 +30,12 @@ if has('vim_starting')
   set runtimepath+=$DOTVIM/bundle/neobundle.vim/
 endif
 
-call neobundle#rc(s:bundle_plugin_dir)
-
 " * github  : NeoBundle '<username>/<scriptname>'
 " * vim.org : NeoBundle '<scriptname>'
 " * other   : NeoBundle 'git://<fqdn>/<scriptname>.git'
+call neobundle#begin(s:bundle_plugin_dir)
 NeoBundleFetch 'Shougo/neobundle.vim'
+call neobundle#end()
 " }}}
 
 " 各種プラグインなどのまとまった設定を読み込み
@@ -59,7 +59,11 @@ endfor
 " }}}
 
 ":Restart" で gvim を再起動
-NeoBundle 'tyru/restart.vim'
+NeoBundleLazy 'tyru/restart.vim', {
+      \ 'gui': 1,
+      \ 'autoload': {
+      \  'commands': 'Restart'
+      \ }}
 
 ":Capture <command>" で command windows への出力をバッファに取り込む
 "NeoBundle 'tyru/capture.vim'
@@ -70,7 +74,7 @@ NeoBundle 'tyru/restart.vim'
 " バッファを Vim Script として評価
 ":Batch" : 現在行を評価
 ":'<,'>Batch" : 選択行を評価
-NeoBundle 'vim-scripts/batch.vim'
+NeoBundleLazy 'vim-scripts/batch.vim', {'autoload': {'commands': 'Batch'}}
 
 " ctags, <cword>, 任意の文字列をハイライト
 "NeoBundle 't9md/vim-quickhl'
