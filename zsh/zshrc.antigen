@@ -13,6 +13,7 @@ antigen-use oh-my-zsh
 
 # Bundles from the default repo
 antigen-bundle git
+antigen bundle rupa/z
 
 # Load theme
 antigen-theme mrtazz

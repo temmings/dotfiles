@@ -162,12 +162,6 @@ function prepare_boot2docker() {
     $(boot2docker shellinit)
 }
 
-function prepare_z() {
-    local z_dir=$HOME/src/z
-    [[ -d $z_dir ]] || (mkdir -p $(dirname $z_dir) && git clone https://github.com/rupa/z.git $z_dir)
-    source $z_dir/z.sh
-}
-
 function prepare_anyenv() {
     local anyenv_dir=$HOME/.anyenv
     [[ -d $anyenv_dir ]] || git clone https://github.com/riywo/anyenv $anyenv_dir
@@ -256,8 +250,6 @@ if [[ x"$OSTYPE" != x"cygwin" ]]; then
     prepare_anyenv
     is_executable direnv && eval "$(direnv hook zsh)"
 fi
-
-prepare_z
 
 ### virtualenvwrapper for python virtualenv
 #if hash virtualenvwrapper.sh 2>/dev/null; then
