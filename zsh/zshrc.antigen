@@ -1,10 +1,12 @@
 # Prepare antigen
 () {
-    if [[ ! -f $1 ]]; then
-        curl -o $1 -L 'https://raw.githubusercontent.com/zsh-users/antigen/master/antigen.zsh'
+    if [[ ! -f $1/$2 ]]; then
+        echo Download the antigen...
+        mkdir -p $1
+        curl -o $1/$2 -L 'https://raw.githubusercontent.com/zsh-users/antigen/master/antigen.zsh'
     fi
-    source $1
-} "$HOME/.zsh/antigen.zsh"
+    source $1/$2
+} "$HOME/.antigen" "antigen.zsh"
 
 # Load the oh-my-zsh
 antigen-use oh-my-zsh
