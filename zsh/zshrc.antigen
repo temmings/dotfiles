@@ -1,0 +1,18 @@
+# Prepare antigen
+() {
+    if [[ ! -f $1 ]]; then
+        curl -o $1 -L 'https://raw.githubusercontent.com/zsh-users/antigen/master/antigen.zsh'
+    fi
+    source $1
+} "$HOME/.zsh/antigen.zsh"
+
+# Load the oh-my-zsh
+antigen-use oh-my-zsh
+
+# Bundles from the default repo
+antigen-bundle git
+
+# Load theme
+antigen-theme mrtazz
+
+antigen-apply
