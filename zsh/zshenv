@@ -107,10 +107,6 @@ path=(
 )
 typeset -U path PATH
 
-export HISTFILE="$HOME/.zsh-history"
-export HISTSIZE=100000000
-export SAVEHIST=100000000
-
 export EDITOR=$(get_executable_first "vim" "vi")
 export PAGER="less"
 
@@ -124,9 +120,6 @@ export LC_TIME=$LANG
 #export LC_ALL="en_US.UTF-8"
 export TZ=JST-9
 export BLOCKSIZE=M
-
-# suppress the logout ^D.
-export IGNOREEOF=2
 
 export LYNX_CFG=~/.lynxrc
 export PERL_BADLANG=0

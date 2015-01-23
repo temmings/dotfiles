@@ -173,25 +173,20 @@ function prepare_anyenv() {
     fi
 }
 
-last_exec_command_name=$(basename -- $0)
 function periodic() {
 }
 function chpwd() {
     todo
 }
 function preexec() {
-    last_exec_command_name=${1%% *}
-    set_screen_caption "${last_exec_command_name}:$(home_or_basename ${PWD})"
 }
 function precmd() {
-    set_screen_caption "${last_exec_command_name}:$(home_or_basename ${PWD})"
 }
 function TRAPDEBUG() {
 }
 function TRAPEXIT() {
 }
 function TRAPZERR() {
-    echo "TRAPZERR: return $?" 1>&2
 }
 # }}}
 
@@ -203,6 +198,13 @@ RPROMPT="%{[36m%}%~%{[m%}"
 
 # ignore ['?', '&', '/'] in word.
 WORDCHARS='*_-.[]~=;!#$%^(){}<>'
+
+HISTFILE="$HOME/.zsh-history"
+HISTSIZE=100000000
+SAVEHIST=100000000
+
+# suppress the logout ^D.
+IGNOREEOF=2
 
 USE_TMUX=1
 

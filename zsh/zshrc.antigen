@@ -9,13 +9,27 @@
 } "$HOME/.antigen" "antigen.zsh"
 
 # Load the oh-my-zsh
-antigen-use oh-my-zsh
+antigen use oh-my-zsh
 
 # Bundles from the default repo
-antigen-bundle git
+antigen bundle git
 antigen bundle rupa/z
 
-# Load theme
-antigen-theme mrtazz
+#antigen bundle zsh-users/zsh-completions src
 
-antigen-apply
+case "$OSTYPE" in
+    cygwin*)
+        ;;
+    darwin*)
+        antigen bundle brew
+        antigen bundle brew-cask
+        antigen bundle gem
+        antigen bundle osx
+        antigen bundle zsh-users/zsh-syntax-highlighting
+        ;;
+esac
+
+# Load theme
+antigen theme mrtazz
+
+antigen apply
