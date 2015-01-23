@@ -16,6 +16,8 @@ antigen bundle git
 antigen bundle rupa/z
 antigen bundle m4i/cdd cdd
 
+antigen bundle temmings/shell-todo shell-todo
+
 #antigen bundle zsh-users/zsh-completions src
 
 case "$OSTYPE" in

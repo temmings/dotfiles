@@ -34,54 +34,6 @@ function set_screen_caption() {
     [ -n "$STY" ] && echo -ne "\ek$1\e\\"
 }
 
-function show_todo() {
-    local TODOFILE=".todo"
-    if [ -f "$TODOFILE" ]; then
-        cat -b $TODOFILE
-    fi
-}
-
-function todo() {
-    local TODOFILE=".todo"
-    local opt
-    local OPTARG
-    while getopts ":d:u" opt; do
-        case $opt in
-            d)
-                if [[ $OPTARG =~ '^[0-9]+$' ]]; then
-                    if [[ -f $TODOFILE ]]; then
-                        local removed=$(sed -n "${OPTARG}p" $TODOFILE)
-                        if [[ -n $removed ]]; then
-                            echo "removed: $removed"
-                            sed -i'.old' "${OPTARG}d" $TODOFILE
-                        fi
-                    fi
-                fi
-                show_todo
-                return
-                ;;
-            u)
-                echo "undo"
-                cp ${TODOFILE}.old ${TODOFILE}
-                show_todo
-                return
-                ;;
-            ?)
-                echo "usage: $0 [option] [<add todo>] "
-                echo " -d <number> remove todo"
-                echo " -u          undo once"
-                return
-                ;;
-        esac
-    done
-    ## no options
-    if [[ -n "$*" ]]; then
-        echo "add: $*"
-        echo $* >> $TODOFILE
-    fi
-    show_todo
-}
-
 function mkcdir() {
     mkdir "$@" || return $?
 
@@ -265,7 +217,6 @@ autoload -U compinit && compinit -u
 
 source_if_exist ~/.zsh/zshrc.antigen
 
-add-zsh-hook chpwd todo
 add-zsh-hook chpwd _cdd_chpwd
 
 bindkey -e
