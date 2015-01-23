@@ -172,22 +172,6 @@ function prepare_anyenv() {
         git clone https://github.com/znz/anyenv-update.git $(anyenv root)/plugins/anyenv-update
     fi
 }
-
-function periodic() {
-}
-function chpwd() {
-    todo
-}
-function preexec() {
-}
-function precmd() {
-}
-function TRAPDEBUG() {
-}
-function TRAPEXIT() {
-}
-function TRAPZERR() {
-}
 # }}}
 
 # show user@host and random color.
@@ -264,6 +248,9 @@ zstyle ':completion:*:*:'$EDITOR':*:*files' ignored-patterns $binary_extension_p
 zstyle ':completion:*:*:'$PAGER':*:*files' ignored-patterns $binary_extension_patterns
 zstyle ':completion:*:*:'view':*:*files' ignored-patterns $binary_extension_patterns
 
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*:descriptions' format '%F{yellow}Completing %B%d%b%f'
+
 ### os specific
 case "$OSTYPE" in
     cygwin*) source_if_exist ~/.zsh/zshrc.cygwin ;;
@@ -274,9 +261,13 @@ esac
 
 typeset -U path PATH
 
+autoload -U compinit && compinit -u
+
 source_if_exist ~/.zsh/zshrc.antigen
 
+add-zsh-hook chpwd todo
+add-zsh-hook chpwd _cdd_chpwd
+
 bindkey -e
-autoload -U compinit && compinit -u
 
 source_if_exist ~/.zshrc.local
