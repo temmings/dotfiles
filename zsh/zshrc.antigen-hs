@@ -1,0 +1,18 @@
+# Prepare antigen
+() {
+    if [[ ! -e $1/$2 ]]; then
+        echo Setup the antigen-hs...
+        mkdir -p $1
+        git clone git@github.com:Tarrasch/antigen-hs.git $1/$2
+    fi
+    source $1/$2
+} "$HOME/.antigen-hs" "antigen-hs"
+
+ANTIGEN_HS_MY="$HOME/.zsh/MyAntigen.hs"
+
+source ~/.antigen-hs/antigen-hs/init.zsh
+if [[ $ANTIGEN_HS_MY -nt $HOME/.antigen-hs/antigen-hs.zsh ]]; then
+    echo compling $ANTIGEN_HS_MY
+    antigen-hs-compile
+    source $HOME/.antigen-hs/antigen-hs.zsh
+fi

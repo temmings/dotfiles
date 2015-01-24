@@ -117,12 +117,12 @@ function prepare_boot2docker() {
 function prepare_anyenv() {
     local anyenv_dir=$HOME/.anyenv
     [[ -d $anyenv_dir ]] || git clone https://github.com/riywo/anyenv $anyenv_dir
+    if [[ ! -d $anyenv_dir/plugins/anyenv-update ]]; then
+        mkdir -p $anyenv_dir/plugins
+        git clone https://github.com/znz/anyenv-update.git $anyenv_dir/plugins/anyenv-update
+    fi
     export PATH="$anyenv_dir/bin:$PATH"
     eval "$(anyenv init -)"
-    if [[ ! -d $(anyenv root)/plugins/anyenv-update ]]; then
-        mkdir -p $(anyenv root)/plugins
-        git clone https://github.com/znz/anyenv-update.git $(anyenv root)/plugins/anyenv-update
-    fi
 }
 # }}}
 
@@ -213,12 +213,20 @@ esac
 
 typeset -U path PATH
 
-autoload -U compinit && compinit -u
+autoload -U compinit && compinit -C -u
 
-source_if_exist ~/.zsh/zshrc.antigen
+if is_executable runghc; then
+    source_if_exist ~/.zsh/zshrc.antigen-hs
+else
+    source_if_exist ~/.zsh/zshrc.antigen
+fi
 
 add-zsh-hook chpwd _cdd_chpwd
 
 bindkey -e
 
 source_if_exist ~/.zshrc.local
+
+if (which zprof > /dev/null); then
+    zprof | less
+fi
