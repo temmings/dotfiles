@@ -1,17 +1,3 @@
 # -*- coding: utf-8 -*-
 
-if [[ -n "$USE_GNU_SCREEN" ]]; then
-    if hash screen 2>/dev/null; then
-        if [ $UID != "0" -a -z "$STY" -a -z "$SSH_TTY" ]; then
-            screen -xRU
-        fi
-    else
-        echo "screen not found"
-    fi
-fi
-
-if [[ -n "$USE_TMUX" ]]; then
-    attach_tmux
-fi
-
 source_if_exist ~/.zlogin.local

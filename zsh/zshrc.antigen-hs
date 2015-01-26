@@ -13,7 +13,9 @@ ANTIGEN_HS_MY="$HOME/.zsh/MyAntigen.hs"
 DISABLE_UPDATE_PROMPT=true
 ZSH="$HOME/.antigen-hs/repos/https-COLON--SLASH--SLASH-github.com-SLASH-robbyrussell-SLASH-oh-my-zsh"
 ZSH_THEME="mrtazz"
-plugins=(themes git ssh-agent history urltools brew cabal docker vagrant)
+ZSH_TMUX_AUTOSTART=true
+
+plugins=(themes git ssh-agent tmux history urltools brew cabal docker vagrant)
 
 source ~/.antigen-hs/antigen-hs/init.zsh
 if [[ $ANTIGEN_HS_MY -nt $HOME/.antigen-hs/antigen-hs.zsh ]]; then

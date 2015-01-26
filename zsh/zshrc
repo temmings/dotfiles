@@ -72,24 +72,6 @@ function configure_for_home_local() {
     ./configure --prefix=$HOME/.local "$@"
 }
 
-function attach_tmux() {
-    if ( ! test $TMUX ) && ( ! expr $TERM : "^screen" > /dev/null ) && is_executable tmux; then
-        if ( tmux has-session ); then
-            local session=$(tmux list-sessions | head -n 1 | awk -F: '{print $1}')
-            if [ -n "$session" ]; then
-                echo "Attache tmux session $session."
-                tmux attach-session -t $session
-            else
-                echo "Session has been already attached."
-                tmux list-sessions
-            fi
-        else
-            echo "Create new tmux session."
-            tmux
-        fi
-    fi
-}
-
 function prepare_boot2docker() {
     boot2docker init
     boot2docker start
