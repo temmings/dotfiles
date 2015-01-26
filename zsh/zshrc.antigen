@@ -13,9 +13,15 @@ antigen use oh-my-zsh
 
 # Bundles from the default repo
 antigen bundle git
+antigen bundle ssh-agent
+antigen bundle history
+antigen bundle urltools
+antigen bundle cabal
+antigen bundle docker
+antigen bundle vagrant
+
 antigen bundle rupa/z
 antigen bundle m4i/cdd cdd
-
 antigen bundle temmings/shell-todo shell-todo
 
 #antigen bundle zsh-users/zsh-completions src

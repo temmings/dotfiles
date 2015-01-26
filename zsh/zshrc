@@ -56,24 +56,6 @@ function mkcdir() {
     cd -- "$arg"
 }
 
-function search_ssh_agent() {
-    local agentPID
-    if [[ x"$OSTYPE" == x"cygwin" ]]; then
-        agentPID=$(ps ux | grep ssh-agent | grep -v 'grep ssh-agent' | awk '{print $1}' | head -1)
-    else
-        agentPID=$(ps ux | grep ssh-agent | grep -v 'grep ssh-agent' | grep $USER | awk '{print $2}')
-    fi
-    local agentSCK=$( (/bin/ls -t /tmp/ssh-*/agent.* | head -1) 2> /dev/null)
-    if [ -z "$agentPID" ]; then
-        eval $(ssh-agent -s) >/dev/null
-        ssh-add $HOME/.ssh/id_dsa
-    else
-        export SSH_AUTH_SOCK=$agentSCK
-        export SSH_AGENT_PID=$agentPID
-        #echo "Agent pid $agentPID"
-    fi
-}
-
 function configure_bootstrap() {
     if which glibtoolize &>/dev/null; then
         glibtoolize --force

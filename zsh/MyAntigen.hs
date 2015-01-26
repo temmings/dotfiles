@@ -20,13 +20,7 @@ bundles =
   , (bundle "rupa/z") { sourcingStrategy = filePathsSourcingStrategy [ "z.sh" ] }
   , (bundle "m4i/cdd") { sourcingStrategy = filePathsSourcingStrategy [ "cdd" ] }
   , (bundle "robbyrussell/oh-my-zsh")
-     { sourcingStrategy = filePathsSourcingStrategy
-       [ "oh-my-zsh.sh"
-       , "plugins/git/git.plugin.zsh"
-       , "plugins/git/_git-branch"
-       , "plugins/git/_git-remote"
-       , "themes/mrtazz.zsh-theme"
-       ] }
+     { sourcingStrategy = filePathsSourcingStrategy [ "oh-my-zsh.sh" ] }
   ]
 
 config = AntigenConfiguration bundles

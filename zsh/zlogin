@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
 
-if [[ x"$OSTYPE" == x"cygwin" ]]; then
-    search_ssh_agent
-fi
-
 if [[ -n "$USE_GNU_SCREEN" ]]; then
     if hash screen 2>/dev/null; then
         if [ $UID != "0" -a -z "$STY" -a -z "$SSH_TTY" ]; then
