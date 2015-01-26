@@ -41,8 +41,9 @@ endif
 
 NeoBundle 'Shougo/neosnippet'
 
- JavaScript completion
+" JavaScript completion
 NeoBundle 'marijnh/tern_for_vim'
+let s:on_windows = has('win95') || has('win16') || has('win32') || has('win64')
 if s:on_windows
   let g:tern#command = [expand('~/AppData/Roaming/npm/tern.cmd')]
 else
