@@ -66,7 +66,10 @@ NeoBundleLazy 'tyru/restart.vim', {
       \ }}
 
 ":Capture <command>" で command windows への出力をバッファに取り込む
-"NeoBundle 'tyru/capture.vim'
+NeoBundleLazy 'tyru/capture.vim', {
+      \ 'autoload': {
+      \  'commands': 'Capture'
+      \ }}
 
 ":PP <Variable>"
 "NeoBundle 'thinca/vim-prettyprint'
