@@ -5,15 +5,13 @@ autocmd! TabLeave * let g:vim_last_tab_number = tabpagenr()
 
 nnoremap [tab] <Nop>
 nmap t [tab]
-nnoremap <silent> [tab]1 1gt
-nnoremap <silent> [tab]2 2gt
-nnoremap <silent> [tab]3 3gt
-nnoremap <silent> [tab]4 4gt
-nnoremap <silent> [tab]5 5gt
-nnoremap <silent> [tab]6 6gt
-nnoremap <silent> [tab]7 7gt
-nnoremap <silent> [tab]8 8gt
-nnoremap <silent> [tab]9 9gt
+
+" [tab]${n} ${n}gt from 1 to 9
+for i in range(9)
+  execute 'nnoremap <silent>' ('[tab]'.(i+1))  ((i+1).'gt')
+endfor
+unlet i
+
 nnoremap <silent> [tab]c :<C-u>tabclose<CR>
 nnoremap [tab]e :<C-u>tabedit<Space>
 nnoremap [tab]f :<C-u>tabfind<Space>
