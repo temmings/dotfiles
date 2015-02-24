@@ -1,9 +1,9 @@
 NeoBundle 'tyru/eskk.vim'
 set imdisable
 
-let g:eskk#directory = "~/Dropbox/skk/eskk"
+let g:eskk#directory = expand("~/Dropbox/skk/eskk")
 let g:eskk#dictionary = {
-\ 'path': expand("~/Dropbox/skk/eskk/.skk-jisyo"), 'sorted': 0, 'encoding': 'utf-8'
+\ 'path': expand("~/Dropbox/skk/eskk/skk-jisyo"), 'sorted': 0, 'encoding': 'utf-8'
 \ }
 let g:eskk#large_dictionary = {
 \ 'path': expand("~/Dropbox/skk/SKK-JISYO.L.unannotated"), 'sorted': 1, 'encoding': 'euc-jp'

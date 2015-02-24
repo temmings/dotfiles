@@ -8,3 +8,5 @@ NeoBundleLazy 'nosami/Omnisharp', {
 \ }
 
 let g:OmniSharp_typeLookupInPreview = 1
+
+autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
