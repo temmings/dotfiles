@@ -19,8 +19,7 @@ endfunction
 
 call s:source_if_exist($MYSHADOWVIMRC)
 
-" neobundle: {{{
-let s:bundle_plugin_dir = '$DOTVIM/bundle'
+""" prepare neobundle: {{{
 if s:on_windows
   set shellslash
 endif
@@ -33,19 +32,24 @@ endif
 " * github  : NeoBundle '<username>/<scriptname>'
 " * vim.org : NeoBundle '<scriptname>'
 " * other   : NeoBundle 'git://<fqdn>/<scriptname>.git'
+let s:bundle_plugin_dir = expand('$DOTVIM/bundle')
+""" }}}
+
+""" prepare plugins: {{{
 call neobundle#begin(s:bundle_plugin_dir)
+
 NeoBundleFetch 'Shougo/neobundle.vim'
+
 call neobundle#end()
-" }}}
 
 " 各種プラグインなどのまとまった設定を読み込み
 for rc in split(globpath('$DOTVIM/conf.d/', '*.vim'), '\n')
   execute "source " . rc
 endfor
 
-""" misc plugins {{{
 " testing: {{{
-"NeoBundle 'rking/ag.vim'
+NeoBundle 'rking/ag.vim'
+NeoBundle 'kchmck/vim-coffee-script'
 
 "NeoBundle 'haya14busa/vim-migemo'
 "NeoBundle 'rhysd/migemo-search.vim'
@@ -108,6 +112,9 @@ NeoBundle 'houtsnip/vim-emacscommandline'
 
 "NeoBundle 'mattn/webapi-vim'
 
+NeoBundle 'junegunn/vim-easy-align'
+vnoremap <silent> <Enter> :EasyAlign<cr>
+
 NeoBundle 'vim-orgmode'
 NeoBundle 'VimOrganizer'
 
@@ -119,10 +126,10 @@ autocmd FileType xml setlocal foldmethod=syntax
 
 filetype plugin indent on
 
-""" misc plugins: }}}
-
 " Plugin installation check.
 NeoBundleCheck
+
+""" prepare plugins: }}}
 
 " Vim config: {{{
 set notitle

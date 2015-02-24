@@ -34,6 +34,7 @@ keymap Global
  key	C-S-Left		= &Default
  key	C-S-Right		= &Default
  key	C-S-Down		= &Default
+ key	C-U			= &Default
 
 #### ダイアログボックス
 window dialog /#32770:Button$/ : Global
