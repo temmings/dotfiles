@@ -8,7 +8,6 @@ export HISTSIZE=10000
 #export VIRTUALENVWRAPPER_PYTHON=/cygdrive/c/Python26/python
 
 alias ls="ls --color"
-alias apt-cyg='apt-cyg --use-setuprc --noupdate'
 alias jenkins-cli='"/cygdrive/c/Program Files/Java/jdk1.7.0_25/bin/java" -jar `cygpath -w ~/Downloads/jenkins-cli.jar` -s http://192.168.10.153/jenkins/'
 if ! whence -p vlc &> /dev/null; then
     alias vlc="\"$(whence -p "/cygdrive/c/Program Files (x86)/VideoLAN/VLC/vlc")\""

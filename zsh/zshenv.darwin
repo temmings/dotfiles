@@ -39,6 +39,8 @@ export AWS_RDS_HOME="$homebrew_prefix/Cellar/rds-command-line-tools/1.14.001/lib
 export AWS_CLOUDWATCH_HOME="$homebrew_prefix/Library/LinkedKegs/cloud-watch/jars"
 export SERVICE_HOME="$AWS_CLOUDWATCH_HOME"
 
+export ANDROID_HOME=/usr/local/opt/android-sdk
+
 alias ls="LC_CTYPE=en_US.UTF-8 ls"
 alias w3m="LC_CTYPE=en_US.UTF-8 w3m"
 #if [ -f "/Applications/MacVim.app/Contents/MacOS/Vim" ]; then

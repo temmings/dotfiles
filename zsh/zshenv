@@ -129,6 +129,7 @@ PERL_CPANM_LOCAL_LIB="$HOME/perl5"
 export PERL_CPANM_OPT="--local-lib=$PERL_CPANM_LOCAL_LIB"
 export PERL5LIB="$PERL_CPANM_LOCAL_LIB/lib/perl5:$PERL5LIB"
 #export PIP_REQUIRE_VIRTUALENV=true
+export GOPATH=$HOME/.go
 
 export WWW_HOME=http://www.google.co.jp/
 export HTTP_HOME=$WWW_HOME

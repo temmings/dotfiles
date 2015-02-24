@@ -10,38 +10,38 @@
 
 ZSH_TMUX_AUTOSTART=true
 
-# Load the oh-my-zsh
-antigen use oh-my-zsh
-
 # Bundles from the default repo
 antigen bundle git
 antigen bundle ssh-agent
 antigen bundle tmux
 antigen bundle history
 antigen bundle urltools
-antigen bundle cabal
-antigen bundle docker
-antigen bundle vagrant
 
 antigen bundle rupa/z
 antigen bundle m4i/cdd cdd
-antigen bundle temmings/shell-todo shell-todo
+antigen bundle temmings/shell-todo
 
-#antigen bundle zsh-users/zsh-completions src
+# FIXME: Cygwin is very slowly...
+if [[ 'cygwin' != "$OSTYPE" ]]; then
+    # Load the oh-my-zsh
+    antigen use oh-my-zsh
+    antigen bundle cabal
+    antigen bundle docker
+    antigen bundle vagrant
+    antigen bundle zsh-users/zsh-syntax-highlighting
+    #antigen bundle zsh-users/zsh-completions src
+
+    # Load theme
+    antigen theme mrtazz
+fi
 
 case "$OSTYPE" in
-    cygwin*)
-        ;;
     darwin*)
         antigen bundle brew
         antigen bundle brew-cask
         antigen bundle gem
         antigen bundle osx
-        antigen bundle zsh-users/zsh-syntax-highlighting
         ;;
 esac
-
-# Load theme
-antigen theme mrtazz
 
 antigen apply

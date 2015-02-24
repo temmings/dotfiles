@@ -144,8 +144,9 @@ alias -s php="php -f"
 alias -s pl="perl"
 alias -s py="python"
 alias -s rb="ruby"
-alias -s sh="sh"
-alias -s zsh="zsh"
+# shbang に -eu とか指定されてても効かなくなるのでやめた
+#alias -s sh="sh"
+#alias -s zsh="zsh"
 # }}}
 
 if [[ x"$OSTYPE" != x"cygwin" ]]; then
@@ -179,13 +180,24 @@ typeset -U path PATH
 
 autoload -U compinit && compinit -C -u
 
-if is_executable runghc; then
-    source_if_exist ~/.zsh/zshrc.antigen-hs
-else
-    source_if_exist ~/.zsh/zshrc.antigen
-fi
+if [[ cygwin = "$OSTYPE" ]]; then
+    # FIXME: Cygwin is very slowly...
+    ZSH="$HOME/.antigen-hs/repos/https-COLON--SLASH--SLASH-github.com-SLASH-robbyrussell-SLASH-oh-my-zsh"
+    ZSH_TMUX_AUTOSTART=true
+    #plugins=(themes git ssh-agent tmux history urltools brew cabal docker vagrant)
 
-add-zsh-hook chpwd _cdd_chpwd
+    source $ZSH/plugins/git/git.plugin.zsh
+    source $ZSH/plugins/ssh-agent/ssh-agent.plugin.zsh
+    source $ZSH/plugins/tmux/tmux.plugin.zsh
+    source $ZSH/plugins/urltools/urltools.plugin.zsh
+else
+    if is_executable runghc; then
+        source_if_exist ~/.zsh/zshrc.antigen-hs
+    else
+        source_if_exist ~/.zsh/zshrc.antigen
+    fi
+    add-zsh-hook chpwd _cdd_chpwd
+fi
 
 bindkey -e
 

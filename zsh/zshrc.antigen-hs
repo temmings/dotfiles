@@ -19,14 +19,6 @@ plugins=(themes git ssh-agent tmux history urltools brew cabal docker vagrant)
 
 source ~/.antigen-hs/antigen-hs/init.zsh
 
-## FIXME:
-if [[ "cygwin" = "$OSTYPE" ]]; then
-    antigen-hs-compile () {
-        runghc -i"$(cygpath -w $ANTIGEN_HS_HOME/)" -- "$(cygpath -w $ANTIGEN_HS_MY)"
-        sed -i'.orig' -e 's|\\|/|g' -e 's|C:/Users|/home|g' -- $HOME/.antigen-hs/antigen-hs.zsh
-    }
-fi
-
 if [[ $ANTIGEN_HS_MY -nt $HOME/.antigen-hs/antigen-hs.zsh ]]; then
     echo compling $ANTIGEN_HS_MY
     antigen-hs-compile
