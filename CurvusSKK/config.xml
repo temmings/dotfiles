@@ -740,8 +740,8 @@
       <row ro="xxya" hi="ゃ" ka="ャ" an="ｬ" so="0" />
       <row ro="xxyu" hi="ゅ" ka="ュ" an="ｭ" so="0" />
       <row ro="xxyo" hi="ょ" ka="ョ" an="ｮ" so="0" />
-      <row ro="kA" hi="ゕ" ka="ヵ" an="ｶ" so="0" />
-      <row ro="kE" hi="ゖ" ka="ヶ" an="ｹ" so="0" />
+      <!-- <row ro="kA" hi="ゕ" ka="ヵ" an="ｶ" so="0" /> -->
+      <!-- <row ro="kE" hi="ゖ" ka="ヶ" an="ｹ" so="0" /> -->
 
 <!-- 促音、撥音、長音符 -->
 
