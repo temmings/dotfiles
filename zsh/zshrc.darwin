@@ -1,1 +1,10 @@
 alias chrome="open ~/Applications/Google\ Chrome.app --args --renderer-process-limit=2"
+
+function prepare_google_cloud_sdk() {
+    ### brew cask install google-cloud-sdk
+    source '/opt/homebrew-cask/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
+    source '/opt/homebrew-cask/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'
+}
+
+### brew tap bfontaine/command-not-found
+eval "$(brew command-not-found-init)" >/dev/null 2>&1
