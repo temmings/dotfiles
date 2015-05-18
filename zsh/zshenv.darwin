@@ -12,7 +12,7 @@ path=(
 )
 
 export EDITOR="vim"
-export LC_CTYPE="C"
+#export LC_CTYPE="C"
 # 'ls' enable colorized output.
 export CLICOLOR=1
 
