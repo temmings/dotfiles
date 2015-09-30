@@ -50,6 +50,8 @@ endfor
 " testing: {{{
 NeoBundle 'rking/ag.vim'
 NeoBundle 'kchmck/vim-coffee-script'
+NeoBundle 'yoppi/fluentd.vim'
+NeoBundle 'tpope/vim-fugitive'
 
 "NeoBundle 'haya14busa/vim-migemo'
 "NeoBundle 'rhysd/migemo-search.vim'

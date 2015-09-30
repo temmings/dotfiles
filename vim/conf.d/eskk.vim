@@ -21,6 +21,8 @@ let g:eskk#egg_like_newline = 1
 let g:eskk#egg_like_newline_completion = 1
 let g:eskk#debug = 0
 let g:eskk#no_default_mappings = 1
+let g:eskk#log_cmdline_level = 4
+let g:eskk#log_file_level = 4
 
 imap <C-j> <Plug>(eskk:enable)
 cmap <C-j> <Plug>(eskk:enable)
