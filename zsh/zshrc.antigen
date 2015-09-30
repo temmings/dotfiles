@@ -32,7 +32,7 @@ if [[ 'cygwin' != "$OSTYPE" ]]; then
     #antigen bundle zsh-users/zsh-completions src
 
     # Load theme
-    antigen theme mrtazz
+    antigen theme murilasso
 fi
 
 case "$OSTYPE" in

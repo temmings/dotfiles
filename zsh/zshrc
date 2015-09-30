@@ -56,16 +56,27 @@ function mkcdir() {
     cd -- "$arg"
 }
 
+### base: https://github.com/mooz/percol#zsh-history-search
+if is_executable percol; then
+    function percol_select_history() {
+        local tac
+        tac=$(get_executable_first "gtac" "tac") || tac="tail -r"
+        BUFFER=$(fc -l -n 1 | eval $tac | percol --query "$LBUFFER")
+        CURSOR=$#BUFFER
+        zle clear-screen
+    }
+
+    zle -N percol_select_history
+fi
+
 function configure_bootstrap() {
-    if which glibtoolize &>/dev/null; then
-        glibtoolize --force
-    else
-        libtoolize --force
-    fi
-    autoheader
-    automake --add-missing --foreign
-    autoconf
-    shtoolize all
+    #if which glibtoolize &>/dev/null; then
+    #    glibtoolize --force
+    #else
+    #    libtoolize --force
+    #fi
+    aclocal && autoconf && autoheader && automake --add-missing --foreign
+    #shtoolize all
 }
 
 function configure_for_home_local() {
@@ -87,6 +98,12 @@ function prepare_anyenv() {
     fi
     export PATH="$anyenv_dir/bin:$PATH"
     eval "$(anyenv init -)"
+}
+
+function cdwork() {
+    local yyyy=$(date '+%Y')
+    local yyyymmdd=$(date '+%Y%m%d')
+    mkcdir -p ~/${yyyy}/${yyyymmdd}
 }
 # }}}
 
@@ -134,6 +151,10 @@ alias show_my_external_ip="curl 'http://whatismyip.akamai.com'"
 
 alias show_ec2_local_ipv4="curl -s 'http://169.254.169.254/latest/meta-data/local-ipv4'"
 alias show_ec2_public_ipv4="curl -s 'http://169.254.169.254/latest/meta-data/public-ipv4'"
+
+alias x509detail="openssl x509 -text -in"
+alias urlencode="nkf -WwMQ | tr = %"
+alias urldecode="nkf -w --url-input"
 
 alias -s exe="wine"
 alias -s htm="w3m"
@@ -190,6 +211,10 @@ if [[ cygwin = "$OSTYPE" ]]; then
     source $ZSH/plugins/ssh-agent/ssh-agent.plugin.zsh
     source $ZSH/plugins/tmux/tmux.plugin.zsh
     source $ZSH/plugins/urltools/urltools.plugin.zsh
+    #source $ZSH/plugins/z/z.plugin.zsh
+    source $HOME/.antigen-hs/repos/https-COLON--SLASH--SLASH-github.com-SLASH-m4i-SLASH-cdd/cdd
+    autoload -Uz add-zsh-hook
+    add-zsh-hook chpwd _cdd_chpwd
 else
     if is_executable runghc; then
         source_if_exist ~/.zsh/zshrc.antigen-hs
@@ -199,7 +224,10 @@ else
     add-zsh-hook chpwd _cdd_chpwd
 fi
 
+is_executable aws_zsh_completer.sh && source aws_zsh_completer.sh
+
 bindkey -e
+is_exist_func percol_select_history && bindkey '^R' percol_select_history
 
 source_if_exist ~/.zshrc.local
 
