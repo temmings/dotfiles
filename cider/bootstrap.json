@@ -232,6 +232,8 @@
     "taps": [
         "aereal/aereal_casks",
         "aki017/sixel",
+        "aspnet/k",
+        "bfontaine/command-not-found",
         "caskroom/cask",
         "caskroom/versions",
         "homebrew/dupes",
