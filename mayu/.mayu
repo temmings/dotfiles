@@ -9,12 +9,12 @@ endif
 
 keymap Global
 
- ### ‰½ŒÌ‚©RDP Œo—R‚·‚é‚Æ‰EƒVƒtƒg‚ª E0-0x36 ‚É‚È‚é‚ËH
+ ### ä½•æ•…ã‹RDP çµŒç”±ã™ã‚‹ã¨å³ã‚·ãƒ•ãƒˆãŒ E0-0x36 ã«ãªã‚‹ã­ï¼Ÿ
  def key YetRightShift YetRShift = E0-0x36
  mod Shift += YetRightShift
  key *YetRightShift = *LShift
 
- ### Windows ƒL[‚Í Alt ‚Æ‚µ‚Äˆµ‚¤
+ ### Windows ã‚­ãƒ¼ã¯ Alt ã¨ã—ã¦æ‰±ã†
  mod	Windows		-= LeftWindows RightWindows
  mod	Alt		+= LeftWindows RightWindows
  key	*LeftWindows	= *LeftAlt
@@ -24,7 +24,7 @@ keymap Global
  key	C-_3			=> ESC
  key	C-LeftSquareBracket	=> ESC
 
- # default.mayu ‚Ìˆê•”‚ÌƒVƒ‡[ƒgƒJƒbƒg‚ğ–³Œø‚É
+ # default.mayu ã®ä¸€éƒ¨ã®ã‚·ãƒ§ãƒ¼ãƒˆã‚«ãƒƒãƒˆã‚’ç„¡åŠ¹ã«
  key	C-S-K C-A-K		= &Default
  key	C-S-Z C-S-X C-S-C	= &Default
  key	C-S-N C-S-P		= &Default
@@ -36,7 +36,7 @@ keymap Global
  key	C-S-Down		= &Default
  key	C-U			= &Default
 
-#### ƒ_ƒCƒAƒƒOƒ{ƒbƒNƒX
+#### ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ãƒœãƒƒã‚¯ã‚¹
 window dialog /#32770:Button$/ : Global
  key	C-G	=> Escape
  key	C-M	=> Enter
@@ -46,16 +46,16 @@ window dialog /#32770:Button$/ : Global
  key	C-P	=> Up
 
 keymap EmacsEdit
- ### ‚¢‚Â‚Å‚à C-J ‚Å SKK ‚Ì‚©‚Èƒ‚[ƒh
- key	~IL-C-J		= $ToggleIME	# IME‚ªƒIƒt‚È‚çA—LŒø‚É
- key	IL-C-J		= &Default	# IME‚ªƒIƒ“‚È‚ç‚ÎA‚»‚Ì‚Ü‚Ü
+ ### ã„ã¤ã§ã‚‚ C-J ã§ SKK ã®ã‹ãªãƒ¢ãƒ¼ãƒ‰
+ key	~IL-C-J		= $ToggleIME	# IMEãŒã‚ªãƒ•ãªã‚‰ã€æœ‰åŠ¹ã«
+ key	IL-C-J		= &Default	# IMEãŒã‚ªãƒ³ãªã‚‰ã°ã€ãã®ã¾ã¾
 
-#### ƒL[ƒ}ƒbƒv‚ğƒfƒtƒHƒ‹ƒg‚É‚·‚éƒEƒBƒ“ƒhƒE
+#### ã‚­ãƒ¼ãƒãƒƒãƒ—ã‚’ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã«ã™ã‚‹ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
 window	Logic	/Logic Platinum 5\.5\.0\.exe:/ : KeymapDefault
 #window RDP		/mstsc\.exe:UIMainClass/ : KeymapDefault
 window	RDP		/mstsc\.exe:TSSHELLWND/ : KeymapDefault
 
-#### EmacsEdit ‚ğ“K—p‚·‚éƒAƒvƒŠƒP[ƒVƒ‡ƒ“, Window
+#### EmacsEdit ã‚’é©ç”¨ã™ã‚‹ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³, Window
 window	AccessOGrid	/MSACCESS\.EXE:.*:OGrid/ : EmacsEdit
 window	AcroReader	/AcroRd32\.exe:.*AcrobatSDIWindow:.*:AVL_AVView/ : EmacsEdit
 window	AFxTextView	/afx\.exe:TAfxForm:TTextView/ : EmacsEdit
@@ -85,23 +85,29 @@ window	MarkdownSharp	/MarkDownSharpEditor\.exe:.*\.RichEdit20W\..*/ : EmacsEdit
 window	MySQLWorkbench	/MySQLWorkbench.exe:.*/ : EmacsEdit
 window	NaviCat		/navicat.exe:.*/ : EmacsEdit
 window	Pidgin		/pidgin\.exe:.*/ : EmacsEdit
+window	PowerPoint	/POWERPNT\.EXE:.*/ : EmacsEdit
 window	PShellISE	/powershell_ise\.exe:.*/ : EmacsEdit
 window	Sakura		/sakura\.exe:.*/ : EmacsEdit
+
 #window	Skype		/Skype\.exe:.*TChatRichEdit.*/ : EmacsEdit
 window	Skype		/Skype\.exe:.*/ : EmacsEdit
  key	C-R	=> &Ignore
+
+window	Slack		/slack\.exe:.*/ : EmacsEdit
 window	Soffice		/soffice\.exe:/ : EmacsEdit
 window	Soffice3	/soffice\.bin:SALFRAME/ : EmacsEdit
 window	StikyNot	/StikyNot\.exe:.*/ : EmacsEdit
 window	SQLServer	/ssmsee.exe:.*/ : EmacsEdit
 window	SQLServer2008	/Ssms\.exe:.*/ : EmacsEdit
 window	SQL_SP_UT_Tool	/SQL_SP_UT_Tool\.exe:.*/ : EmacsEdit
-window	TortoiseSVN	/TortoiseProc\.exe:#32770:.*Scintilla/ : EmacsEdit
+window	TortoiseGit	/TortoiseGitProc\.exe:.*/ : EmacsEdit
+window	TortoiseSVN	/TortoiseProc\.exe:.*/ : EmacsEdit
 window	TortoiseMerge	/TortoiseMerge\.exe:.*/ : EmacsEdit
 window	TSXBIN		/TSXBIN\.exe:.*/ : EmacsEdit
 window	Tween		/Tween\.exe:.*/ : EmacsEdit
 window	TweetDeck	/TweetDeck\.exe:.*ApolloRuntimeContentWindow/ : EmacsEdit
 window	VbsEdit		/Vbsedit\.exe:.*/ : EmacsEdit
+
 window	VCSTestEdit	/vcsexpress\.exe:.*VsTextEditPane/ : EmacsEdit
 window	VCSHWND		/vcsexpress\.exe:HwndWrapper.*/ : EmacsEdit
 window	VCSEdit		/vcsexpress\.exe:.*WindowsForms10\.EDIT.*/ : EmacsEdit
@@ -120,16 +126,16 @@ window	VCSTextEdit	/vcsexpress\.exe:.*VsTextEditPane/ : EmacsEdit
 window	VCSHWND		/vcsexpress\.exe:HwndWrapper.*/ : EmacsEdit
 window	VCSEdit		/vcsexpress\.exe:.*WindowsForms10\.EDIT.*/ : EmacsEdit
 
-window	WinMergeU	/WinMergeU\.exe:.*AfxMDIFrame100u.*/ : EmacsEdit
+window	WinMergeU	/WinMergeU\.exe:.*/ : EmacsEdit
 window	WireShark	/wireshark\.exe:.*/ : EmacsEdit
 
 window	Yammer		/YammerDesktop\.exe:ApolloRuntimeContentWindow.*/ : EmacsEdit
 # key	*A-SLASH	= C-Space
 
 window	ExcelVBA	/EXCEL\.EXE:.*:VbaWindow/ : EmacsEdit
- key	*C-A-Slash	= C-Space	# ©“®ƒƒ“ƒo•\¦
- key	A-P		= C-Up		# ‘O‚ÌƒvƒƒV[ƒWƒƒ
- key	A-N		= C-Down	# Œã‚ÌƒvƒƒV[ƒWƒƒ
+ key	*C-A-Slash	= C-Space	# è‡ªå‹•ãƒ¡ãƒ³ãƒè¡¨ç¤º
+ key	A-P		= C-Up		# å‰ã®ãƒ—ãƒ­ã‚·ãƒ¼ã‚¸ãƒ£
+ key	A-N		= C-Down	# å¾Œã®ãƒ—ãƒ­ã‚·ãƒ¼ã‚¸ãƒ£
 
 window	MSExcel		/EXCEL\.EXE:XLMAIN:/ : EmacsEdit
  if ( !ZXCV ) key C-X	= &Prefix(GeneralC-X)
@@ -137,7 +143,7 @@ window	MSExcel		/EXCEL\.EXE:XLMAIN:/ : EmacsEdit
  key	C-I		= F2
 
 window	MSWord		/WINWORD\.EXE:OpusApp.*/ : EmacsEdit
- key	~IL-C-J		= &Default	# IME‚Ìó‘Ô‚ªæ“¾‚Å‚«‚È‚¢‚Ì‚Åg‚¦‚È‚¢
+ key	~IL-C-J		= &Default	# IMEã®çŠ¶æ…‹ãŒå–å¾—ã§ããªã„ã®ã§ä½¿ãˆãªã„
 
 window	MSProject	/WINPROJ\.EXE:.*/ : EmacsEdit
  if ( !ZXCV ) key C-X	= &Prefix(GeneralC-X)
@@ -145,4 +151,7 @@ window	MSProject	/WINPROJ\.EXE:.*/ : EmacsEdit
  key	C-I		= F2
 
 window	VS2012		/devenv\.exe:.*/ : Global
- key	C-H		= Backspace	# VsVim ‚Ì command ƒ‚[ƒh‚Å Ctrl-H ‚ªŒø‚©‚È‚­‚È‚é‚Ì‚Å
+ key	C-H		= Backspace	# VsVim ã® command ãƒ¢ãƒ¼ãƒ‰ã§ Ctrl-H ãŒåŠ¹ã‹ãªããªã‚‹ã®ã§
+
+window  Atom  /atom\.exe:.*/ : Global
+ key	C-H		= Backspace	# ãªã‚“ã§ã‹ Windows ã§ Ctrl-H ã ã‘ã‚­ãƒ¼ã‚«ã‚¹ã‚¿ãƒã‚¤ã‚ºã§ããªã„ã®ã§ã€‚vim-mode ã®ã›ã„ã‹ã‚‚ã€‚
