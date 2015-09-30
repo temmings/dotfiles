@@ -14,15 +14,15 @@ if s:on_windows
   set renderoptions=type:directx,renmode:5
   set columns=165
   set lines=74
-  if exists('&transparency')
-    set transparency=240
-    augroup hack234
-      autocmd!
-      autocmd GUIEnter * set transparency=240
-      autocmd FocusGained * set transparency=240
-      autocmd FocusLost * set transparency=210
-    augroup END
-  endif
+  "if exists('&transparency')
+  "  set transparency=240
+  "  augroup hack234
+  "    autocmd!
+  "    autocmd GUIEnter * set transparency=240
+  "    autocmd FocusGained * set transparency=240
+  "    autocmd FocusLost * set transparency=210
+  "  augroup END
+  "endif
   "if has('kaoriya')
   "  " 一部のUCS文字の幅を自動計測して決める
   "  set ambiwidth=auto
