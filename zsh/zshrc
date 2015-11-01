@@ -61,7 +61,7 @@ if is_executable percol; then
     function percol_select_history() {
         local tac
         tac=$(get_executable_first "gtac" "tac") || tac="tail -r"
-        BUFFER=$(fc -l -n 1 | eval $tac | percol --query "$LBUFFER")
+        BUFFER=$(fc -l -n 1 | eval $tac | percol --query "$LBUFFER" | sed 's/\\n/\n/g')
         CURSOR=$#BUFFER
         zle clear-screen
     }
