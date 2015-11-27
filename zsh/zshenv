@@ -7,7 +7,7 @@ setopt pushd_ignore_dups
 setopt auto_menu
 setopt print_eight_bit
 setopt ignore_eof
-setopt correct
+setopt no_correct
 setopt always_last_prompt
 
 setopt extended_glob
