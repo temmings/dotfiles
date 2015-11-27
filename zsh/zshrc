@@ -129,6 +129,7 @@ USE_TMUX=1
 alias ll="ls -l"
 alias lf="ls -F"
 alias la="ls -A"
+alias clear2="echo -e '\026\033c'"
 alias ssh="ssh -F =(cat ~/.ssh/config.local ~/.ssh/config ~/.ssh/config.global)"
 alias scp="scp -F =(cat ~/.ssh/config.local ~/.ssh/config ~/.ssh/config.global)"
 alias sftp="sftp -F =(cat ~/.ssh/config.local ~/.ssh/config ~/.ssh/config.global)"
@@ -143,6 +144,8 @@ fi
 
 alias vinarise="vim -c Vinarise"
 
+alias git-init="git init && git add -A && git commit -m 'Initialize repository'"
+
 alias grep_nm_func_names="grep ' T _' | sed 's/.* T _//'"
 
 alias show_my_ipv4="telnet ipv4.test-ipv6.com 79"
@@ -152,7 +155,9 @@ alias show_my_external_ip="curl 'http://whatismyip.akamai.com'"
 alias show_ec2_local_ipv4="curl -s 'http://169.254.169.254/latest/meta-data/local-ipv4'"
 alias show_ec2_public_ipv4="curl -s 'http://169.254.169.254/latest/meta-data/public-ipv4'"
 
-alias x509detail="openssl x509 -text -in"
+alias ssl-x509-detail="openssl x509 -text -noout -in"
+alias ssl-rsa-detail="openssl rsa -text -noout -in"
+alias ssl-csr-detail="openssl req -text -noout -in"
 alias urlencode="nkf -WwMQ | tr = %"
 alias urldecode="nkf -w --url-input"
 
