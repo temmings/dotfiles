@@ -5,3 +5,5 @@
 bin/
 .DS_Store
 proxy.pac
+.mucommander/
+.aws/
