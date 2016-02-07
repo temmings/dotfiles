@@ -208,31 +208,9 @@ esac
 typeset -U path PATH
 
 autoload -U compinit && compinit -C -u
-
-if [[ cygwin = "$OSTYPE" ]]; then
-    # FIXME: Cygwin is very slowly...
-    ZSH="$HOME/.antigen-hs/repos/https-COLON--SLASH--SLASH-github.com-SLASH-robbyrussell-SLASH-oh-my-zsh"
-    ZSH_TMUX_AUTOSTART=true
-    #plugins=(themes git ssh-agent tmux history urltools brew cabal docker vagrant)
-
-    source $ZSH/plugins/git/git.plugin.zsh
-    source $ZSH/plugins/ssh-agent/ssh-agent.plugin.zsh
-    source $ZSH/plugins/tmux/tmux.plugin.zsh
-    source $ZSH/plugins/urltools/urltools.plugin.zsh
-    #source $ZSH/plugins/z/z.plugin.zsh
-    source $HOME/.antigen-hs/repos/https-COLON--SLASH--SLASH-github.com-SLASH-m4i-SLASH-cdd/cdd
-    autoload -Uz add-zsh-hook
-    add-zsh-hook chpwd _cdd_chpwd
-else
-    if is_executable runghc; then
-        source_if_exist ~/.zsh/zshrc.antigen-hs
-    else
-        source_if_exist ~/.zsh/zshrc.antigen
-    fi
-    add-zsh-hook chpwd _cdd_chpwd
-fi
-
 is_executable aws_zsh_completer.sh && source aws_zsh_completer.sh
+
+source_if_exist ~/.zsh/zshrc.zplug
 
 setopt auto_cd
 setopt auto_pushd
