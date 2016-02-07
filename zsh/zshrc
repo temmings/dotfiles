@@ -102,8 +102,8 @@ function prepare_anyenv() {
 
 function cdwork() {
     local yyyy=$(date '+%Y')
-    local yyyymmdd=$(date '+%Y%m%d')
-    mkcdir -p ~/${yyyy}/${yyyymmdd}
+    local mmdd=$(date '+%m%d')
+    mkcdir -p ~/${yyyy}/${mmdd}
 }
 # }}}
 
