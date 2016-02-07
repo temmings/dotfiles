@@ -7,4 +7,7 @@ function prepare_google_cloud_sdk() {
 }
 
 ### brew tap bfontaine/command-not-found
-eval "$(brew command-not-found-init)" >/dev/null 2>&1
+is_executable brew && eval "$(brew command-not-found-init)" >/dev/null 2>&1
+
+### brew install thefuck
+is_executable thefuck && eval "$(thefuck --alias)"
