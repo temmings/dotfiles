@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<root>
+    <appdef>
+        <appname>IntelliJ_IDEA</appname>
+        <equal>com.jetbrains.intellij</equal>
+    </appdef>
+    <item>
+        <name>Disable all settings while using IntelliJ IDEA</name>
+        <identifier>private.ignore_intellij_idea</identifier>
+        <only>IntelliJ_IDEA</only>
+        <autogen>__PassThrough__</autogen>
+    </item>
+</root>
