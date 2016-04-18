@@ -2,7 +2,7 @@ let s:on_windows = has('win95') || has('win16') || has('win32') || has('win64')
 
 NeoBundle 'Shougo/unite.vim'
 
-"NeoBundle 'Shougo/neomru.vim'
+NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'Shougo/unite-build'
 NeoBundle 'ujihisa/unite-colorscheme'
 NeoBundle 'm2mdas/unite-file-vcs'
@@ -21,7 +21,7 @@ NeoBundle 'hrsh7th/vim-versions'
 NeoBundle 'mattn/unite-advent_calendar'
 
 " Start insert.
-let g:unite_enable_start_insert = 1
+let g:unite_enable_start_insert = 0
 let g:unite_enable_short_source_names = 0
 
 let g:unite_source_file_mru_limit = 100
@@ -33,13 +33,19 @@ let g:unite_source_directory_mru_long_limit = 1000
 let g:unite_update_time = 1000
 let g:vimfiler_as_default_explorer = 1
 
-if executable('jvgrep')
-  " For jvgrep.
+if executable('hw')
+  let g:unite_source_grep_command = 'hw'
+  let g:unite_source_grep_default_opts = '--no-group --no-color'
+  let g:unite_source_grep_recursive_opt = ''
+elseif executable('ag')
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts = '--vimgrep'
+  let g:unite_source_grep_recursive_opt = ''
+elseif executable('jvgrep')
   let g:unite_source_grep_command = 'jvgrep'
   let g:unite_source_grep_default_opts = '--exclude ''\.(git|svn|hg|bzr)'''
   let g:unite_source_grep_recursive_opt = '-R'
 elseif executable('ack-grep')
-  " For ack.
   let g:unite_source_grep_command = 'ack-grep'
   let g:unite_source_grep_default_opts = '--no-heading --no-color -a -H'
   let g:unite_source_grep_recursive_opt = ''
@@ -73,21 +79,26 @@ function! UniteRefDoc()
         Unite ref/pydo
     elseif &filetype =~ 'ruby'
         Unite ref/refe
+    elseif *filetype =~ 'erlang'
+        Unite ref/erlang
+    else
+        Unite ref/man
     endif
 endfunction
 
 nnoremap [unite] <Nop>
 nmap , [unite]
-"nnoremap <silent> [unite]a :<C-u>Unite -buffer-name=wild buffer file_mru bookmark file<CR>
-nnoremap <silent> [unite]a :<C-u>Unite -buffer-name=wild buffer bookmark file<CR>
+nnoremap <silent> [unite]a :<C-u>Unite -buffer-name=wild buffer file_mru bookmark file<CR>
+"nnoremap <silent> [unite]a :<C-u>Unite -buffer-name=wild buffer bookmark file<CR>
 nnoremap <silent> [unite]b :<C-u>Unite -buffer-name=buffer buffer<CR>
 nnoremap <silent> [unite]c :<C-u>Unite -buffer-name=build build<CR>
 nnoremap <silent> [unite]d :<C-u>call UniteRefDoc()<CR>
 nnoremap <silent> [unite]f :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+nnoremap <silent> [unite]g :<C-u>Unite-auto-preview -buffer-name=preview-grep grep:.<CR>
 nnoremap <silent> [unite]h :<C-u>Unite -buffer-name=history history/command<CR>
 nnoremap <silent> [unite]H :<C-u>Unite -buffer-name=highlight highlight<CR>
 nnoremap <silent> [unite]k :<C-u>Unite -buffer-name=mapping mapping<CR>
-"nnoremap <silent> [unite]m :<C-u>Unite -buffer-name=mru file_mru:short<CR>
+nnoremap <silent> [unite]m :<C-u>Unite -buffer-name=mru file_mru:short<CR>
 nnoremap <silent> [unite]ps :<C-u>Unite -buffer-name=plugin/search neobundle/search<CR>
 nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=register register<CR>
 nnoremap <silent> [unite]t :<C-u>Unite -buffer-name=tab tab<CR>

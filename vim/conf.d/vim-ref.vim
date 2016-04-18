@@ -2,7 +2,7 @@
 NeoBundle 'thinca/vim-ref'
 
 let g:ref_open = ':tabnew'
-let g:ref_use_vimproc = 0
+let g:ref_use_vimproc = 1
 let g:ref_man_cmd = "/usr/bin/man -P cat"
 let g:ref_man_lang = "C"
 let g:ref_detect_filetype = {
