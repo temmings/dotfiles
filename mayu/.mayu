@@ -25,16 +25,37 @@ keymap Global
  key	C-LeftSquareBracket	=> ESC
 
  # default.mayu の一部のショートカットを無効に
- key	C-S-K C-A-K		= &Default
- key	C-S-Z C-S-X C-S-C	= &Default
- key	C-S-N C-S-P		= &Default
+ key	C-A-A			= &Default
+ key	C-A-E			= &Default
+ key	C-A-N			= &Default
+ key	C-A-P			= &Default
+ key	C-A-V			= &Default
  key	C-S-A C-S-E		= &Default
- key	C-S-F C-S-B		= &Default
- key	C-S-Up			= &Default
- key	C-S-Left		= &Default
- key	C-S-Right		= &Default
+ key	C-S-A-H			= &Default
+ key	C-S-C C-A-C		= &Default
+ key	C-S-D			= &Default
  key	C-S-Down		= &Default
+ key	C-S-F C-S-B		= &Default
+ key	C-S-H			= &Default
+ key	C-S-I C-A-I		= &Default
+ key	C-S-K C-A-K		= &Default
+ key	C-S-L C-A-L		= &Default
+ key	C-S-Left		= &Default
+ key	C-S-N C-S-P		= &Default
+ key	C-S-R C-A-R		= &Default
+ key	C-S-Right		= &Default
+# key	C-S-S			= &Default
+ key	C-S-T			= &Default
+ key	C-S-U			= &Default
+ key	C-S-Up			= &Default
+ key	C-S-X C-A-X		= &Default
+ key	C-S-Z C-A-Z		= &Default
+ key	C-S-Z C-S-X C-S-C	= &Default
  key	C-U			= &Default
+
+ key	C-S-A-D			= &WindowIdentify &NodokaDialog(Log, SHOW)
+ key	C-S-F1			= &InvestigateCommand	# WM_COMMAND の調査
+
 
 #### ダイアログボックス
 window dialog /#32770:Button$/ : Global
@@ -61,6 +82,7 @@ window	AcroReader	/AcroRd32\.exe:.*AcrobatSDIWindow:.*:AVL_AVView/ : EmacsEdit
 window	AFxTextView	/afx\.exe:TAfxForm:TTextView/ : EmacsEdit
 window	AFxFileBox	/afx\.exe:TAfxForm:TPanel:TFileBox/ : EmacsEdit
 window	Console		/ConsoleWindowClass/ : EmacsEdit
+window	Charles		/Charles\.exe/ : EmacsEdit
 window	EverNote	/Evernote\.exe:.*/ : EmacsEdit
 window	FFPlugin	/plugin-container\.exe:.*GeckoPluginWindow.*/ : EmacsEdit
 window	FireFox		/firefox\.exe:MozillaWindowClass/ : EmacsEdit
