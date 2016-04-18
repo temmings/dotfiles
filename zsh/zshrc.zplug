@@ -14,10 +14,8 @@ zplug "plugins/tmux", from:oh-my-zsh
 zplug "plugins/urltools", from:oh-my-zsh
 zplug "plugins/themes", from:oh-my-zsh
 
-zplug "zsh-users/zsh-syntax-highlighting"
 zplug "temmings/shell-todo"
 zplug "m4i/cdd", of:cdd
-zplug "rupa/z", of:z.sh
 
 zplug "holman/spark", as:command
 zplug "mrowa44/emojify", as:command
@@ -25,9 +23,15 @@ zplug "mrowa44/emojify", as:command
 ### os specific
 case "$OSTYPE" in
     darwin*)
+        zplug "plugins/github", from:oh-my-zsh
+        zplug "plugins/mvn", from:oh-my-zsh
+        zplug "plugins/sbt", from:oh-my-zsh
+        zplug "plugins/golang", from:oh-my-zsh
         zplug "plugins/docker", from:oh-my-zsh
         zplug "plugins/vagrant", from:oh-my-zsh
         zplug "plugins/brew", from:oh-my-zsh
+        zplug "zsh-users/zsh-syntax-highlighting"
+        zplug "rupa/z", of:z.sh
         ;;
     cygwin*)
         zplug "kou1okada/apt-cyg", as:command
@@ -35,12 +39,13 @@ case "$OSTYPE" in
 esac
 
 DISABLE_UPDATE_PROMPT=true
+CASE_SENSITIVE=true
 ZSH_TMUX_AUTOSTART=true
 ZSH_TMUX_ITERM2=false
 ZSH_THEME="murilasso"
 
 zplug check || zplug install
-zplug load --verbose
+zplug load
 
 autoload -U add-zsh-hook
 add-zsh-hook chpwd _cdd_chpwd
