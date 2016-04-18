@@ -1,4 +1,3 @@
-" FIXME: gvim で機能しない
 " http://sites.google.com/site/fudist/Home/vim-nihongo-ban/vim-color
 " sample:[　　　]
 
