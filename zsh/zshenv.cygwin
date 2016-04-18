@@ -16,3 +16,7 @@ fi
 if ! whence -p vagrant &> /dev/null; then
     alias vagrant="\"$(whence -p "/cygdrive/c/HashiCorp/Vagrant/bin/vagrant")\""
 fi
+
+if ! whence -p go &> /dev/null; then
+    alias go="\"$(whence -p "/cygdrive/c/bin/go/bin/go")\""
+fi
