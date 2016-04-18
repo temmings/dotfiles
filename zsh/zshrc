@@ -216,9 +216,6 @@ esac
 
 typeset -U path PATH
 
-autoload -U compinit && compinit -C -u
-is_executable aws_zsh_completer.sh && source aws_zsh_completer.sh
-
 source_if_exist ~/.zsh/zshrc.zplug
 
 setopt auto_cd
@@ -250,6 +247,9 @@ unsetopt no_match
 
 bindkey -e
 is_exist_func percol_select_history && bindkey '^R' percol_select_history
+
+autoload -U compinit && compinit -C -u
+source_if_exist /usr/local/share/zsh/site-functions/_aws
 
 source_if_exist ~/.zshrc.local
 
