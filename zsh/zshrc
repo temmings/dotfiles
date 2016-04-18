@@ -161,8 +161,15 @@ alias ssl-csr-detail="openssl req -text -noout -in"
 function ssl-pfx-detail() {
     openssl pkcs12 -clcerts -nokeys -in $1 | openssl x509 -text -noout
 }
+function ssl-show-https() {
+    openssl s_client -connect $1:443 -showcerts
+}
 alias urlencode="nkf -WwMQ | tr = %"
 alias urldecode="nkf -w --url-input"
+
+function sum-col() {
+    awk '{s+=$'${1:-1}'}END{print s}'
+}
 
 alias -s exe="wine"
 alias -s htm="w3m"
