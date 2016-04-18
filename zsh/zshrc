@@ -196,7 +196,9 @@ fi
 #    source $(which virtualenvwrapper.sh)
 #fi
 
-binary_extension_patterns='*.(o|obj|a|so|dylib|lib|dll|com|exe|pyc|elc|hi|class|pdb)'
+source_if_exist ~/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
+binary_extension_patterns='*.(o|obj|a|so|dylib|lib|dll|com|exe|pyc|elc|hi|class|pdb|cmi|cmo)'
 zstyle ':completion:*:*:'$EDITOR':*:*files' ignored-patterns $binary_extension_patterns
 zstyle ':completion:*:*:'$PAGER':*:*files' ignored-patterns $binary_extension_patterns
 zstyle ':completion:*:*:'view':*:*files' ignored-patterns $binary_extension_patterns
