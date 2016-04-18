@@ -40,8 +40,6 @@ call neobundle#begin(s:bundle_plugin_dir)
 
 NeoBundleFetch 'Shougo/neobundle.vim'
 
-call neobundle#end()
-
 " 各種プラグインなどのまとまった設定を読み込み
 for rc in split(globpath('$DOTVIM/conf.d/', '*.vim'), '\n')
   execute "source " . rc
@@ -52,6 +50,10 @@ NeoBundle 'rking/ag.vim'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'yoppi/fluentd.vim'
 NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'mrk21/yaml-vim'
+NeoBundle 'fatih/vim-go'
+NeoBundle 'rust-lang/rust.vim'
+NeoBundle 'rizzatti/dash.vim'
 
 "NeoBundle 'haya14busa/vim-migemo'
 "NeoBundle 'rhysd/migemo-search.vim'
@@ -92,9 +94,6 @@ NeoBundle 'thinca/vim-ref'
 
 " Ex command 差し替え
 NeoBundle 'tyru/vim-altercmd'
-call altercmd#load()
-" require: conf.d/bufferWipeoutInteractive
-AlterCommand q[uit] call BufferWipeoutInteractive()
 
 " emacs keybind for command line.
 "   * <C-O> : prefix to original keybind
@@ -126,10 +125,16 @@ NeoBundle 'XML-Folding'
 let g:xml_syntax_folding = 0
 autocmd FileType xml setlocal foldmethod=syntax
 
+call neobundle#end()
+
 filetype plugin indent on
 
 " Plugin installation check.
 NeoBundleCheck
+
+call altercmd#load()
+" require: conf.d/bufferWipeoutInteractive
+AlterCommand q[uit] call BufferWipeoutInteractive()
 
 """ prepare plugins: }}}
 
@@ -343,7 +348,7 @@ set t_Co=256
 set nocursorline    " cursorline は描画重い
 set synmaxcol=2000  " syntax を適用する最大カラム数
 set background=dark
-colorscheme solarized
+silent! colorscheme solarized
 syntax on
 " force background to black
 hi Normal guibg=#000000
