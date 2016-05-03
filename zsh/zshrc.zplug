@@ -15,7 +15,7 @@ zplug "plugins/urltools", from:oh-my-zsh
 zplug "plugins/themes", from:oh-my-zsh
 
 zplug "temmings/shell-todo"
-zplug "m4i/cdd", of:cdd
+zplug "m4i/cdd", use:cdd
 
 zplug "holman/spark", as:command
 zplug "mrowa44/emojify", as:command
@@ -31,7 +31,7 @@ case "$OSTYPE" in
         zplug "plugins/vagrant", from:oh-my-zsh
         zplug "plugins/brew", from:oh-my-zsh
         zplug "zsh-users/zsh-syntax-highlighting"
-        zplug "rupa/z", of:z.sh
+        zplug "rupa/z", use:z.sh
         ;;
     cygwin*)
         zplug "kou1okada/apt-cyg", as:command
