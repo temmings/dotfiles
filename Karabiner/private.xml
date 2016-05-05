@@ -10,4 +10,15 @@
         <only>IntelliJ_IDEA</only>
         <autogen>__PassThrough__</autogen>
     </item>
+
+    <appdef>
+        <appname>iterm2</appname>
+        <equal>com.googlecode.iterm2</equal>
+    </appdef>
+    <item>
+        <name>Disable all settings in iterm2</name>
+        <identifier>private.disable_in_iterm2</identifier>
+        <only>iterm2</only>
+        <autogen>__PassThrough__</autogen>
+    </item>
 </root>
