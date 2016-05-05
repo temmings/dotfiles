@@ -5,7 +5,7 @@ NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'Shougo/unite-build'
 NeoBundle 'ujihisa/unite-colorscheme'
-NeoBundle 'm2mdas/unite-file-vcs'
+"NeoBundle 'm2mdas/unite-file-vcs'
 NeoBundle 'osyo-manga/unite-fold'
 NeoBundle 'ujihisa/unite-font'
 NeoBundle 'hewes/unite-gtags'
@@ -29,6 +29,8 @@ let g:unite_source_directory_mru_limit = 100
 " To track long mru history.
 let g:unite_source_file_mru_long_limit = 1000
 let g:unite_source_directory_mru_long_limit = 1000
+
+let g:neomru#do_validate = 0
 
 let g:unite_update_time = 1000
 let g:vimfiler_as_default_explorer = 1
@@ -103,7 +105,7 @@ nnoremap <silent> [unite]ps :<C-u>Unite -buffer-name=plugin/search neobundle/sea
 nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=register register<CR>
 nnoremap <silent> [unite]t :<C-u>Unite -buffer-name=tab tab<CR>
 "nnoremap <silent> [unite]u :<C-u>Unite buffer file_mru:short<CR>
-nnoremap <silent> [unite]v :<C-u>Unite -start-insert -no-split -buffer-name=file_vcs file/vcs<CR>
+"nnoremap <silent> [unite]v :<C-u>Unite -start-insert -no-split -buffer-name=file_vcs file/vcs<CR>
 nnoremap <silent> [unite]vs :<C-u>UniteVersions status:!<CR>
 nnoremap <silent> [unite]vl :<C-u>UniteVersions log:%<CR>
 nnoremap <silent> [unite]/ :<C-u>execute "Unite -buffer-name=spotlight " . g:unite_source_everything<CR>

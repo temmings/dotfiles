@@ -3,6 +3,7 @@ scriptencoding utf-8
 set nocompatible               " be iMproved
 filetype off                   " required!
 
+""" prepare basic: {{{
 let s:on_windows = has('win95') || has('win16') || has('win32') || has('win64')
 
 let $DOTVIM = expand('~/.vim')
@@ -18,6 +19,7 @@ function! s:source_if_exist(file)
 endfunction
 
 call s:source_if_exist($MYSHADOWVIMRC)
+""" }}}
 
 """ prepare neobundle: {{{
 if s:on_windows
@@ -45,15 +47,10 @@ for rc in split(globpath('$DOTVIM/conf.d/', '*.vim'), '\n')
   execute "source " . rc
 endfor
 
-" testing: {{{
-NeoBundle 'rking/ag.vim'
-NeoBundle 'kchmck/vim-coffee-script'
-NeoBundle 'yoppi/fluentd.vim'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'mrk21/yaml-vim'
-NeoBundle 'fatih/vim-go'
-NeoBundle 'rust-lang/rust.vim'
-NeoBundle 'rizzatti/dash.vim'
+""" testing: {{{
+" 再帰的に .git を探すようなので、ファイルシステムによってはめっちゃ重い？
+"NeoBundle 'tpope/vim-fugitive'
+"NeoBundle 'rizzatti/dash.vim'
 
 "NeoBundle 'haya14busa/vim-migemo'
 "NeoBundle 'rhysd/migemo-search.vim'
@@ -63,8 +60,7 @@ NeoBundle 'rizzatti/dash.vim'
 " migemo 検索テスト用
 "local: ローカル
 "indent: インデント
-
-" }}}
+""" }}}
 
 ":Restart" で gvim を再起動
 NeoBundleLazy 'tyru/restart.vim', {
@@ -115,15 +111,6 @@ NeoBundle 'houtsnip/vim-emacscommandline'
 
 NeoBundle 'junegunn/vim-easy-align'
 vnoremap <silent> <Enter> :EasyAlign<cr>
-
-NeoBundle 'vim-orgmode'
-NeoBundle 'VimOrganizer'
-
-NeoBundle 'chrisbra/csv.vim'
-NeoBundle 'JSON.vim'
-NeoBundle 'XML-Folding'
-let g:xml_syntax_folding = 0
-autocmd FileType xml setlocal foldmethod=syntax
 
 call neobundle#end()
 
@@ -219,7 +206,7 @@ set updatecount=0
 set swapsync=fsync
 
 set nobackup
-set backupdir-=. " no create on current
+set backupdir=$DOTVIM/backup
 set nowritebackup
 set backupcopy=yes
 
@@ -229,7 +216,7 @@ set viminfo='100,<100,:10000,/100,s10,h,c,n~/.viminfo
 
 if has('persistent_undo')
   set undofile
-  let &undodir = &backupdir
+  set undodir=$DOTVIM/undo
   set undolevels=1000
   set undoreload=10000
 endif
@@ -309,7 +296,7 @@ nnoremap <silent> <C-g> :<C-u>nohlsearch<CR><C-g>
 nnoremap <silent> <Esc><Esc> :<C-u>nohlsearch<CR>
 
 inoremap <C-g> <Esc>
-cnoremap <C-g> <ESC>
+cnoremap <C-g> <Esc>
 
 "nnoremap [C-c] <Nop>
 "nmap <C-c> [C-c]

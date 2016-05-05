@@ -16,3 +16,5 @@ done
 for f in $vim_dir_files; do
     ln -svni $install_script_dir/$f $vim_dir/$f
 done
+
+git clone git://github.com/Shougo/neobundle.vim $vim_dir/bundle/neobundle.vim
