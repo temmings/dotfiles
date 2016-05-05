@@ -16,7 +16,7 @@ function get_value_of_key() {
 }
 
 function is_executable() {
-    hash "$1" 2>/dev/null || return
+    (($+commands[$1]))
 }
 
 function get_executable() {
@@ -32,8 +32,7 @@ function get_executable_first() {
 }
 
 function is_exist_func() {
-    declare -f -F $1 > /dev/null
-    return $?
+    (($+functions[$1]))
 }
 
 function abs_path() {
@@ -66,6 +65,7 @@ path=(
     ~/Dropbox/bin(N-/)
     ~/node_modules/.bin(N-/)
     ~/.cabal/bin(N-/)
+    ~/.go/bin(N-/)
     ### pear / pecl $ php -d detect_unicode=0 =(curl -fsSL http://pear.php.net/go-pear.phar)
     ~/pear/bin(N-/)
     ### cpanminus

@@ -57,16 +57,17 @@ function mkcdir() {
 }
 
 ### base: https://github.com/mooz/percol#zsh-history-search
-if is_executable percol; then
-    function percol_select_history() {
+local cmd_peco=$(get_executable_first peco percol)
+if [[ ${cmd_peco} ]]; then
+    function select_history() {
         local tac
         tac=$(get_executable_first "gtac" "tac") || tac="tail -r"
-        BUFFER=$(fc -l -n 1 | eval $tac | percol --query "$LBUFFER" | sed 's/\\n/\n/g')
+        BUFFER=$(fc -l -n 1 | eval $tac | $cmd_peco --query "$LBUFFER" | sed 's/\\n/\n/g')
         CURSOR=$#BUFFER
         zle clear-screen
     }
 
-    zle -N percol_select_history
+    zle -N select_history
 fi
 
 function configure_bootstrap() {
@@ -142,6 +143,16 @@ if is_executable vim; then
     alias vi="vim"
 fi
 
+# command on tmux panel
+alias t="tmux split-window -v"
+alias tb="tmux split-window -bdv"
+alias th="tmux split-window -h"
+alias tp="tmux new-window"
+
+# see: http://qiita.com/itkrt2y/items/0671d1f48e66f21241e2
+alias cdg='(){ cd $(ghq root)/$(ghq list | peco --query "$*") }'
+alias gh='(){ hub browse $(ghq list | peco --query "$*" | cut -d "/" -f 2,3) }'
+
 alias vinarise="vim -c Vinarise"
 
 alias git-init="git init && git add -A && git commit -m 'Initialize repository'"
@@ -158,18 +169,12 @@ alias show_ec2_public_ipv4="curl -s 'http://169.254.169.254/latest/meta-data/pub
 alias ssl-x509-detail="openssl x509 -text -noout -in"
 alias ssl-rsa-detail="openssl rsa -text -noout -in"
 alias ssl-csr-detail="openssl req -text -noout -in"
-function ssl-pfx-detail() {
-    openssl pkcs12 -clcerts -nokeys -in $1 | openssl x509 -text -noout
-}
-function ssl-show-https() {
-    openssl s_client -connect $1:443 -showcerts
-}
+alias ssl-pfx-detail='(){ openssl pkcs12 -clcerts -nokeys -in $1 | openssl x509 -text -noout }'
+alias ssl-show-https='(){ openssl s_client -connect $1:443 -showcerts }'
 alias urlencode="nkf -WwMQ | tr = %"
 alias urldecode="nkf -w --url-input"
 
-function sum-col() {
-    awk '{s+=$'${1:-1}'}END{print s}'
-}
+alias sum-col='(){ awk "{s+=\$${1:-1}}END{print s}" }'
 
 alias -s exe="wine"
 alias -s htm="w3m"
@@ -246,9 +251,9 @@ unsetopt bg_nice
 unsetopt no_match
 
 bindkey -e
-is_exist_func percol_select_history && bindkey '^R' percol_select_history
+is_exist_func select_history && bindkey '^R' select_history
 
-autoload -U compinit && compinit -C -u
+#autoload -U compinit && compinit -C -u
 source_if_exist /usr/local/share/zsh/site-functions/_aws
 
 source_if_exist ~/.zshrc.local

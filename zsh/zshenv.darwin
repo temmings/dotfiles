@@ -30,7 +30,9 @@ if [[ -f $curl_ca_path ]]; then
     export SSL_CERT_FILE=$curl_ca_path
 fi
 
-export JAVA_HOME="$(/usr/libexec/java_home)"
+if is_executable /usr/libexec/java_home; then
+    export JAVA_HOME="$(/usr/libexec/java_home)"
+fi
 export EC2_HOME="$homebrew_prefix/Library/LinkedKegs/ec2-api-tools/jars"
 export EC2_AMITOOL_HOME="$homebrew_prefix/Library/LinkedKegs/ec2-ami-tools/jars"
 export AWS_ELASTICACHE_HOME="$homebrew_prefix/Cellar/aws-elasticache/1.7.000/libexec"
@@ -40,13 +42,3 @@ export AWS_CLOUDWATCH_HOME="$homebrew_prefix/Library/LinkedKegs/cloud-watch/jars
 export SERVICE_HOME="$AWS_CLOUDWATCH_HOME"
 
 export ANDROID_HOME=/usr/local/opt/android-sdk
-
-alias ls="LC_CTYPE=en_US.UTF-8 ls"
-alias w3m="LC_CTYPE=en_US.UTF-8 w3m"
-#if [ -f "/Applications/MacVim.app/Contents/MacOS/Vim" ]; then
-#    alias vi="/Applications/MacVim.app/Contents/MacOS/Vim"
-#    alias vim="/Applications/MacVim.app/Contents/MacOS/Vim"
-#    alias view="/Applications/MacVim.app/Contents/MacOS/Vim -R"
-#fi
-alias show_dotfiles="defaults write com.apple.finder AppleShowAllFiles true; killall Finder"
-alias hide_dotfiles="defaults write com.apple.finder AppleShowAllFiles false; killall Finder"

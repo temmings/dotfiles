@@ -1,3 +1,13 @@
+alias ls="LC_CTYPE=en_US.UTF-8 ls"
+alias w3m="LC_CTYPE=en_US.UTF-8 w3m"
+alias locate="mdfind -name"
+#if [ -f "/Applications/MacVim.app/Contents/MacOS/Vim" ]; then
+#    alias vi="/Applications/MacVim.app/Contents/MacOS/Vim"
+#    alias vim="/Applications/MacVim.app/Contents/MacOS/Vim"
+#    alias view="/Applications/MacVim.app/Contents/MacOS/Vim -R"
+#fi
+alias show_dotfiles="defaults write com.apple.finder AppleShowAllFiles true; killall Finder"
+alias hide_dotfiles="defaults write com.apple.finder AppleShowAllFiles false; killall Finder"
 alias chrome="open ~/Applications/Google\ Chrome.app --args --renderer-process-limit=2"
 
 function prepare_google_cloud_sdk() {
@@ -6,8 +16,10 @@ function prepare_google_cloud_sdk() {
     source '/opt/homebrew-cask/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'
 }
 
-### brew tap bfontaine/command-not-found
-is_executable brew && eval "$(brew command-not-found-init)" >/dev/null 2>&1
+### brew tap homebrew/command-not-found
+if brew command command-not-found-init >/dev/null; then
+    eval "$(brew command command-not-found-init)" >/dev/null 2>&1
+fi
 
 ### brew install thefuck
 is_executable thefuck && eval "$(thefuck --alias)"
