@@ -15,6 +15,7 @@
 	precomposeunicode = true
 	autocrlf = input
 	safecrlf = false
+	excludesfile = ~/.gitignore_global
 [i18n]
 	filesEncoding = utf-8
 [alias]
@@ -40,3 +41,16 @@
 	generic = G move-last-line
 [merge]
 	ff = false
+	tool = vimdiff
+[pull]
+	rebase = preserve
+[difftool]
+	prompt = false
+[mergetool]
+	prompt = false
+[branch "master"]
+	rebase = true
+[ghq]
+	root = ~/src
+[include]
+	path = .gitconfig.kaleidoscope
