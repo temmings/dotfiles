@@ -167,6 +167,7 @@ set ruler
 set list                " タブ・改行表示
 " タブや改行の表現方法
 set listchars=tab:\|\ ,nbsp:&,trail:-,precedes:*,extends:*,eol:\ 
+set scrolloff=5
 
 " for snippet_complete marker.
 if has('conceal')
