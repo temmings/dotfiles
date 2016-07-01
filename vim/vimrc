@@ -168,6 +168,14 @@ set list                " タブ・改行表示
 " タブや改行の表現方法
 set listchars=tab:\|\ ,nbsp:&,trail:-,precedes:*,extends:*,eol:\ 
 set scrolloff=5
+set foldmethod=syntax
+set foldlevel=1
+let sh_fold_enabled = 1
+let php_folding = 1
+let perl_fold = 1
+let perl_extented_vars = 1
+let perl_sync_dist = 250
+let xml_syntax_folding = 1
 
 " for snippet_complete marker.
 if has('conceal')
