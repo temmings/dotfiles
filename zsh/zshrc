@@ -106,6 +106,12 @@ function cdwork() {
     local mmdd=$(date '+%m%d')
     mkcdir -p ~/${yyyy}/${mmdd}
 }
+
+function ssh-concat-config() {
+    local d=$HOME/.ssh
+    [ -f $d/config ] && mv $d/config{,.bak}
+    cat $d/conf.d/*.conf > $d/config
+}
 # }}}
 
 # show user@host and random color.
@@ -131,9 +137,9 @@ alias ll="ls -l"
 alias lf="ls -F"
 alias la="ls -A"
 alias clear2="echo -e '\026\033c'"
-alias ssh="ssh -F =(cat ~/.ssh/config.local ~/.ssh/config ~/.ssh/config.global)"
-alias scp="scp -F =(cat ~/.ssh/config.local ~/.ssh/config ~/.ssh/config.global)"
-alias sftp="sftp -F =(cat ~/.ssh/config.local ~/.ssh/config ~/.ssh/config.global)"
+alias ssh="ssh-concat-config; ssh"
+alias scp="ssh-concat-config; scp"
+alias sftp="ssh-concat-config; sftp"
 alias svstatall="sudo svstat /var/service/*"
 if is_executable w3mman; then
     alias man="w3mman"
