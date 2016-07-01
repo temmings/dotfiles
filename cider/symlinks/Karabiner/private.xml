@@ -1,24 +1,15 @@
 <?xml version="1.0"?>
 <root>
-    <appdef>
-        <appname>IntelliJ_IDEA</appname>
-        <equal>com.jetbrains.intellij</equal>
-    </appdef>
     <item>
         <name>Disable all settings while using IntelliJ IDEA</name>
-        <identifier>private.ignore_intellij_idea</identifier>
-        <only>IntelliJ_IDEA</only>
+        <identifier>private.ignore_intellij</identifier>
+        <only>IntelliJ</only>
         <autogen>__PassThrough__</autogen>
     </item>
-
-    <appdef>
-        <appname>iterm2</appname>
-        <equal>com.googlecode.iterm2</equal>
-    </appdef>
     <item>
-        <name>Disable all settings in iterm2</name>
-        <identifier>private.disable_in_iterm2</identifier>
-        <only>iterm2</only>
+        <name>Disable all settings in terminal</name>
+        <identifier>private.disable_in_terminal</identifier>
+        <only>TERMINAL</only>
         <autogen>__PassThrough__</autogen>
     </item>
 </root>
