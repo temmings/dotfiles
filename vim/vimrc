@@ -291,6 +291,10 @@ nnoremap gk k
 nnoremap j gj
 nnoremap k gk
 
+" 選択範囲のinc/dec後に範囲選択したままにする
+vnoremap <C-a> <C-a>gv
+vnoremap <C-x> <C-x>gv
+
 "l を <Right>に置き換えても、折りたたみを l で開くことができるようにする
 "if has('folding')
 "  nnoremap <expr> l foldlevel(line('.')) ? "\<Right>zo" : "\<Right>"
