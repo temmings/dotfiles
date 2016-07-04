@@ -53,3 +53,8 @@ function home_or_basename() {
 function get_ssh_client_ip() {
     echo $SSH_CLIENT | awk '{print $1}'
 }
+
+function add_manpath() {
+    [[ -e "$1" ]] &&
+        manpath=($manpath "$1")
+}
