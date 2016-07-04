@@ -1,25 +1,30 @@
 # -*- coding: utf-8 -*-
 # vim:ts=4 foldmethod=marker
 
-__ZPLUG_DIR__=~/.zplug
-__ZPLUG_FILE__=$__ZPLUG_DIR__/zplug
-if [[ ! -f $__ZPLUG_FILE__ ]]; then
-    git clone https://github.com/b4b4r07/zplug $__ZPLUG_DIR__
+local ZPLUG_HOME=~/.zplug
+local ZPLUG_INIT=$ZPLUG_HOME/init.zsh
+if [[ ! -f $ZPLUG_INIT ]]; then
+    git clone https://github.com/b4b4r07/zplug $ZPLUG_HOME
 fi
-source $__ZPLUG_FILE__
+source $ZPLUG_INIT
 
-zplug "b4b4r07/zplug"
+#zplug "b4b4r07/zplug"
 
-zplug "plugins/git", from:oh-my-zsh, nice:19
+zplug "plugins/git", from:oh-my-zsh, nice:10
 zplug "plugins/ssh-agent", from:oh-my-zsh
-zplug "plugins/tmux", from:oh-my-zsh, nice:19
+zplug "plugins/tmux", from:oh-my-zsh, nice:10
 zplug "plugins/urltools", from:oh-my-zsh
 zplug "plugins/themes", from:oh-my-zsh
 
 zplug "temmings/shell-todo"
 zplug "m4i/cdd", use:cdd, nice:19
+zplug 'mollifier/anyframe'
+zplug "b4b4r07/enhancd", use:enhancd.sh
 
-zplug "zsh-users/zsh-syntax-highlighting", nice:19, if:"[[ $OSTYPE != *cygwin* ]]"
+zplug "zsh-users/zsh-completions"
+zplug "zsh-users/zsh-syntax-highlighting", nice:10, if:"[[ $OSTYPE != *cygwin* ]]"
+
+zplug "Tarrasch/zsh-functional"
 
 zplug "holman/spark", as:command
 zplug "mrowa44/emojify", as:command
@@ -27,16 +32,10 @@ zplug "mrowa44/emojify", as:command
 ### os specific
 case "$OSTYPE" in
     darwin*)
-        zplug "plugins/github", from:oh-my-zsh
-        zplug "plugins/mvn", from:oh-my-zsh
-        zplug "plugins/sbt", from:oh-my-zsh
-        zplug "plugins/golang", from:oh-my-zsh, nice:19
-        zplug "plugins/vagrant", from:oh-my-zsh
         zplug "plugins/docker", from:oh-my-zsh
         zplug "plugins/brew", from:oh-my-zsh
-        zplug "plugins/brew-cask", from:oh-my-zsh, nice:19
         zplug "plugins/osx", from:oh-my-zsh
-        zplug "rupa/z", use:z.sh
+        #zplug "rupa/z", use:z.sh
         ;;
     cygwin*)
         zplug "kou1okada/apt-cyg", as:command
@@ -53,5 +52,4 @@ ZPLUG_CLONE_DEPTH=1
 zplug check --verbose || zplug install
 zplug load
 
-autoload -U add-zsh-hook
 add-zsh-hook chpwd _cdd_chpwd

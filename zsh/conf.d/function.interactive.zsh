@@ -68,6 +68,6 @@ function cdwork() {
 
 function ssh-concat-config() {
     local d=$HOME/.ssh
-    [ -f $d/config ] && mv $d/config{,.bak}
+    [[ -f $d/config ]] && mv $d/config{,.bak}
     cat $d/conf.d/*.conf > $d/config
 }

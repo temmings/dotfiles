@@ -6,3 +6,5 @@ export TEMP=/tmp
 export LANG=en_US.UTF-8
 export HISTSIZE=10000
 #export VIRTUALENVWRAPPER_PYTHON=/cygdrive/c/Python26/python
+
+export GOPATH=$(cygpath -w ${USERPROFILE}\\.go)

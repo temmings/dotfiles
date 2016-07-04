@@ -16,10 +16,5 @@ function prepare_google_cloud_sdk() {
     source '/opt/homebrew-cask/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'
 }
 
-### brew tap homebrew/command-not-found
-if brew command command-not-found-init >/dev/null; then
-    eval "$(brew command command-not-found-init)" >/dev/null 2>&1
-fi
-
 ### brew install thefuck
 is_executable thefuck && eval "$(thefuck --alias)"

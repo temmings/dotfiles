@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # vim:ts=4 foldmethod=marker
 
-### on exec
+### on exec: {{{
 ## 1: /etc/zshenv
 ## 2: ~/.zshenv
 ## if login shell; then
@@ -20,8 +20,9 @@
 ### on logout
 ## 1: ~/.zlogout
 ## 2: /etc/zlogout
+# }}}
 
-source_if_exist ~/.zsh/conf.d/function.interactive.zsh
+# Environment: {{{
 
 # show user@host and random color.
 PROMPT="%{[$[32 + $RANDOM % 5]m%}%n@%m%{[m%} %(#.#.$) "
@@ -39,14 +40,17 @@ SAVEHIST=100000000
 # suppress the logout ^D.
 IGNOREEOF=2
 
-USE_TMUX=1
+# }}}
 
+source_if_exist ~/.zsh/conf.d/function.interactive.zsh
 source_if_exist ~/.zsh/conf.d/alias.zsh
 
 if [[ x"$OSTYPE" != x"cygwin" ]]; then
     prepare_anyenv
     is_executable direnv && eval "$(direnv hook zsh)"
 fi
+
+source_if_exist ~/.travis/travis.sh
 
 add_manpath /usr/local/opt/erlang/lib/erlang/man
 
@@ -68,12 +72,15 @@ case "$OSTYPE" in
     linux*) source_if_exist ~/.zsh/zshrc.linux ;;
 esac
 
-typeset -U path PATH
-
 source_if_exist ~/.zsh/zshrc.zplug
 
 source_if_exist ~/.zsh/conf.d/setopt.zsh
 source_if_exist ~/.zsh/conf.d/bindkey.zsh
+
+source_if_exist ~/.fzf.zsh
+#source_if_exist "${HOME}/.iterm2_shell_integration.zsh"
+
+autoload -Uz compinit && compinit -u -C
 
 source_if_exist ~/.zshrc.local
 

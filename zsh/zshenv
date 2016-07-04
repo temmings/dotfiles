@@ -39,7 +39,6 @@ path=(
     ### qmail
     /var/qmail/bin(N-/)
 )
-typeset -U path PATH
 
 export EDITOR=$(get_executable_first "vim" "vi")
 export PAGER="less"
@@ -72,11 +71,6 @@ export AWS_DEFAULT_PROFILE="default"
 #export CVSROOT=/home/ncvs/tsc
 #export PDX_PATH=~acid/local/lib/pdx
 
-# for OpenCV
-#typeset -xT PYTHONPATH python_path
-#typeset -U python_path
-#python_path=(/usr/local/lib/python2.7/site-packages $python_path)
-
 ### os specific
 case "$OSTYPE" in
     cygwin*) source_if_exist ~/.zsh/zshenv.cygwin ;;
@@ -84,7 +78,5 @@ case "$OSTYPE" in
     freebsd*) source_if_exist ~/.zsh/zshenv.freebsd ;;
     linux*) source_if_exist ~/.zsh/zshenv.linux ;;
 esac
-
-typeset -U path PATH
 
 source_if_exist ~/.zshenv.local

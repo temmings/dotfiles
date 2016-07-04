@@ -3,7 +3,6 @@
 ##    globがマッチしなかったり存在しないパスを無視する。
 ## -: シンボリックリンク先のパスを評価。
 ## /: ディレクトリのみ残す。
-#typeset -U path
 path=(
     $path
     ### macports
@@ -42,3 +41,7 @@ export AWS_CLOUDWATCH_HOME="$homebrew_prefix/Library/LinkedKegs/cloud-watch/jars
 export SERVICE_HOME="$AWS_CLOUDWATCH_HOME"
 
 export ANDROID_HOME=/usr/local/opt/android-sdk
+
+typeset -xTU PYTHONPATH pythonpath
+pythonpath=(${homebrew_prefix}/lib/python2.7/site-packages $pythonpath)
+path=($path ${homebrew_prefix}/share/python)
