@@ -67,3 +67,6 @@ autocmd BufRead,BufNewFile *.csv,*.tsv setlocal filetype=csv
 "let g:xml_syntax_folding = 0
 "autocmd BufRead,BufNewFile *.xml setlocal filetype=ml
 "autocmd FileType xml setlocal foldmethod=syntax
+
+NeoBundleLazy 'tmux-plugins/vim-tmux', {'autoload': {'filetypes': ['tmux']}}
+autocmd BufRead,BufNewFile .tmux.conf setlocal filetype=tmux
