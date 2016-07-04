@@ -48,6 +48,7 @@ for rc in split(globpath('$DOTVIM/conf.d/', '*.vim'), '\n')
 endfor
 
 """ testing: {{{
+NeoBundle 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 " 再帰的に .git を探すようなので、ファイルシステムによってはめっちゃ重い？
 "NeoBundle 'tpope/vim-fugitive'
 "NeoBundle 'rizzatti/dash.vim'
