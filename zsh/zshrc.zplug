@@ -14,7 +14,7 @@ zplug "plugins/git", from:oh-my-zsh, nice:10
 zplug "plugins/ssh-agent", from:oh-my-zsh
 zplug "plugins/tmux", from:oh-my-zsh, nice:10
 zplug "plugins/urltools", from:oh-my-zsh
-zplug "plugins/themes", from:oh-my-zsh
+zplug "themes/murilasso", from:oh-my-zsh
 
 zplug "temmings/shell-todo"
 zplug "m4i/cdd", use:cdd, nice:19
@@ -46,7 +46,6 @@ DISABLE_UPDATE_PROMPT=true
 CASE_SENSITIVE=true
 ZSH_TMUX_AUTOSTART=false
 ZSH_TMUX_ITERM2=false
-ZSH_THEME="murilasso"
 ZPLUG_CLONE_DEPTH=1
 
 zplug check --verbose || zplug install
