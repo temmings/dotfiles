@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 # vim:ts=4 foldmethod=marker
 
-local ZPLUG_HOME=~/.zplug
+export ZPLUG_HOME=~/.zplug
 local ZPLUG_INIT=$ZPLUG_HOME/init.zsh
 if [[ ! -f $ZPLUG_INIT ]]; then
-    git clone https://github.com/b4b4r07/zplug $ZPLUG_HOME
+    git clone https://github.com/zplug/zplug $ZPLUG_HOME
 fi
 source $ZPLUG_INIT
 
-#zplug "b4b4r07/zplug"
+#zplug "zplug/zplug"
 
 zplug "plugins/git", from:oh-my-zsh, nice:10
 zplug "plugins/ssh-agent", from:oh-my-zsh
@@ -34,7 +34,7 @@ case "$OSTYPE" in
     darwin*)
         zplug "plugins/docker", from:oh-my-zsh
         zplug "plugins/brew", from:oh-my-zsh
-        zplug "plugins/osx", from:oh-my-zsh
+        zplug "plugins/osx", from:oh-my-zsh, nice:19
         #zplug "rupa/z", use:z.sh
         ;;
     cygwin*)
