@@ -10,20 +10,20 @@ source $ZPLUG_INIT
 
 zplug "zplug/zplug"
 
-zplug "plugins/git", from:oh-my-zsh, nice:10
+zplug "plugins/git", from:oh-my-zsh, defer:1
 zplug "plugins/ssh-agent", from:oh-my-zsh
-zplug "plugins/tmux", from:oh-my-zsh, nice:10
+zplug "plugins/tmux", from:oh-my-zsh, defer:1
 zplug "plugins/urltools", from:oh-my-zsh
 zplug "themes/murilasso", from:oh-my-zsh
 
 zplug "temmings/shell-todo"
-zplug "m4i/cdd", use:cdd, nice:19
+zplug "m4i/cdd", use:cdd, defer:2
 zplug 'mollifier/anyframe', if:"[[ $OSTYPE != *cygwin* ]]"
 zplug "b4b4r07/enhancd", use:init.sh, if:"[[ $OSTYPE != *cygwin* ]]"
 #zplug "rupa/z", use:z.sh, if:"[[ $OSTYPE != *cygwin* ]]"
 
-zplug "zsh-users/zsh-completions", nice:-20
-zplug "zsh-users/zsh-syntax-highlighting", nice:10, if:"[[ $OSTYPE != *cygwin* ]]"
+zplug "zsh-users/zsh-completions", defer:0
+zplug "zsh-users/zsh-syntax-highlighting", defer:2, if:"[[ $OSTYPE != *cygwin* ]]"
 
 zplug "Tarrasch/zsh-functional"
 
@@ -35,8 +35,8 @@ zplug "plugins/docker", from:oh-my-zsh, if:"[[ $OSTYPE != *cygwin* ]]"
 ### os specific
 # OSX
 zplug "plugins/brew", from:oh-my-zsh, if:"[[ $OSTYPE = *darwin* ]]"
-zplug "plugins/brew-cask", from:oh-my-zsh, nice:10, if:"[[ $OSTYPE = *darwin* ]]"
-zplug "plugins/osx", from:oh-my-zsh, nice:19, if:"[[ $OSTYPE = *darwin* ]]"
+zplug "plugins/brew-cask", from:oh-my-zsh, defer:2, if:"[[ $OSTYPE = *darwin* ]]"
+zplug "plugins/osx", from:oh-my-zsh, defer:3, if:"[[ $OSTYPE = *darwin* ]]"
 
 # Cygwin
 #zplug "transcode-open/apt-cyg", as:command, if:"[[ $OSTYPE = *cygwin* ]]"
