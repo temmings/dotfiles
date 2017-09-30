@@ -6,4 +6,7 @@
     "com.apple.finder": {
         "_FXShowPosixPathInTitle": 1
     }
+    "com.googlecode.iterm2": {
+        "HotkeyTermAnimationDuration": 0.0
+    }
 }
