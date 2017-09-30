@@ -77,8 +77,8 @@ source_if_exist ~/.zsh/zshrc.zplug
 source_if_exist ~/.zsh/conf.d/setopt.zsh
 source_if_exist ~/.zsh/conf.d/bindkey.zsh
 
-source_if_exist ~/.fzf.zsh
-#source_if_exist "${HOME}/.iterm2_shell_integration.zsh"
+#source_if_exist ~/.fzf.zsh
+source_if_exist "${HOME}/.iterm2_shell_integration.zsh"
 
 autoload -Uz compinit && compinit -u -C
 

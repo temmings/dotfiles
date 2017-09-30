@@ -20,9 +20,10 @@ alias tb="tmux split-window -bdv"
 alias th="tmux split-window -h"
 alias tp="tmux new-window"
 
+alias cdg='cd -g'
+alias cdG='cd -G'
 # see: http://qiita.com/itkrt2y/items/0671d1f48e66f21241e2
 peco_cmd=$(get_executable_first fzf peco percol)
-alias cdg='(){ cd $(ghq root)/$(ghq list | '$peco_cmd' --query "$*") }'
 alias gh='(){ hub browse $(ghq list | '$peco_cmd' --query "$*" | cut -d "/" -f 2,3) }'
 
 alias vinarise="vim -c Vinarise"

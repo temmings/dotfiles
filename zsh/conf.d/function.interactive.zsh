@@ -60,6 +60,7 @@ function prepare_anyenv() {
     fi
     export PATH="$anyenv_dir/bin:$PATH"
     eval "$(anyenv init -)"
+    is_executable pyenv && eval "$(pyenv init -)"
 }
 
 function cdwork() {

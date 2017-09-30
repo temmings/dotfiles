@@ -8,7 +8,7 @@ if [[ ! -f $ZPLUG_INIT ]]; then
 fi
 source $ZPLUG_INIT
 
-#zplug "zplug/zplug"
+zplug "zplug/zplug"
 
 zplug "plugins/git", from:oh-my-zsh, nice:10
 zplug "plugins/ssh-agent", from:oh-my-zsh
@@ -18,10 +18,11 @@ zplug "themes/murilasso", from:oh-my-zsh
 
 zplug "temmings/shell-todo"
 zplug "m4i/cdd", use:cdd, nice:19
-zplug 'mollifier/anyframe'
-zplug "b4b4r07/enhancd", use:enhancd.sh
+zplug 'mollifier/anyframe', if:"[[ $OSTYPE != *cygwin* ]]"
+zplug "b4b4r07/enhancd", use:init.sh, if:"[[ $OSTYPE != *cygwin* ]]"
+#zplug "rupa/z", use:z.sh, if:"[[ $OSTYPE != *cygwin* ]]"
 
-zplug "zsh-users/zsh-completions"
+zplug "zsh-users/zsh-completions", nice:-20
 zplug "zsh-users/zsh-syntax-highlighting", nice:10, if:"[[ $OSTYPE != *cygwin* ]]"
 
 zplug "Tarrasch/zsh-functional"
@@ -29,22 +30,20 @@ zplug "Tarrasch/zsh-functional"
 zplug "holman/spark", as:command
 zplug "mrowa44/emojify", as:command
 
+zplug "plugins/docker", from:oh-my-zsh, if:"[[ $OSTYPE != *cygwin* ]]"
+
 ### os specific
-case "$OSTYPE" in
-    darwin*)
-        zplug "plugins/docker", from:oh-my-zsh
-        zplug "plugins/brew", from:oh-my-zsh
-        zplug "plugins/osx", from:oh-my-zsh, nice:19
-        #zplug "rupa/z", use:z.sh
-        ;;
-    cygwin*)
-        zplug "kou1okada/apt-cyg", as:command
-        ;;
-esac
+# OSX
+zplug "plugins/brew", from:oh-my-zsh, if:"[[ $OSTYPE = *darwin* ]]"
+zplug "plugins/brew-cask", from:oh-my-zsh, nice:10, if:"[[ $OSTYPE = *darwin* ]]"
+zplug "plugins/osx", from:oh-my-zsh, nice:19, if:"[[ $OSTYPE = *darwin* ]]"
+
+# Cygwin
+#zplug "transcode-open/apt-cyg", as:command, if:"[[ $OSTYPE = *cygwin* ]]"
 
 DISABLE_UPDATE_PROMPT=true
 CASE_SENSITIVE=true
-ZSH_TMUX_AUTOSTART=false
+ZSH_TMUX_AUTOSTART=true
 ZSH_TMUX_ITERM2=false
 ZPLUG_CLONE_DEPTH=1
 
