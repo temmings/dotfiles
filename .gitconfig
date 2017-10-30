@@ -52,5 +52,7 @@
 	rebase = true
 [ghq]
 	root = ~/src
+[commit]
+	template = ~/.gitmessage
 [include]
 	path = .gitconfig.kaleidoscope
