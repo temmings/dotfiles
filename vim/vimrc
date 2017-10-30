@@ -53,8 +53,19 @@ NeoBundle 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 "NeoBundle 'tpope/vim-fugitive'
 "NeoBundle 'rizzatti/dash.vim'
 
+NeoBundle 'fsharp/vim-fsharp', {
+           \ 'description': 'F# support for Vim',
+           \ 'lazy': 1,
+           \ 'autoload': {'filetypes': 'fsharp'},
+           \ 'build': {
+           \   'unix':  'make fsautocomplete',
+           \ },
+           \ 'build_commands': ['curl', 'make', 'mozroots', 'touch', 'unzip'],
+           \}
+
 "NeoBundle 'haya14busa/vim-migemo'
 "NeoBundle 'rhysd/migemo-search.vim'
+NeoBundle 'surround.vim'
 "if executable('cmigemo')
 "  cnoremap <expr><CR> migemosearch#replace_search_word()."\<CR>"
 "endif
@@ -178,6 +189,13 @@ let perl_extented_vars = 1
 let perl_sync_dist = 250
 let xml_syntax_folding = 1
 
+"set foldtext=s:myfoldtext()
+"function! s:myfoldtext()
+"  let line = getline(v:foldstart)
+"  let sub = substitute(line, '/\*\|\*/\|{{{\d\=', '', 'g')
+"  return sub
+"endfunction
+
 " for snippet_complete marker.
 if has('conceal')
   set conceallevel=2 concealcursor=i
@@ -189,7 +207,8 @@ set formatoptions+=mM   " テキスト挿入中の自動折り返しを日本語
 set wrap                " 長い行を折り返して表示
 set linebreak
 " 折り返し時に行頭に付与する文字列
-set showbreak=..
+"set showbreak=..
+set showbreak=
 
 """ Vim breakindent patch: https://retracile.net/wiki/VimBreakIndent
 if exists('&breakindent')
@@ -294,11 +313,22 @@ nnoremap k gk
 " 選択範囲のinc/dec後に範囲選択したままにする
 vnoremap <C-a> <C-a>gv
 vnoremap <C-x> <C-x>gv
+vnoremap g<C-a> g<C-a>gv
+vnoremap g<C-x> g<C-x>gv
+
+" Ctrl-C で選択範囲をクリップボードへコピー
+vnoremap <C-c> "*y
+" Ctrl-C で単語をクリップボードへコピー
+nnoremap <C-c> "*yiw
 
 "l を <Right>に置き換えても、折りたたみを l で開くことができるようにする
 "if has('folding')
 "  nnoremap <expr> l foldlevel(line('.')) ? "\<Right>zo" : "\<Right>"
 "endif
+
+" append empty line.
+nnoremap <S-Enter> O<Esc>
+nnoremap <Enter> o<Esc>
 
 " 間違えやすいキーを潰したり入れ替えたり
 nnoremap Q gq
@@ -349,12 +379,14 @@ set t_Co=256
 set nocursorline    " cursorline は描画重い
 set synmaxcol=2000  " syntax を適用する最大カラム数
 set background=dark
-silent! colorscheme solarized
+silent! colorscheme torte
 syntax on
+"silent! colorscheme solarized
+"syntax on
 " force background to black
-hi Normal guibg=#000000
-hi Normal guifg=#888888
-hi CursorLine guibg=#262626
+"hi Normal guibg=#000000
+"hi Normal guifg=#888888
+"hi CursorLine guibg=#262626
 " }}}
 
 call s:source_if_exist($MYLOCALVIMRC)

@@ -13,24 +13,24 @@ NeoBundle 'tsukkee/unite-help'
 NeoBundle 'mytoh/unite-highlight'
 NeoBundle 'thinca/vim-unite-history'
 NeoBundle 'tacroe/unite-mark'
-NeoBundle 'h1mesuke/unite-outline'
+"NeoBundle 'h1mesuke/unite-outline'
+"NeoBundle 'Shougo/unite-outline'
 NeoBundle 'osyo-manga/unite-qfixhowm'
 NeoBundle 'basyura/unite-rails'
 NeoBundle 'ujihisa/unite-rake'
 NeoBundle 'hrsh7th/vim-versions'
 NeoBundle 'mattn/unite-advent_calendar'
+NeoBundle 'Shougo/neoyank.vim'
 
 " Start insert.
 let g:unite_enable_start_insert = 0
 let g:unite_enable_short_source_names = 0
 
-let g:unite_source_file_mru_limit = 100
-let g:unite_source_directory_mru_limit = 100
-" To track long mru history.
-let g:unite_source_file_mru_long_limit = 1000
-let g:unite_source_directory_mru_long_limit = 1000
+let g:unite_source_history_yank_enable = 1
 
 let g:neomru#do_validate = 0
+let g:neomru#file_mru_limit = 100
+let g:neomru#directory_mru_limit = 100
 
 let g:unite_update_time = 1000
 let g:vimfiler_as_default_explorer = 1
@@ -108,4 +108,5 @@ nnoremap <silent> [unite]t :<C-u>Unite -buffer-name=tab tab<CR>
 "nnoremap <silent> [unite]v :<C-u>Unite -start-insert -no-split -buffer-name=file_vcs file/vcs<CR>
 nnoremap <silent> [unite]vs :<C-u>UniteVersions status:!<CR>
 nnoremap <silent> [unite]vl :<C-u>UniteVersions log:%<CR>
+nnoremap <silent> [unite]y :<C-u>Unite -buffer-name=history-yank history/yank<CR>
 nnoremap <silent> [unite]/ :<C-u>execute "Unite -buffer-name=spotlight " . g:unite_source_everything<CR>

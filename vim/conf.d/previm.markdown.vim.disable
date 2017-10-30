@@ -1,5 +1,6 @@
-""" :PrevimOpen
-NeoBundle 'kannokanno/previm', { 'depends' : 'tyru/open-browser.vim' }
+"NeoBundle 'kannokanno/previm', { 'depends' : 'tyru/open-browser.vim' }
+NeoBundle 'temmings/previm', 'feature/add-plantuml-plugin', { 'depends' : 'tyru/open-browser.vim' }
+nnoremap [misc]l :<C-u>PrevimOpen<CR>
 augroup filetypedetect
   autocmd BufNew,BufNewFile,BufRead *.md,*.markdown,*.ft :setfiletype markdown
 augroup END

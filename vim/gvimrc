@@ -9,10 +9,13 @@ set guioptions-=m
 "set guioptions+=a	" ビジュアルモードで選択したテキストをクリップボードに入れる
 
 if s:on_windows
-  set guifont=Inconsolata:h9
-  set guifontwide=MS_Gothic:h9:cSHIFTJIS
+  set guifont=Inconsolata:h12:w7:cSHIFTJIS,Consolas:h12:w7:cSHIFTJIS,MS_Gothic:h12:w7:cSHIFTJIS
+  set guifontwide=MeiryoKe_Console:h12:cSHIFTJIS,MS_Gothic:h12:cSHIFTJIS
+  "set guifontwide=MeiryoKe_Console:h12:cSHIFTJIS
+  "set guifontwide=MeiryoKe_Gothic:h12:cSHIFTJIS
+  "set guifontwide=MS_Gothic:h12:cSHIFTJIS
   set renderoptions=type:directx,renmode:5
-  set columns=165
+  set columns=90
   set lines=74
   "if exists('&transparency')
   "  set transparency=240
@@ -23,10 +26,10 @@ if s:on_windows
   "    autocmd FocusLost * set transparency=210
   "  augroup END
   "endif
-  "if has('kaoriya')
-  "  " 一部のUCS文字の幅を自動計測して決める
-  "  set ambiwidth=auto
-  "endif
+  if exists('&ambiwidth')
+    " 一部のUCS文字の幅を自動計測して決める
+    set ambiwidth=auto
+  endif
 elseif has('mac')
   set guifont=InconsolataForPowerline:h14
   set columns=100

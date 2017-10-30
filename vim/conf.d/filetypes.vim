@@ -1,5 +1,5 @@
-autocmd! BufRead,BufNewFile *.sql setlocal filetype=mysql
-autocmd! BufRead,BufNewFile *.ini setlocal filetype=dosini
+autocmd! BufRead,BufNewFile *.sql setfiletype mysql
+autocmd! BufRead,BufNewFile *.ini setfiletype dosini
 
 autocmd FileType python setl tabstop=8 expandtab shiftwidth=4 softtabstop=4 autoindent smartindent
 autocmd FileType python setl cinwords=if,elif,else,for,while,try,except,finally,def,class
@@ -20,53 +20,55 @@ autocmd FileType vim    setl foldmethod=indent foldlevel=0
 "augroup END
 
 NeoBundleLazy 'elzr/vim-json', {'autoload': {'filetypes': ['json']}}
-autocmd! BufRead,BufNewFile *.json,*.jsonp,*.geojson setl filetype=json foldmethod=syntax
+autocmd! BufRead,BufNewFile *.json,*.jsonp,*.geojson set filetype=json foldmethod=syntax
 
 NeoBundleLazy 'vim-scripts/Flex-4', {'autoload': {'filetypes': ['actionscript', 'mxml']}}
-autocmd BufRead,BufNewFile *.as setlocal filetype=actionscript
-autocmd BufRead,BufNewFile *.mxml setlocal filetype=mxml
+autocmd BufRead,BufNewFile *.as setfiletype actionscript
+autocmd BufRead,BufNewFile *.mxml setfiletype mxml
 
 NeoBundleLazy 'vim-scripts/nagios-syntax', {'autoload': {'filetypes': ['nagios', 'mxml']}}
-autocmd BufRead,BufNewFile */nagios/*.cfg setlocal filetype=nagios
+autocmd BufRead,BufNewFile */nagios/*.cfg setfiletype nagios
 
 NeoBundleLazy 'aklt/plantuml-syntax', {'autoload': {'filetypes': ['plantuml']}}
-autocmd BufRead,BufNewFile *.pu,*.uml,*.plantuml setlocal filetype=plantuml
+autocmd BufRead,BufNewFile *.pu,*.uml,*.plantuml setfiletype plantuml
 
 NeoBundleLazy 'derekwyatt/vim-scala', {'autoload': {'filetypes': ['scala']}}
-autocmd BufRead,BufNewFile *.scala setlocal filetype=scala
+autocmd BufRead,BufNewFile *.scala setfiletype scala
 
 NeoBundleLazy 'PProvost/vim-ps1', {'autoload': {'filetypes': ['ps1']}}
-autocmd BufRead,BufNewFile *.ps1 setlocal filetype=ps1
+autocmd BufRead,BufNewFile *.ps1 setfiletype ps1
 
 NeoBundleLazy 'Elemecca/dockerfile.vim', {'autoload': {'filetypes': ['dockerfile']}}
-autocmd BufRead,BufNewFile Dockerfile setlocal filetype=dockerfile
+autocmd BufRead,BufNewFile Dockerfile setfiletype dockerfile
 
 NeoBundleLazy 'kchmck/vim-coffee-script', {'autoload': {'filetypes': ['coffee']}}
-autocmd BufRead,BufNewFile *.coffee setlocal filetype=coffee
+autocmd BufRead,BufNewFile *.coffee setfiletype coffee
 
 NeoBundleLazy 'mrk21/yaml-vim', {'autoload': {'filetypes': ['yaml']}}
-autocmd BufRead,BufNewFile *.yaml,*.yml setlocal filetype=yaml
+autocmd BufRead,BufNewFile *.yaml,*.yml setfiletype yaml
+" digdag workflow
+autocmd BufRead,BufNewFile *.dig setfiletype yaml
 
 NeoBundleLazy 'fatih/vim-go', {'autoload': {'filetypes': ['go']}}
-autocmd BufRead,BufNewFile *.go setlocal filetype=go
+autocmd BufRead,BufNewFile *.go set filetype=go shiftwidth=8
 
 NeoBundleLazy 'rust-lang/rust.vim', {'autoload': {'filetypes': ['rust']}}
-autocmd BufRead,BufNewFile *.rs setlocal filetype=rust
+autocmd BufRead,BufNewFile *.rs setfiletype rust
 
 NeoBundleLazy 'yoppi/fluentd.vim', {'autoload': {'filetypes': ['fluentd']}}
-autocmd BufRead,BufNewFile fluentd*.conf,td-agent*.conf setlocal filetype=fluentd
+autocmd BufRead,BufNewFile fluentd*.conf,td-agent*.conf setfiletype fluentd
 
 "NeoBundleLazy 'vim-orgmode', {'autoload': {'filetypes': ['org']}}
 NeoBundleLazy 'VimOrganizer', {'autoload': {'filetypes': ['org']}}
-autocmd BufRead,BufNewFile *.org setlocal filetype=org
+autocmd BufRead,BufNewFile *.org setfiletype org
 
 NeoBundleLazy 'chrisbra/csv.vim', {'autoload': {'filetypes': ['csv']}}
-autocmd BufRead,BufNewFile *.csv,*.tsv setlocal filetype=csv
+autocmd BufRead,BufNewFile *.csv,*.tsv setfiletype csv
 
 "NeoBundleLazy 'XML-Folding', {'autoload': {'filetypes': ['xml']}}
 "let g:xml_syntax_folding = 0
-"autocmd BufRead,BufNewFile *.xml setlocal filetype=ml
+"autocmd BufRead,BufNewFile *.xml setfiletype ml
 "autocmd FileType xml setlocal foldmethod=syntax
 
 NeoBundleLazy 'tmux-plugins/vim-tmux', {'autoload': {'filetypes': ['tmux']}}
-autocmd BufRead,BufNewFile .tmux.conf setlocal filetype=tmux
+autocmd BufRead,BufNewFile .tmux.conf setfiletype tmux
