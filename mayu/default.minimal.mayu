@@ -1,82 +1,21 @@
 keyseq $WindowClose = A-F4
 
 keymap Global
- key *IC-C-BackSlash    = $ToggleIME                                    	# IME ON/OFF をするキーの指定
- key C-S-M     C-A-M    = Applications                                  	# アプリケーションキー
- key C-S-L     C-A-L    = &WindowLower                                  	# ウィンドウを一番下へ
- key C-S-R     C-A-R    = &WindowRaise                                  	# ウィンドウを一番上へ
-# key C-S-R     C-A-R   = &WindowToggleTopMost &Wait(200) &WindowToggleTopMost
- key C-S-Z     C-A-Z    = &WindowMaximize                               	# ウィンドウの最大化 (IE全画面)
- key C-S-I     C-A-I    = &WindowMinimize                               	# ウィンドウの最小化
- key C-S-X     C-A-X    = &WindowVMaximize                              	# ウィンドウの縦最大化
- key C-S-C     C-A-C    = &WindowHMaximize                              	# ウィンドウの横最大化
- key C-S-Left  C-A-Left = &WindowMove(-16, 0)                           	# ウィンドウの移動
- key C-S-Right C-A-Right= &WindowMove(16, 0)                            	#       〃
- key C-S-Up    C-A-Up   = &WindowMove(0, -16)                           	#       〃
- key C-S-Down  C-A-Down = &WindowMove(0, 16)                            	#       〃
- key C-S-A-Left         = &WindowMove(-1, 0)                            	#       〃
- key C-S-A-Right        = &WindowMove(1, 0)                             	#       〃
- key C-S-A-Up           = &WindowMove(0, -1)                            	#       〃
- key C-S-A-Down         = &WindowMove(0, 1)                             	#       〃
- key W-Left             = &MouseMove(-16, 0)                            	# マウスの移動
- key W-Right            = &MouseMove(16, 0)                             	#       〃
- key W-Up               = &MouseMove(0, -16)                            	#       〃
- key W-Down             = &MouseMove(0, 16)                             	#       〃
- key W-A-C-Left         = &MouseMove(-1, 0)                             	#       〃
- key W-A-C-Right        = &MouseMove(1, 0)                              	#       〃
- key W-A-C-Up           = &MouseMove(0, -1)                             	#       〃
- key W-A-C-Down         = &MouseMove(0, 1)                              	#       〃
- key C-A-A              = &WindowClingToLeft                            	# ウィンドウを左に寄せる
- key C-A-E              = &WindowClingToRight                           	# ウィンドウを右に寄せる
- key C-A-P              = &WindowClingToTop                             	# ウィンドウを上に寄せる
- key C-A-N              = &WindowClingToBottom                          	# ウィンドウを下に寄せる
- key C-A-V              = &WindowMoveVisibly                            	# ウィンドウを見える位置へ移動
- key C-S-K     C-A-K    = $WindowClose                                  	# ウィンドウを閉じる
- key C-S-T              = &WindowToggleTopMost                          	# 最前面トグル
- key C-S-D              = &WindowIdentify &NodokaDialog(Log, SHOW)
-# ウィンドウの素性を調べる
- key C-S-H              = &WindowSetAlpha(70)                           	# ウィンドウの半透明化
- key C-S-A-H            = &WindowSetAlpha(-1)                           	# 半透明化全て解除
- key C-S-U              = &WindowRedraw                                 	# ウィンドウの再描画
- key C-S-S              = &LoadSetting &HelpMessage(Nodoka, "再読込完了")    	# 設定ファイルの読み込み
- key C-S-F1             = &InvestigateCommand                           	# WM_COMMAND の調査
- if ( ! EmacsMove/ShiftSelection )
-   key C-S-A   C-S-B    = &WindowClingToLeft                            	# ウィンドウを左に寄せる
-   key C-S-F   C-S-E    = &WindowClingToRight                           	# ウィンドウを右に寄せる
-   key C-S-P            = &WindowClingToTop                             	# ウィンドウを上に寄せる
-   key C-S-N            = &WindowClingToBottom                          	# ウィンドウを下に寄せる
-   key C-S-V            = &WindowMoveVisibly                            	# ウィンドウを見える位置へ移動
- endif
-
  if ( KBD109 ) and ( ! KBD104on109 )
    key *半角/全角   = *Esc                  # Esc と半角/全角の入れ替え
-   key *Esc             = *半角/全角                                    	#       〃
+   key *Esc         = *半角/全角            #       〃
  endif
 
- mod control += CapsLock                                                	# CapsLock を Control に
- key *CapsLock        = *LControl                                       	#       〃
-
-keymap2 GlobalEscape : Global = &KeymapParent
- event prefixed         = &HelpMessage("Global", "ESC-")
- event before-key-down  = &HelpMessage
- key M-C-G              = &Ignore
-
-keymap Global
- if ( MAP-ESCAPE-TO-META )
-   key Escape           = &Prefix(GlobalEscape) &EditNextModifier(M-)
-   if ( KBD109 ) and ( ! KBD104on109 )
-     key 半角/全角  = &Prefix(GlobalEscape) &EditNextModifier(M-)
-   endif
- endif
-
+ mod control += CapsLock                    # CapsLock を Control に
+ key *CapsLock        = *LControl           #       〃
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # 全て(ではないがだいたい)デフォルトのキーマップの定義
 #
 
 keymap  KeymapDefault = &Default
- mod control += CapsLock                                                	# CapsLock を Control に
- key *CapsLock        = *LControl                                       	#       〃
+ mod control += CapsLock                    # CapsLock を Control に
+ key *CapsLock        = *LControl           #       〃
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -89,7 +28,7 @@ window  EditControl     /:(Edit|TEdit|RichEdit(20[AW])?)$/ : EmacsEdit
 window  SysListView32   /:SysListView32$/ : EmacsMove
 window  SysTreeView32   /:SysTreeView32$/ : EmacsMove
 window  ComboBox        /:ComboBox(:Edit)?$/ : EmacsEdit
- key M-N M-P            = A-Down                                        	# ドロップダウンメニューを開く
+ key M-N M-P            = A-Down            # ドロップダウンメニューを開く
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -100,13 +39,13 @@ window  ComboBox        /:ComboBox(:Edit)?$/ : EmacsEdit
  keyseq $WM_VSCROLL/SB_PAGEDOWN         = &PostMessage(ToItself, 277, 3, 0)
 
 keymap2 GeneralC-X : EmacsC-X
- key C-S                = C-S                                           	# 上書き保存(S)
- key C-W                = LAlt F A                                      	# 名前を付けて保存(A)...
- key C-F                = C-O                                           	# 開く(O)...
- key K                  = C-N                                           	# 新規作成(N)
- key C-C                = LAlt F X                                      	# 終了(X)
-# key C-C               = A-Q                                           	# 終了(X)
-# key C-C               = $WindowClose                                  	# 終了(X)
+ key C-S                = C-S               # 上書き保存(S)
+ key C-W                = LAlt F A          # 名前を付けて保存(A)...
+ key C-F                = C-O               # 開く(O)...
+ key K                  = C-N               # 新規作成(N)
+ key C-C                = LAlt F X          # 終了(X)
+# key C-C               = A-Q               # 終了(X)
+# key C-C               = $WindowClose      # 終了(X)
 
 
 # ダイアログボックス .........................................................
@@ -116,39 +55,8 @@ window  DialogBox       /:#32770:/ : Global
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# MDI 上のウィンドウの設定
-#
-
-keymap2 MDI-WindowOperation : Global
- key C-S-L     C-A-L    = &WindowLower(MDI)                             	# ウィンドウを一番下へ
- key C-S-R     C-A-R    = &WindowRaise(MDI)                             	# ウィンドウを一番上へ
- key C-S-Z     C-A-Z    = &WindowMaximize(MDI)                          	# ウィンドウの最大化
- key C-S-I     C-A-I    = &WindowMinimize(MDI)                          	# ウィンドウの最小化
- key C-S-X     C-A-X    = &WindowVMaximize(MDI)                         	# ウィンドウの縦最大化
- key C-S-C     C-A-C    = &WindowHMaximize(MDI)                         	# ウィンドウの横最大化
- key C-S-Left  C-A-Left = &WindowMove(-16, 0, MDI)                      	# ウィンドウの移動
- key C-S-Right C-A-Right= &WindowMove(16, 0, MDI)                       	#       〃
- key C-S-Up    C-A-Up   = &WindowMove(0, -16, MDI)                      	#       〃
- key C-S-Down  C-A-Down = &WindowMove(0, 16, MDI)                       	#       〃
- key C-S-A-Left         = &WindowMove(-1, 0, MDI)                       	#       〃
- key C-S-A-Right        = &WindowMove(1, 0, MDI)                        	#       〃
- key C-S-A-Up           = &WindowMove(0, -1, MDI)                       	#       〃
- key C-S-A-Down         = &WindowMove(0, 1, MDI)                        	#       〃
- key C-S-A C-S-B C-A-A  = &WindowClingToLeft(MDI)                       	# ウィンドウ左に寄せる
- key C-S-E C-S-F C-A-E  = &WindowClingToRight(MDI)                      	# ウィンドウ右に寄せる
- key C-S-P     C-A-P    = &WindowClingToTop(MDI)                        	# ウィンドウ上に寄せる
- key C-S-N     C-A-N    = &WindowClingToBottom(MDI)                     	# ウィンドウ下に寄せる
- key C-S-V     C-A-V    = &WindowMoveVisibly(MDI)                       	# ウィンドウ見える位置
- key C-S-K     C-A-K    = C-F4                                          	# ウィンドウを閉じる
-
-window  MDI     /:MDIClient:/ : Global
- key C-S-Q      C-A-Q   = &Prefix(MDI-WindowOperation)
-
-
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # 各アプリケーションの設定
 #
-
 
 # のどか ...............................................................
 # http://appletkan.com/
@@ -173,7 +81,7 @@ window  NodokaLog ( /nodoka\.exe:#32770:Button/ \
  keyseq $ConsoleWindowClass/select-all  = &PostMessage(ToItself, 274, 65525, 0)
 
 window  ConsoleWindowClass /^ConsoleWindowClass$/ : Global
- key C-S-K     C-A-K    = A-Space C                                     	# ウィンドウを閉じる
+ #key C-S-K     C-A-K    = A-Space C                                     	# ウィンドウを閉じる
  key S-Insert           = $ConsoleWindowClass/paste
  key S-Prior            = $WM_VSCROLL/SB_PAGEUP
  key S-Next             = $WM_VSCROLL/SB_PAGEDOWN
