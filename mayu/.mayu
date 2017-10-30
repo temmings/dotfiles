@@ -21,7 +21,7 @@ keymap Global
  key	*RightWindows	= *RightAlt
 
  key	C-I			=> Tab
- key	C-_3			=> ESC
+# key	C-_3			=> ESC
  key	C-LeftSquareBracket	=> ESC
 
  # default.mayu の一部のショートカットを無効に
@@ -81,8 +81,10 @@ window	AccessOGrid	/MSACCESS\.EXE:.*:OGrid/ : EmacsEdit
 window	AcroReader	/AcroRd32\.exe:.*AcrobatSDIWindow:.*:AVL_AVView/ : EmacsEdit
 window	AFxTextView	/afx\.exe:TAfxForm:TTextView/ : EmacsEdit
 window	AFxFileBox	/afx\.exe:TAfxForm:TPanel:TFileBox/ : EmacsEdit
+window	Blisk	/blisk\.exe:.*/ : EmacsEdit
 window	Console		/ConsoleWindowClass/ : EmacsEdit
 window	Charles		/Charles\.exe/ : EmacsEdit
+window	Discord		/Discord\.exe/ : EmacsEdit
 window	EverNote	/Evernote\.exe:.*/ : EmacsEdit
 window	FFPlugin	/plugin-container\.exe:.*GeckoPluginWindow.*/ : EmacsEdit
 window	FireFox		/firefox\.exe:MozillaWindowClass/ : EmacsEdit
@@ -100,6 +102,7 @@ window	Launchy		/Launchy\.exe:.*/ : EmacsEdit
 window	Line		/line\.exe:.*/ : EmacsEdit
 window	LiveMessengerIM	/msnmsgr\.exe:.*:IM Window Class:.*/ : EmacsEdit
 window	LiveMessengerMW	/msnmsgr\.exe:.*:Main Window Class:.*/ : EmacsEdit
+window	Marp	/Marp\.exe:.*/ : EmacsEdit
 window	MSNMessenger	/msnmsgr\.exe:IMWindowClass:DirectUIHWND/ : EmacsEdit
 window	MSTSC		/mstsc\.exe:.*:CtrlNotifySink:Edit/ : EmacsEdit
 window	MarkdownPad2	/MarkdownPad2\.exe:.*/ : EmacsEdit
@@ -147,6 +150,8 @@ window	VCExpress	/VCExpress\.exe:.*/ : EmacsEdit
 window	VCSTextEdit	/vcsexpress\.exe:.*VsTextEditPane/ : EmacsEdit
 window	VCSHWND		/vcsexpress\.exe:HwndWrapper.*/ : EmacsEdit
 window	VCSEdit		/vcsexpress\.exe:.*WindowsForms10\.EDIT.*/ : EmacsEdit
+
+window	Vivaldi		/vivaldi\.exe:.*/ : EmacsEdit
 
 window	WinMergeU	/WinMergeU\.exe:.*/ : EmacsEdit
 window	WireShark	/wireshark\.exe:.*/ : EmacsEdit
