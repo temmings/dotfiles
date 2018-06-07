@@ -72,3 +72,22 @@ function ssh-concat-config() {
     [[ -f $d/config ]] && mv $d/config{,.bak}
     cat $d/conf.d/*.conf > $d/config
 }
+
+function presentation-minutes-timer() {
+    # $1: total minutes (default: 5 min)
+    # $2: say voice (default: Samantha)
+    local mins=${1:-5}
+    local say_yes(){ say -v ${2:-Samantha} $1 }
+    local sleep_annoy() {
+        for i in {1..60}; (sleep 1; echo -n .)
+        echo
+    }
+    say_yes "let's start"
+    for i in {${mins}..1}; do
+        local m="least $i minutes"
+        say_yes $m;
+        echo $m
+        sleep_annoy
+    done
+    say_yes 'FINISH!'
+}
