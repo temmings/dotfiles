@@ -53,6 +53,8 @@ remapKey({'ctrl'}, 'n', keyCode('down'))
 remapKey({'ctrl'}, 'p', keyCode('up'))
 remapKey({'ctrl'}, 'a', keyCode('left', {'cmd'}))
 remapKey({'ctrl'}, 'e', keyCode('right', {'cmd'}))
+remapKey({'alt'}, 'f', keyCode('right', {'alt'}))
+remapKey({'alt'}, 'b', keyCode('left', {'alt'}))
 
 -- テキスト編集
 remapKey({'ctrl'}, 'd', keyCode('forwarddelete'))
