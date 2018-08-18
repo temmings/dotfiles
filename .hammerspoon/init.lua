@@ -8,66 +8,82 @@ local function keyCode(key, modifiers)
 end
 
 local function remapKey(modifiers, key, keyCode)
-   hs.hotkey.bind(modifiers, key, keyCode, nil, keyCode)
+   return hs.hotkey.bind(modifiers, key, keyCode, nil, keyCode)
 end
 
-local function disableAllHotkeys()
-   for k, v in pairs(hs.hotkey.getHotkeys()) do
+local function disableHotkeys(hotkeys)
+   for k, v in pairs(hotkeys) do
       v['_hk']:disable()
    end
 end
 
-local function enableAllHotkeys()
-   for k, v in pairs(hs.hotkey.getHotkeys()) do
+local function enableHotkeys(hotkeys)
+   for k, v in pairs(hotkeys) do
       v['_hk']:enable()
    end
 end
 
-local function handleGlobalAppEvent(name, event, app)
-   if event == hs.application.watcher.activated then
-      -- hs.alert.show(name)
-      if name ~= "iTerm2" then
-         enableAllHotkeys()
-      else
-         disableAllHotkeys()
-      end
-   end
+local function Set(list)
+  local set = {}
+  for _, l in ipairs(list) do set[l] = true end
+  return set
 end
 
-local function keyCtrlK()
+local basicRemapKeys = {
+    remapKey({'ctrl'}, 'd', keyCode('forwarddelete')),
+    remapKey({'ctrl'}, 'h', keyCode('delete'))
+    remapKey({'ctrl'}, 'm', keyCode('return')),
+    remapKey({'ctrl'}, '[', keyCode('esc')),
+}
+
+local function keyEmacsCtrlK()
     keyCode('e', {'shift', 'ctrl'})()
     keyCode('x', {'cmd'})()
 end
-hs.hotkey.bind({'ctrl'}, 'k', keyCtrlK, nil, keyCtrlK)
+
+-- Emacs Keymaps
+local emacsRemapKeys = {
+    -- カーソル移動
+    remapKey({'ctrl'}, 'f', keyCode('right')),
+    remapKey({'ctrl'}, 'b', keyCode('left')),
+    remapKey({'ctrl'}, 'n', keyCode('down')),
+    remapKey({'ctrl'}, 'p', keyCode('up')),
+    remapKey({'ctrl'}, 'a', keyCode('left', {'cmd'})),
+    remapKey({'ctrl'}, 'e', keyCode('right', {'cmd'})),
+    remapKey({'alt'}, 'f', keyCode('right', {'alt'})),
+    remapKey({'alt'}, 'b', keyCode('left', {'alt'})),
+
+    -- テキスト編集
+    remapKey({'alt'}, 'w', keyCode('c', {'cmd'})),
+    remapKey({'ctrl'}, 'w', keyCode('x', {'cmd'})),
+    remapKey({'ctrl'}, 'y', keyCode('v', {'cmd'})),
+    hs.hotkey.bind({'ctrl'}, 'k', keyEmacsCtrlK, nil, keyEmacsCtrlK),
+
+    -- コマンド
+    remapKey({'ctrl'}, 's', keyCode('f', {'cmd'})),
+    remapKey({'ctrl'}, '/', keyCode('z', {'cmd'})),
+    -- remapKey({'ctrl'}, 'g', keyCode('escape')),
+
+    -- ページスクロール
+    remapKey({'ctrl'}, 'v', keyCode('pagedown')),
+    remapKey({'alt'}, 'v', keyCode('pageup'))
+}
+
+local disableApps = Set { "iTerm2" }
+local disableEmacsApps = Set { "MacVim", "Code", "IntelliJ IDEA", "PhpStorm" }
+
+local function handleGlobalAppEvent(name, event, app)
+    if event == hs.application.watcher.activated then
+        -- hs.alert.show(name)
+        if disableApps[name] then
+            disableHotkeys(hs.hotkey.getHotkeys())
+        elseif disableEmacsApps[name] then
+            disableHotkeys(emacsRemapKeys)
+        else
+            enableHotkeys(hs.hotkey.getHotkeys())
+        end
+    end
+end
 
 appsWatcher = hs.application.watcher.new(handleGlobalAppEvent)
 appsWatcher:start()
-
-remapKey({'ctrl'}, 'm', keyCode('return'))
-remapKey({'ctrl'}, '[', keyCode('esc'))
-
--- カーソル移動
-remapKey({'ctrl'}, 'f', keyCode('right'))
-remapKey({'ctrl'}, 'b', keyCode('left'))
-remapKey({'ctrl'}, 'n', keyCode('down'))
-remapKey({'ctrl'}, 'p', keyCode('up'))
-remapKey({'ctrl'}, 'a', keyCode('left', {'cmd'}))
-remapKey({'ctrl'}, 'e', keyCode('right', {'cmd'}))
-remapKey({'alt'}, 'f', keyCode('right', {'alt'}))
-remapKey({'alt'}, 'b', keyCode('left', {'alt'}))
-
--- テキスト編集
-remapKey({'ctrl'}, 'd', keyCode('forwarddelete'))
-remapKey({'ctrl'}, 'h', keyCode('delete'))
-remapKey({'alt'}, 'w', keyCode('c', {'cmd'}))
-remapKey({'ctrl'}, 'w', keyCode('x', {'cmd'}))
-remapKey({'ctrl'}, 'y', keyCode('v', {'cmd'}))
-
--- コマンド
-remapKey({'ctrl'}, 's', keyCode('f', {'cmd'}))
-remapKey({'ctrl'}, '/', keyCode('z', {'cmd'}))
--- remapKey({'ctrl'}, 'g', keyCode('escape'))
-
--- ページスクロール
-remapKey({'ctrl'}, 'v', keyCode('pagedown'))
-remapKey({'alt'}, 'v', keyCode('pageup'))
