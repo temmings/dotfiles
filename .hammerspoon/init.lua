@@ -31,7 +31,7 @@ end
 
 local basicRemapKeys = {
     remapKey({'ctrl'}, 'd', keyCode('forwarddelete')),
-    remapKey({'ctrl'}, 'h', keyCode('delete'))
+    remapKey({'ctrl'}, 'h', keyCode('delete')),
     remapKey({'ctrl'}, 'm', keyCode('return')),
     remapKey({'ctrl'}, '[', keyCode('esc')),
 }
@@ -66,11 +66,11 @@ local emacsRemapKeys = {
 
     -- ページスクロール
     remapKey({'ctrl'}, 'v', keyCode('pagedown')),
-    remapKey({'alt'}, 'v', keyCode('pageup'))
+    remapKey({'alt'}, 'v', keyCode('pageup')),
 }
 
-local disableApps = Set { "iTerm2" }
-local disableEmacsApps = Set { "MacVim", "Code", "IntelliJ IDEA", "PhpStorm" }
+local disableApps = Set { 'iTerm2', 'muCommander', 'wine' }
+local disableEmacsApps = Set { 'MacVim', 'Code', 'IntelliJ IDEA', 'PhpStorm', 'GoLand', 'PyCharm' }
 
 local function handleGlobalAppEvent(name, event, app)
     if event == hs.application.watcher.activated then
